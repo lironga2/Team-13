@@ -107,12 +107,12 @@ void menu(Worker* worker)
 		}
 		case 3:
 		{
-			supply_manager(worker);
+			//supply_manager(worker);
 			break;
 		}
 		case 4:
 		{
-			store_manager(worker);
+			//store_manager(worker);
 			break;
 		}
 	}
