@@ -1,12 +1,13 @@
 #pragma once
 #include<iostream>
 #include<string>
+#include<fstream>
 using namespace std;
 
 
 typedef struct Product {
 	string name;
-	int cct = 0;
+	string cct = 0;
 	double price = 0;
 };
 
@@ -21,7 +22,7 @@ void newBill(Bill** bill);
 void newProduct(Product** product);
 void creatBill();
 void addProductToBill(Bill** bill);
-bool validCct(int product_cct);
+bool validCct(string product_cct);
 void updateBill(Bill*** bill);
 void deleteExistProduct(Bill ** bill);
 
@@ -45,12 +46,15 @@ void creatBill()
 	bill->current_account_number = invoice_number;
 	bool flag = true;
 	char user_choise;
-	cout << "1) Add a new product:" << endl;
-	cout << "2) Delete an existing product:" << endl;
-	cout << "3) Making a payment:" << endl;
-	cout << "4) Back:" << endl;
+
 	// לא לשכוח לבדוק תקינות קלט ולהוסיף הודעת שגיאה במקרה והקלט לא תקין
 	do {
+		cout << "1) Add a new product:" << endl;
+		cout << "2) Delete an existing product:" << endl;
+		cout << "3) Making a payment:" << endl;
+		cout << "4) Back:" << endl;
+		cin >> user_choise;
+
 		switch (user_choise)
 		{
 		case '1':
@@ -72,7 +76,7 @@ void creatBill()
 
 void addProductToBill(Bill** bill)
 {
-	int product_cct = 0;
+	string product_cct = 0;
 	do {
 		cout << "Please Enter Product cct:" << endl; //cct -> makat.
 		cin >> product_cct;
@@ -86,9 +90,19 @@ void addProductToBill(Bill** bill)
 
 }
 // A function that checks if the cct that entered in a function addProductToBill() exists in the database.
-bool validCct(int product_cct) {
-	// ריצה על מאגר המקטים ובדיקה אם המקט קיים
-	return true;
+bool validCct(string product_cct) {
+	fstream Stock;
+	string file_cct;
+	Stock.open("Stock.txt");
+	while (!Stock.eof())
+	{
+		Stock >> file_cct;
+		if (file_cct.compare(product_cct) == 0)
+		{
+			return true;
+		}
+	}
+	Stock.close();
 	return false;
 }
 
@@ -141,13 +155,13 @@ void deleteExistProduct(Bill ** bill)
 	}
 	else
 	{
-		int product_cct = 0;
+		string product_cct = 0;
 		cout << "Enter cct to delete product" << endl;
 		cin >> product_cct;
 
 		for(int i=0; i<(*(bill))->num_of_product; i++)
 		{
-			if ((*(bill))->product[i]->cct == product_cct) {
+			if (product_cct.compare((*(bill))->product[i]->cct) == 0 ) {
 				index_to_delete = i;
 			}
 		}

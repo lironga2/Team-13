@@ -2,6 +2,7 @@
 #include<iostream>
 #include<fstream>
 #include<string>
+#include"Requirements_1_to_4.h"
 using namespace std;
 
 
@@ -72,6 +73,7 @@ bool isValid(string user, string pass)
 		}
 		return false;
 	}
+	UsersData.close();
 }
 
 
@@ -98,6 +100,7 @@ void load_details(string user_name)
 			}
 		}
 	}
+	UsersData.close();
 	menu(worker);
 }
 
@@ -148,7 +151,7 @@ void general_worker(Worker* worker)
 		{
 		case 1:
 		{
-			//createBill();
+			creatBill();
 			break;
 		}
 		case 2:
