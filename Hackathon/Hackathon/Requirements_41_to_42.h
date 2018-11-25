@@ -2,10 +2,9 @@
 #include<iostream>
 #include<fstream>
 #include<string>
-#include"Requirements_1_to_4.h"
+#include"Requirements_1_to_3.h"
+#include "Requirements_5.h"
 using namespace std;
-
-
 
 
 typedef struct {
@@ -15,6 +14,7 @@ typedef struct {
 	int level;
 	int phone_number;
 }Worker;
+
 
 void Login();
 bool isValid(string user, string pass);
@@ -30,12 +30,14 @@ void Login()
 	char exit;
 	string user_name;
 	string password;
+	//getting user name and password from user
 	do
 	{
 		cout << "Please enter your username" << endl;
 		cin >> user_name;
 		cout << "Please enter your password" << endl;
 		cin >> password;
+		//checking if user name and right password exists
 		if (isValid(user_name, password))
 		{
 			cout << "You have been connected to user:" << user_name << endl;
@@ -60,6 +62,7 @@ bool isValid(string user, string pass)
 	string file_pass;
 	ifstream UsersData;
 	UsersData.open("UserAndPass.txt");
+	//checking in data base if user and password exsist and match
 	if (UsersData.is_open())
 	{
 		while (!UsersData.eof())
@@ -84,6 +87,7 @@ void load_details(string user_name)
 	bool flag = false;
 	ifstream UsersData;
 	UsersData.open("Employee.txt");
+	//load details of employee that connect to the system
 	if (UsersData.is_open())
 	{
 		while (!UsersData.eof() && (!flag))
@@ -103,7 +107,7 @@ void load_details(string user_name)
 	UsersData.close();
 	menu(worker);
 }
-
+//first menu of worker, checks which level the employee have and choose the right menu
 void menu(Worker* worker)
 {
 	int opt;
@@ -121,7 +125,7 @@ void menu(Worker* worker)
 	}
 	case 3:
 	{
-		//supply_manager(worker);
+		//supply_manager(worker);   
 		break;
 	}
 	case 4:
@@ -131,13 +135,14 @@ void menu(Worker* worker)
 	}
 	}
 }
-void general_worker(Worker* worker)
+void general_worker(Worker* worker) 
 {
 	int opt;
 	bool flag = false;
 
 	do
 	{
+		cout << "welcome to employee menu" << endl;
 		cout << "press 1 to create bill" << endl;
 		cout << "press 2 to add club member" << endl;
 		cout << "press 3 to check if product in stock" << endl;
@@ -151,12 +156,12 @@ void general_worker(Worker* worker)
 		{
 		case 1:
 		{
-			creatBill();
+			creatBill(worker->id);
 			break;
 		}
 		case 2:
 		{
-			//addClubMember();
+			Add_Club_Member();
 			break;
 		}
 		case 3:
@@ -200,6 +205,7 @@ void shift_manager(Worker* worker)
 
 	do
 	{
+		cout << "welcome to shift manager menu" << endl;
 		cout << "press 1 to create bill" << endl;
 		cout << "press 2 to add club member" << endl;
 		cout << "press 3 to check if product in stock" << endl;
@@ -213,12 +219,12 @@ void shift_manager(Worker* worker)
 		{
 		case 1:
 		{
-			//createBill();
+			creatBill(worker->id);
 			break;
 		}
 		case 2:
 		{
-			//addClubMember();
+			Add_Club_Member();
 			break;
 		}
 		case 3:

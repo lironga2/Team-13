@@ -15,21 +15,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Requirements_1_to_4.cpp">
+    <ClCompile Include="driver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="driver.cpp">
+    <ClCompile Include="Requirements_1_to_3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Requirements_1_to_4.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Login_And_Menu.h">
+    <ClInclude Include="Requirements_1_to_3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Add_Mebership.h">
+    <ClInclude Include="Requirements_41_to_42.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Requirements_5.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

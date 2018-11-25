@@ -2,32 +2,20 @@
 #include<iostream>
 #include<string>
 #include<fstream>
+#include"Requirements_1_to_3.h"
 using namespace std;
 
 
-typedef struct Product {
-	string name;
-	string cct = 0;
-	double price = 0;
-};
-
-typedef struct Bill {
-	double sum = 0;
-	int num_of_product = 0;
-	bool club_member = false;
-	int current_account_number;
-	Product** product;
-};
 void newBill(Bill** bill);
 void newProduct(Product** product);
-void creatBill();
+void creatBill(int id);
 void addProductToBill(Bill** bill);
 bool validCct(string product_cct);
-void updateBill(Bill*** bill);
+void updateBill(Bill*** bill,string product_cct);
 void deleteExistProduct(Bill ** bill);
 
 
-static int invoice_number = 0;
+
 
 void newBill(Bill** bill) {
 	*bill = new Bill; // בדיקה האם היצירה נכשלה ושליחת הודעת שגיאה בהתאם
@@ -39,7 +27,7 @@ void newProduct(Product** product) {
 }
 
 //The menu that appears after selecting Create new account from the main menu. Demand Analysis Number 1.
-void creatBill()
+void creatBill(int id)
 {
 	Bill *bill;
 	newBill(&bill);
@@ -58,16 +46,17 @@ void creatBill()
 		switch (user_choise)
 		{
 		case '1':
-			addProductToBill(&bill);
-			break;
+				addProductToBill(&bill);
+				break;
 		case '2':
-			deleteExistProduct(&bill);
-			break;
+				deleteExistProduct(&bill);
+				break;
 		case '3': // לשנות דגל לשלילי ולמחוק כל מה שקיים בקובץ החשבון הנוכחי
 			break;
 		case '4': // לא לשכוח שחרור הקצאה לחשבון החדש וגם לעשות -- למספר חשבון הגלובאלי
 				  // לשנות דגל לשלילי ולמחוק כל מה שקיים בקובץ החשבון הנוכחי
-			break;
+					flag = false;
+					break;
 		default:
 			break;
 		}
@@ -76,7 +65,7 @@ void creatBill()
 
 void addProductToBill(Bill** bill)
 {
-	string product_cct = 0;
+	string product_cct;
 	do {
 		cout << "Please Enter Product cct:" << endl; //cct -> makat.
 		cin >> product_cct;
@@ -86,7 +75,7 @@ void addProductToBill(Bill** bill)
 	} while (!validCct(product_cct));
 	// if the cct is valid.
 	cout << "Product successfully added" << endl;
-	updateBill(&bill);
+	updateBill(&bill,product_cct);
 
 }
 // A function that checks if the cct that entered in a function addProductToBill() exists in the database.
@@ -106,11 +95,24 @@ bool validCct(string product_cct) {
 	return false;
 }
 
-void updateBill(Bill*** bill) {
+void updateBill(Bill*** bill,string product_cct) {
 	// משיכת מחיר מהקובץ של המוצר של מספר המקט שהוזן למשתנה price
-	double price = 0;
+
+	ifstream Stock;
+	Stock.open("Stock.txt");
 	string name;
-	int cct = 0;
+	string cct;
+	double price = 0;
+	while (!Stock.eof())
+	{
+		Stock >> cct;
+		if (product_cct.compare(cct) == 0)
+		{
+			Stock >> name;
+			Stock >> price;
+			break;
+		}
+	}
 	// משיכת הנתונים מהקובץ
 	(*(*bill))->sum += price;
 	int old_size = (*(*bill))->num_of_product;
@@ -155,7 +157,7 @@ void deleteExistProduct(Bill ** bill)
 	}
 	else
 	{
-		string product_cct = 0;
+		string product_cct;
 		cout << "Enter cct to delete product" << endl;
 		cin >> product_cct;
 
@@ -187,6 +189,7 @@ void deleteExistProduct(Bill ** bill)
 			(*(bill))->num_of_product--;
 			(*(bill))->sum -= (*bill)->product[index_to_delete]->price;
 			Assist = nullptr;
+			cout << "product has deleted" << endl;
 		}
 	}
 

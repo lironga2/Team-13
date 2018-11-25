@@ -1,12 +1,13 @@
 #pragma once
 #include<iostream>
+#include<fstream>
 #include<string>
 using namespace std;
-int invoice_number = 0;
+static int invoice_number = 0;
 
 typedef struct Product {
 	string name;
-	int cct = 0;
+	string cct;
 	double price = 0;
 };
 
@@ -19,17 +20,18 @@ typedef struct Bill {
 };
 
 
+
 void newBill(Bill** bill);
 
 void newProduct(Product** product);
 
 //The menu that appears after selecting Create new account from the main menu. Demand Analysis Number 1.
-void creatBill();
+void creatBill(int id);
 
 void addProductToBill(Bill** bill);
 // A function that checks if the cct that entered in a function addProductToBill() exists in the database.
-bool validCct(int product_cct);
+bool validCct(string product_cct);
 
-void updateBill(Bill*** bill);
+void updateBill(Bill*** bill,string product_cct);
 
 void deleteExistProduct(Bill **bill);

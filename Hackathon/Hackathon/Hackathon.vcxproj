@@ -143,14 +143,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="driver.cpp" />
-    <ClCompile Include="Requirements_1_to_4.cpp" />
+    <ClCompile Include="Requirements_1_to_3.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Add_Mebership.h" />
-    <ClInclude Include="Requirements_1_to_4.h" />
+    <ClInclude Include="Requirements_5.h" />
+    <ClInclude Include="Requirements_1_to_3.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Login_And_Menu.h" />
+    <ClInclude Include="Requirements_41_to_42.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
