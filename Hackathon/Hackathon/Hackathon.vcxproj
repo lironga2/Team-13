@@ -142,7 +142,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Hackathon.cpp" />
+    <ClCompile Include="Requirements_1_to_4.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Requirements_1_to_4.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
