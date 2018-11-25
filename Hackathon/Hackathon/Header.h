@@ -6,8 +6,7 @@ using namespace std;
 
 typedef struct {
 	int id;
-	string first_name;
-	string last_name;
+	string name;
 	int level;
 	int phone_number;
 }Worker;
@@ -66,30 +65,8 @@ bool isValid(string user, string pass)
 
 Worker load_details(string user_name)
 {
-	Worker* worker = new Worker;
-	string file_user;
-	bool flag = false;
-	ifstream UsersData;
-	UsersData.open("Employee.txt");
-	if (UsersData.is_open())
-	{
-		while (!UsersData.eof() && (!flag))
-		{
-			UsersData >> file_user;
-			if (user_name.compare(file_user) == 0)
-			{
-				UsersData >> worker->id;
-				UsersData >>worker->first_name;
-				UsersData >> worker->last_name;
-				UsersData >> worker->level;
-				UsersData >> worker->phone_number;
-				flag = true;
-			}
-		}
-	}
-	menu(worker);
-}
 
+<<<<<<< HEAD
 void menu(Worker* worker) 
 {
 	int opt;
@@ -176,85 +153,6 @@ void general_worker(Worker* worker)
 			}
 		}
 	} while (!flag);
-}
-void shift_manager(Worker* worker) 
-{
-	int opt;
-	bool flag = false;
-
-	do
-	{
-		cout << "press 1 to create bill" << endl;
-		cout << "press 2 to add club member" << endl;
-		cout << "press 3 to check if product in stock" << endl;
-		cout << "press 4 to check product price" << endl;
-		cout << "press 5 to locate transaction" << endl;
-		cout << "press 6 to create your daily sells report" << endl;
-		cout << "press 7 to create your daily club members report" << endl;
-		cout << "press 0 to back" << endl;
-		switch (opt)
-		{
-		case 1:
-		{
-			//createBill();
-			break;
-		}
-		case 2:
-		{
-			//addClubMember();
-			break;
-		}
-		case 3:
-		{
-			//productInStock();
-			break;
-		}
-		case 4:
-		{
-			//productPrice();
-			break;
-		}
-		case 5:
-		{
-			//locateTransaction();
-			break;
-		}
-		case 6:
-		{
-			//dailySalesReport();
-			break;
-		}
-		case 7:
-		{
-			//dailyClubMebmer();
-			break;
-		}
-		case 8:
-		{
-			//returnProduct();
-			break;
-		}
-		case 9:
-		{
-			//workerBonus();
-			break;
-		}
-		case 10:
-		{
-			//removeBonus();
-			break;
-		}
-		case 11:
-		{
-			//saleNewGiftCard();
-			break;
-		}
-		case 0:
-		{
-			Login();
-			break;
-		}
-		}
-	} while (!flag);
-	
+=======
+>>>>>>> b8a58d9f77763a5a750ae4e07c4088e1c84221f7
 }
