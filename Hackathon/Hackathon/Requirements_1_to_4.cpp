@@ -1,11 +1,8 @@
-#include "Requirements_1_to_4.h"
+#pragma once
+#include<iostream>
+#include<string>
+using namespace std;
 
-typedef struct Bill {
-	double sum = 0;
-	int num_of_product = 0;
-	bool club_member = false;
-	int current_account_number;
-};
 
 typedef struct Product {
 	string name;
@@ -13,14 +10,31 @@ typedef struct Product {
 	double price = 0;
 };
 
+typedef struct Bill {
+	double sum = 0;
+	int num_of_product = 0;
+	bool club_member = false;
+	int current_account_number;
+	Product** product;
+};
+void newBill(Bill** bill);
+void newProduct(Product** product);
+void creatBill();
+void addProductToBill(Bill** bill);
+bool validCct(int product_cct);
+void updateBill(Bill*** bill);
+void deleteExistProduct(Bill ** bill);
+
+
+static int invoice_number = 0;
 
 void newBill(Bill** bill) {
-	Bill *bill = new Bill; // בדיקה האם היצירה נכשלה ושליחת הודעת שגיאה בהתאם
+	*bill = new Bill; // בדיקה האם היצירה נכשלה ושליחת הודעת שגיאה בהתאם
 	invoice_number++;
 }
 
 void newProduct(Product** product) {
-	Product *product = new Product; // בדיקה האם היצירה נכשלה ושליחת הודעת שגיאה בהתאם
+	*product = new Product; // בדיקה האם היצירה נכשלה ושליחת הודעת שגיאה בהתאם
 }
 
 //The menu that appears after selecting Create new account from the main menu. Demand Analysis Number 1.
@@ -84,17 +98,17 @@ void updateBill(Bill*** bill) {
 	string name;
 	int cct = 0;
 	// משיכת הנתונים מהקובץ
-	Product **product;
 	(*(*bill))->sum += price;
 	int old_size = (*(*bill))->num_of_product;
 	(*(*bill))->num_of_product++;
 	int temp = (*(*bill))->num_of_product;
 	if ((*(*bill))->num_of_product == 1)
 	{
-		product[0] = new Product;
-		product[0]->cct = cct;
-		product[0]->name = name;
-		product[0]->price = price;
+		(*(*bill))->product = new Product*;
+		(*(*bill))->product[0] = new Product;
+		(*(*bill))->product[0]->cct = cct;
+		(*(*bill))->product[0]->name = name;
+		(*(*bill))->product[0]->price = price;
 	}
 	else
 	{
@@ -102,14 +116,14 @@ void updateBill(Bill*** bill) {
 		for (int i = 0; i < old_size; i++)
 		{
 			Assist[i] = new Product;
-			Assist[i] = product[i];
+			Assist[i] = (*(*bill))->product[i];
 		}
 		Assist[old_size] = new Product;
 		Assist[old_size]->cct = cct;
 		Assist[old_size]->name = name;
 		Assist[old_size]->price = price;
-		delete(product);
-		product = Assist;
+		delete((*(*bill))->product);
+		(*(*bill))->product = Assist;
 		Assist = nullptr;
 	}
 	
@@ -117,10 +131,51 @@ void updateBill(Bill*** bill) {
 
 }
 
-void deleteExistProduct(Bill ** bill, Product** product)
+void deleteExistProduct(Bill ** bill)
 {
-	int product_cct = 0;
-	cout << "Enter cct to delete product" << endl;
-	// קריאה מקובץ שאליו הפריטים שהתווספו לחשבון נכתבו בפונקציה לעל (אפדייט ביל) כדי לבדוק שהמוצר קיים בחשבון
+	int index_to_delete = -1;
+	bool flag = false;
+	if ((*(bill))->num_of_product == 0) 
+	{
+		cout << "The cart is empty." << endl;
+	}
+	else
+	{
+		int product_cct = 0;
+		cout << "Enter cct to delete product" << endl;
+		cin >> product_cct;
+
+		for(int i=0; i<(*(bill))->num_of_product; i++)
+		{
+			if ((*(bill))->product[i]->cct == product_cct) {
+				index_to_delete = i;
+			}
+		}
+		if (index_to_delete == -1)
+		{
+			cout << "The product does not exist in the cart" << endl;
+		}
+		else
+		{
+			Product** Assist = new Product* [(*(bill))->num_of_product - 1];
+			int j = 0;
+			for (int i = 0; i < (*(bill))->num_of_product; i++)
+			{
+				if (i = index_to_delete)
+				{
+					continue;
+				}
+				Assist[j] = new Product;
+				Assist[j++] = (*bill)->product[i];
+			}
+			delete((*bill)->product);
+			(*bill)->product = Assist;
+			(*(bill))->num_of_product--;
+			(*(bill))->sum -= (*bill)->product[index_to_delete]->price;
+			Assist = nullptr;
+		}
+	}
+
+	//לא לשכוח להוסיף את המוצר חזרה למלאי
 
 }
