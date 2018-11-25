@@ -26,5 +26,11 @@
     <ClInclude Include="Requirements_1_to_4.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Login_And_Menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Add_Mebership.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,10 +1,8 @@
 #pragma once
-#include "Requirements_1_to_4.h"
-
-
+#include"Header.h"
 
 int main()
 {
-
+	Login();
 	return 0;
 }
