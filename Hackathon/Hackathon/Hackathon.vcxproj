@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="driver.cpp" />
     <ClCompile Include="Requirements_1_to_4.cpp" />
   </ItemGroup>
   <ItemGroup>
