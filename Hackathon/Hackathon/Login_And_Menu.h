@@ -4,6 +4,9 @@
 #include<string>
 using namespace std;
 
+
+
+
 typedef struct {
 	int id;
 	string first_name;
@@ -12,7 +15,15 @@ typedef struct {
 	int phone_number;
 }Worker;
 
-bool Login()
+void Login();
+bool isValid(string user, string pass);
+void load_details(string user_name);
+void menu(Worker* worker);
+void general_worker(Worker* worker);
+void shift_manager(Worker* worker);
+
+
+void Login()
 {
 	bool flag = false;
 	char exit;
@@ -35,7 +46,7 @@ bool Login()
 			cout << "If you want try again press Y or y to exit press any other key" << endl;
 			cin >> exit;
 		}
-	} while ((!flag) && ((exit != 'y') || (exit != 'Y')));
+	} while ((!flag) && ((exit == 'y') || (exit == 'Y')));
 	if (flag)
 	{
 		load_details(user_name);
@@ -64,7 +75,7 @@ bool isValid(string user, string pass)
 }
 
 
-Worker load_details(string user_name)
+void load_details(string user_name)
 {
 	Worker* worker = new Worker;
 	string file_user;
@@ -132,6 +143,7 @@ void general_worker(Worker* worker)
 		cout << "press 6 to create your daily sells report" << endl;
 		cout << "press 7 to create your daily club members report" << endl;
 		cout << "press 0 to back" << endl;
+		cin >> opt;
 		switch (opt)
 		{
 		case 1:
@@ -172,6 +184,7 @@ void general_worker(Worker* worker)
 		case 0:
 		{
 			Login();
+			flag = true;
 			break;
 		}
 		}
@@ -192,6 +205,7 @@ void shift_manager(Worker* worker)
 		cout << "press 6 to create your daily sells report" << endl;
 		cout << "press 7 to create your daily club members report" << endl;
 		cout << "press 0 to back" << endl;
+		cin >> opt;
 		switch (opt)
 		{
 		case 1:
@@ -252,9 +266,11 @@ void shift_manager(Worker* worker)
 		case 0:
 		{
 			Login();
+			flag = true;
 			break;
 		}
 		}
 	} while (!flag);
 
 }
+
