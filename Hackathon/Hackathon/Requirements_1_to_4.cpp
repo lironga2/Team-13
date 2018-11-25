@@ -1,11 +1,17 @@
 #include "Requirements_1_to_4.h"
 
-typedef struct{
+typedef struct Bill {
 	double sum = 0;
 	int num_of_product = 0;
 	bool club_member = false;
 	int current_account_number;
-}Bill;
+};
+
+typedef struct Product {
+	string name;
+	int cct = 0;
+	double price = 0;
+};
 
 
 void newBill(Bill** bill) {
@@ -13,14 +19,17 @@ void newBill(Bill** bill) {
 	invoice_number++;
 }
 
+void newProduct(Product** product) {
+	Product *product = new Product; // בדיקה האם היצירה נכשלה ושליחת הודעת שגיאה בהתאם
+}
+
 //The menu that appears after selecting Create new account from the main menu. Demand Analysis Number 1.
 void creatBill()
 {
-	bool flag = true;
 	Bill *bill;
 	newBill(&bill);
 	bill->current_account_number = invoice_number;
-
+	bool flag = true;
 	char user_choise;
 	cout << "1) Add a new product:" << endl;
 	cout << "2) Delete an existing product:" << endl;
@@ -72,15 +81,46 @@ bool validCct(int product_cct) {
 void updateBill(Bill*** bill) {
 	// משיכת מחיר מהקובץ של המוצר של מספר המקט שהוזן למשתנה price
 	double price = 0;
+	string name;
+	int cct = 0;
+	// משיכת הנתונים מהקובץ
+	Product **product;
 	(*(*bill))->sum += price;
+	int old_size = (*(*bill))->num_of_product;
 	(*(*bill))->num_of_product++;
+	int temp = (*(*bill))->num_of_product;
+	if ((*(*bill))->num_of_product == 1)
+	{
+		product[0] = new Product;
+		product[0]->cct = cct;
+		product[0]->name = name;
+		product[0]->price = price;
+	}
+	else
+	{
+		Product** Assist = new Product *[temp];
+		for (int i = 0; i < old_size; i++)
+		{
+			Assist[i] = new Product;
+			Assist[i] = product[i];
+		}
+		Assist[old_size] = new Product;
+		Assist[old_size]->cct = cct;
+		Assist[old_size]->name = name;
+		Assist[old_size]->price = price;
+		delete(product);
+		product = Assist;
+		Assist = nullptr;
+	}
+	
 	// ברגע שמוסיפים מוצר לחשבון צריך לכתוב אותו לקובץ בשביל שכדי שנרצה למחוק מוצר נוכל לבדוק אם המוצר קיים בחשבון
+
 }
 
-void deleteExistProduct(Bill ** bill)
+void deleteExistProduct(Bill ** bill, Product** product)
 {
 	int product_cct = 0;
 	cout << "Enter cct to delete product" << endl;
 	// קריאה מקובץ שאליו הפריטים שהתווספו לחשבון נכתבו בפונקציה לעל (אפדייט ביל) כדי לבדוק שהמוצר קיים בחשבון
-	
+
 }
