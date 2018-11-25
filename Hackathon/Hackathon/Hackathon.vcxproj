@@ -142,7 +142,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Hackathon.cpp" />
+    <ClCompile Include="Requirements_1_to_4.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Requirements_1_to_4.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h" />
