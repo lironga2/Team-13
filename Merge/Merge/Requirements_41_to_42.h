@@ -4,7 +4,10 @@
 #include<string>
 #include"Requirements_1_to_3.h"
 #include "Requirements_5.h"
+#include "Requirement_7.h"
 using namespace std;
+
+
 
 
 typedef struct {
@@ -22,6 +25,7 @@ void load_details(string user_name);
 void menu(Worker* worker);
 void general_worker(Worker* worker);
 void shift_manager(Worker* worker);
+
 
 
 void Login()
@@ -82,6 +86,7 @@ bool isValid(string user, string pass)
 
 void load_details(string user_name)
 {
+
 	Worker* worker = new Worker;
 	string file_user;
 	bool flag = false;
@@ -135,7 +140,7 @@ void menu(Worker* worker)
 	}
 	}
 }
-void general_worker(Worker* worker) 
+void general_worker(Worker* worker)
 {
 	int opt;
 	bool flag = false;
@@ -161,7 +166,7 @@ void general_worker(Worker* worker)
 		}
 		case 2:
 		{
-			Add_Club_Member();
+			Add_Club_Member(worker->id);
 			break;
 		}
 		case 3:
@@ -224,7 +229,7 @@ void shift_manager(Worker* worker)
 		}
 		case 2:
 		{
-			Add_Club_Member();
+			Add_Club_Member(worker->id);
 			break;
 		}
 		case 3:
