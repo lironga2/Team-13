@@ -27,9 +27,6 @@
     <ClInclude Include="Requirement_7.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Requirement_9.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Requirements_1_to_3.cpp">
