@@ -1,3 +1,0 @@
-100 MacBook 12000 
-1001 DellPc 4500
-10001 OpticalMouse 120

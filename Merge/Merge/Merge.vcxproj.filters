@@ -24,16 +24,13 @@
     <ClInclude Include="Requirements_41_to_42.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Requirement_7.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="driver.cpp">
-      <Filter>Resource Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Requirements_1_to_3.cpp">
-      <Filter>Resource Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
