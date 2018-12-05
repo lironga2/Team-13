@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Requirement_7.h" />
     <ClInclude Include="Requirements_1_to_3.h" />
     <ClInclude Include="Requirements_41_to_42.h" />
     <ClInclude Include="Requirements_5.h" />
