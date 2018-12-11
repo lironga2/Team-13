@@ -4,7 +4,7 @@
 #include<string>
 #include"Requirements_1_to_3.h"
 #include "Requirements_5.h"
-#include "Requirement_7.h"
+#include "Requirement_6_to_8.h"
 using namespace std;
 
 
@@ -175,12 +175,12 @@ void general_worker(Worker* worker)
 		}
 		case 3:
 		{
-			//productInStock();
+			productInStock();
 			break;
 		}
 		case 4:
 		{
-			//productPrice();
+			productPrice();
 			break;
 		}
 		case 5:
@@ -240,12 +240,12 @@ void shift_manager(Worker* worker)
 		}
 		case 3:
 		{
-			//productInStock();
+			productInStock();
 			break;
 		}
 		case 4:
 		{
-			//productPrice();
+			productPrice();
 			break;
 		}
 		case 5:

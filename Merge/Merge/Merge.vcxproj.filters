@@ -24,7 +24,7 @@
     <ClInclude Include="Requirements_41_to_42.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Requirement_7.h">
+    <ClInclude Include="Requirement_6_to_8.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
