@@ -16,7 +16,7 @@ typedef struct Product {
 };
 
 typedef struct Bill {
-	double sum = 0;
+	long double sum = 0;
 	int num_of_product = 0;
 	bool club_member = false;
 	int current_account_number;

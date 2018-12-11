@@ -239,6 +239,7 @@ void deleteExistProduct(Bill ** bill)
 			(*(bill))->num_of_product = 0;
 			delete((*bill)->product);
 			(*bill)->product = nullptr;
+			cout << "product has deleted" << endl;
 		}
 	}
 
@@ -301,14 +302,36 @@ void makePayment(Bill * bill)
 			switch (payment_type)
 			{
 			case '1':
+			{
 				cout << "How much money did you receive from the client?: " << endl;
 				cin >> cash;
-				cout << "Money return: " << cash - (bill->sum) << endl;
-				flag = false;
+				if (cash >= bill->sum)
+				{
+					cout << "Money return: " << cash - bill->sum << endl;
+					flag = false;
+				}
+				else
+				{
+					bill->sum -= cash;
+					cout << "remind bill to pay is: " << bill->sum << endl;
+				}
+
+				
 				break;
-			case '2': 
+			}
+			case '2':
+			{
 				do
 				{
+					cout << "How much money to charge: " << endl;
+					do
+					{
+						cin >> cash;
+						if (cash > bill->sum)
+						{
+							cout << "the amount to charge is bigger then bill amount try again." << endl;
+						}
+					} while (cash > bill->sum);
 					if (!validFlag)
 					{
 						cout << "card number invalid" << endl;
@@ -337,12 +360,12 @@ void makePayment(Bill * bill)
 					}
 					else
 					{
-						if ((year == lm.tm_year ) && (month < lm.tm_mon ))
+						if ((year == lm.tm_year) && (month < lm.tm_mon))
 						{
 							validFlag = false;
 						}
 					}
-				} while ((year == lm.tm_year ) && (month < lm.tm_mon ) || (year < lm.tm_year));
+				} while ((year == lm.tm_year) && (month < lm.tm_mon) || (year < lm.tm_year));
 				validFlag = true;
 				do
 				{
@@ -352,13 +375,22 @@ void makePayment(Bill * bill)
 					}
 					cout << "Enter CVV: " << endl;
 					cin >> CVV;
-					if(CVV<0 || CVV > 999)
+					if (CVV < 0 || CVV > 999)
 					{
 						validFlag = false;
 					}
 				} while (CVV < 0 || CVV > 999);
-				flag = false;
+				if (cash == bill->sum)
+				{
+					flag = false;
+				}
+				else
+				{
+					bill->sum -= cash;
+					cout << "remind bill to pay is: " << bill->sum << endl;
+				}
 				break;
+			}
 			default:
 				cout << "Bad choice. Try again." << endl;
 				break;
@@ -381,8 +413,20 @@ void makePayment(Bill * bill)
 
 bool findFriendClub() {
 	string phone_number;
-	cout << "Enter customer's phone number: " << endl;
-	cin >> phone_number;
+	bool phone_flag = true;
+	do
+	{
+		if (!phone_flag)
+		{
+			cout << "phone number invalid" << endl;
+		}
+		cout << "Enter customer's phone number: " << endl;
+		cin >> phone_number;
+		if (phone_number.length() != 10)
+		{
+			phone_flag = false;
+		}
+	} while (phone_number.length() != 10);
 	string member_phone;
 	ifstream ClubMember;
 	ClubMember.open("ClubMember.txt");
