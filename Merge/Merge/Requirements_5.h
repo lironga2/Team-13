@@ -18,7 +18,10 @@ typedef struct
 
 void Add_Club_Member(string worker_id)
 {
-	sprintf(currDate, "%d.%d.%d", tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900);
+	/*tm.tm_mday += 1;
+	tm.tm_year += 1900;*/
+	sprintf(currDate, "%d.%d.%d", tm.tm_mday + 1, tm.tm_mon, tm.tm_year + 1900);
+	cout << currDate;
 	string first_name;
 	string last_name;
 	string id;
@@ -72,3 +75,4 @@ void Add_Club_Member(string worker_id)
 	clubMembers << id << ' ' << first_name << ' ' << last_name << ' ' << bDay.day << '.' << bDay.month << '.' << bDay.year << ' ' << city << ' ' << phone_number << ' ' << currDate << ' ' << worker_id << endl;
 	clubMembers.close();
 }
+

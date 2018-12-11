@@ -1,0 +1,4 @@
+ 1 The products are:
+MacBook210870412000
+OpticalMouse2108704120
+Total bill: 12120
