@@ -120,11 +120,13 @@ void menu(Worker* worker)
 	{
 	case 1:
 	{
+		system("cls");
 		general_worker(worker);
 		break;
 	}
 	case 2:
 	{
+		system("cls");
 		shift_manager(worker);
 		break;
 	}
@@ -161,11 +163,13 @@ void general_worker(Worker* worker)
 		{
 		case 1:
 		{
+			system("cls");
 			creatBill(worker->id);
 			break;
 		}
 		case 2:
 		{
+			system("cls");
 			Add_Club_Member(worker->id);
 			break;
 		}
@@ -224,11 +228,13 @@ void shift_manager(Worker* worker)
 		{
 		case 1:
 		{
+			system("cls");
 			creatBill(worker->id);
 			break;
 		}
 		case 2:
 		{
+			system("cls");
 			Add_Club_Member(worker->id);
 			break;
 		}

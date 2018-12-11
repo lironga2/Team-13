@@ -9,6 +9,7 @@ using namespace std;
 static char todaydate[30];
 time_t l = time(NULL);
 struct tm lm = *localtime(&l);
+static bool Date_Flag = true;
 
 void newBill(Bill** bill);
 void newProduct(Product** product);
@@ -43,12 +44,34 @@ void newProduct(Product** product) {
 //The menu that appears after selecting Create new account from the main menu. Demand Analysis Number 1.
 void creatBill(string id)
 {
-	lm.tm_mday += 1;
-	lm.tm_year += 1900;
+	if(Date_Flag)
+	{
+		lm.tm_mon += 1;
+		lm.tm_year += 1900;
+		Date_Flag = false;
+	}
+
 	sprintf(todaydate, "%d.%d.%d", lm.tm_mday, lm.tm_mon , lm.tm_year);
 	cout << todaydate << endl;
 	Bill *bill;
 	newBill(&bill);
+	int Transaction_Number = 0;
+	char ch = '0';
+	ifstream Transaction;
+	Transaction.open("Transaction.txt");
+	if (Transaction.is_open())
+	{
+		while (!Transaction.eof())
+		{
+			Transaction >> ch;
+			if (ch == '#')
+			{
+				Transaction >> Transaction_Number;
+			}
+		}
+	}
+	Transaction.close();
+	invoice_number = Transaction_Number + 1;
 	bill->current_account_number = invoice_number;
 	bool flag = true;
 	char user_choise;
@@ -94,6 +117,7 @@ void addProductToBill(Bill** bill)
 		}
 	} while (!validCct(product_cct));
 	// if the cct is valid.
+	system("cls");
 	cout << "Product successfully added" << endl;
 	updateBill(&bill,product_cct);
 
@@ -183,19 +207,20 @@ void deleteExistProduct(Bill ** bill)
 		{
 			if (product_cct.compare((*(bill))->product[i]->cct) == 0 ) {
 				index_to_delete = i;
+				break;
 			}
 		}
 		if (index_to_delete == -1)
 		{
 			cout << "The product does not exist in the cart" << endl;
 		}
-		else
+		else if ((*(bill))->num_of_product > 1)
 		{
 			Product** Assist = new Product* [(*(bill))->num_of_product - 1];
 			int j = 0;
 			for (int i = 0; i < (*(bill))->num_of_product; i++)
 			{
-				if (i = index_to_delete)
+				if (i == index_to_delete)
 				{
 					continue;
 				}
@@ -209,6 +234,12 @@ void deleteExistProduct(Bill ** bill)
 			Assist = nullptr;
 			cout << "product has deleted" << endl;
 		}
+		else
+		{
+			(*(bill))->num_of_product = 0;
+			delete((*bill)->product);
+			(*bill)->product = nullptr;
+		}
 	}
 
 	//לא לשכוח להוסיף את המוצר חזרה למלאי
@@ -217,6 +248,7 @@ void deleteExistProduct(Bill ** bill)
 
 void makePayment(Bill * bill)
 {
+	system("cls");
 	if(bill->num_of_product == 0)
 	{
 		cout << "There is no products in the bill" << endl;
@@ -237,84 +269,84 @@ void makePayment(Bill * bill)
 		fstream transaction;
 		char ch;
 
-		cout << "Is the client a club member? 1) Yes 2)No" << endl;
+		cout << "Is the client a club member? \n 1) Yes 2) No" << endl;
 		cin >> user_freind_club_choice;
 		do {
-			if (user_freind_club_choice == 1)
+			if (user_freind_club_choice == '1')
 				if (findFriendClub()) {
 					friend_club = true;
 					bill->sum *= 0.95;
 				}
 				else
 				{
-					cout << "friend member dose not found. do you want try again? 1) Yes 2)No" << endl;
+					cout << "friend member dose not found. do you want try again?\n 1) Yes 2) No" << endl;
 					cin >> user_freind_club_choice;
 				}
-		} while (user_freind_club_choice == 1);
+		} while (user_freind_club_choice == '1' && friend_club == false);
 
 		cout << "The products are:" << endl;
 		for (int i = 0; i < bill->num_of_product; i++)
 		{
-			cout << bill->product[i]->name << ' - ' << bill->product[i]->price << endl;
+			cout << bill->product[i]->name << " - " << bill->product[i]->price << endl;
 		}
 
-		cout << "Amount to pay: " << bill->sum;
-		if (friend_club = true)
+		cout << "Amount to pay: " << bill->sum << endl;
+		if (friend_club == true)
 			cout << "You saved 5%! " << endl;
 		do
 		{
-			cout << "How do you want to pay?: " << bill->sum;
-			cout << "1) Cash 2)Credit Card: " << endl;
+			cout << "How do you want to pay?: " << bill->sum << endl;
+			cout << "1) Cash 2) Credit Card: " << endl;
 			cin >> payment_type;
 			switch (payment_type)
 			{
 			case '1':
 				cout << "How much money did you receive from the client?: " << endl;
 				cin >> cash;
-				cout << "Money return: " << cash - (bill->sum);
+				cout << "Money return: " << cash - (bill->sum) << endl;
 				flag = false;
 				break;
 			case '2': 
 				do
 				{
-					if (!flag)
+					if (!validFlag)
 					{
 						cout << "card number invalid" << endl;
 					}
 
 					cout << "card number" << endl;
-					std::getline(std::cin, card_number);
+					cin >> card_number;
 					cout << card_number.length() << endl;
-					if (card_number.length() != 8 || card_number.length() != 16)
+					if (card_number.length() != 8 && card_number.length() != 16)
 					{
-						flag = false;
+						validFlag = false;
 					}
-				} while (card_number.length() != 8 || card_number.length() != 16);
+				} while ((card_number.length() != 8) && (card_number.length() != 16));
 				validFlag = true;
 				do
 				{
-					if (!flag)
+					if (!validFlag)
 					{
 						cout << "validity invalid" << endl;
 					}
 					cout << "Enter validity: " << endl;
 					cin >> month >> ch >> year;
-					if (year < lm.tm_year +1900)
+					if (year < lm.tm_year)
 					{
-						flag = false;
+						validFlag = false;
 					}
 					else
 					{
-						if ((year == lm.tm_year + 1900) && (month < lm.tm_mon + 1))
+						if ((year == lm.tm_year ) && (month < lm.tm_mon ))
 						{
-							flag = false;
+							validFlag = false;
 						}
 					}
-				} while ((year == lm.tm_year + 1900) && (month < lm.tm_mon + 1) || (year < lm.tm_year + 1900));
+				} while ((year == lm.tm_year ) && (month < lm.tm_mon ) || (year < lm.tm_year));
 				validFlag = true;
 				do
 				{
-					if (!flag)
+					if (!validFlag)
 					{
 						cout << "CVV: " << endl;
 					}
@@ -322,7 +354,7 @@ void makePayment(Bill * bill)
 					cin >> CVV;
 					if(CVV<0 || CVV > 999)
 					{
-						flag = false;
+						validFlag = false;
 					}
 				} while (CVV < 0 || CVV > 999);
 				flag = false;
@@ -333,13 +365,17 @@ void makePayment(Bill * bill)
 			}
 		} while (flag);
 		transaction.open("Transaction.txt", std::fstream::app);
-		transaction << todaydate << ' ' << bill->id << ' ';
-		transaction << "The products are:" << endl;
+		transaction <<'#' <<bill->current_account_number << ' ' << todaydate << ' ' << bill->id << ' ';
 		for (int i = 0; i < bill->num_of_product; i++)
 		{
-			transaction << bill->product[i]->name << ' - ' << bill->product[i]->price << endl;
+			transaction << bill->product[i]->name << ' ' << bill->product[i]->price << endl;
 		}
 		transaction << "Total bill: " << bill->sum << endl;
+		transaction.close();
+		cout << "transaction number: " << bill->current_account_number << " payed thank you" << endl;
+		getchar();
+		getchar();
+		system("cls");
 	}
 }
 

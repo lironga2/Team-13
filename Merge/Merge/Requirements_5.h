@@ -8,6 +8,7 @@ using namespace std;
 static char currDate[30];
 time_t t = time(NULL);
 struct tm tm = *localtime(&t);
+static bool currDate_Flag = true;
 
 typedef struct
 {
@@ -18,9 +19,13 @@ typedef struct
 
 void Add_Club_Member(string worker_id)
 {
-	/*tm.tm_mday += 1;
-	tm.tm_year += 1900;*/
-	sprintf(currDate, "%d.%d.%d", tm.tm_mday + 1, tm.tm_mon, tm.tm_year + 1900);
+	if (currDate_Flag)
+	{
+		tm.tm_mon += 1;
+		tm.tm_year += 1900;
+		currDate_Flag = false;
+	}
+	sprintf(currDate, "%d.%d.%d", tm.tm_mday, tm.tm_mon, tm.tm_year);
 	cout << currDate;
 	string first_name;
 	string last_name;

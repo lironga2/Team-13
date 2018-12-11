@@ -1,4 +1,25 @@
- 1 The products are:
-MacBook210870412000
-OpticalMouse2108704120
-Total bill: 12120
+#1 11.12.2018 1 MacBook 12000
+Total bill: 12000
+#2 11.12.2018 1 MacBook 12000
+Total bill: 11400
+#3 11.12.2018 1 OpticalMouse 120
+Total bill: 120
+#4 11.12.2018 1 DellPc 4500
+Total bill: 4500
+#5 11.12.2018 1 DellPc 4500
+Total bill: 4500
+#6 11.12.2018 1 OpticalMouse 120
+Total bill: 120
+#7 11.12.2018 1 OpticalMouse 120
+Total bill: 120
+#8 11.12.2018 1 OpticalMouse 120
+Total bill: 120
+#9 11.12.2018 1 DellPc 4500
+Total bill: 4500
+#10 11.12.2018 1 DellPc 4500
+OpticalMouse 120
+Total bill: 11514
+#11 11.12.2018 1 MacBook 12000
+MacBook 12000
+OpticalMouse 120
+Total bill: 24120
