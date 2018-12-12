@@ -21,6 +21,7 @@ void updateBill(Bill*** bill,string product_cct);
 void deleteExistProduct(Bill ** bill);
 void makePayment(Bill *bill);
 bool findFriendClub();
+int ConvertToNum(string Number);
 
 
 
@@ -124,6 +125,7 @@ void creatBill(string id)
 
 void addProductToBill(Bill** bill)
 {
+
 	string product_cct;
 	do {
 		cout << "Please Enter Product cct:" << endl; //cct -> makat.
@@ -135,6 +137,66 @@ void addProductToBill(Bill** bill)
 	// if the cct is valid.
 	system("cls");
 	cout << "Product successfully added" << endl;
+	ifstream Input;
+	string Copy_String;
+	ofstream Output;
+	Output.open("Temp_Stock.txt");
+	Input.open("Stock.txt");
+	Product Temp_product;
+	int Product_Amount;
+	//load details of employee that connect to the system
+	if (Input.is_open())
+	{
+		while (!(Input.eof()))
+		{
+			Input >> Copy_String;
+			if (!Input.eof())
+			{
+				if (product_cct.compare(Copy_String) == 0)
+				{
+					Temp_product.cct = Copy_String;
+					Input >> Temp_product.name;
+					Input >> Temp_product.price;
+					Input >> Copy_String;
+					Product_Amount = ConvertToNum(Copy_String);
+					Product_Amount -= 1;
+				}
+				else
+				{
+					Output << Copy_String << ' ';
+					if (Copy_String[Copy_String.length() - 1] == '#')
+					{
+						Output << endl;
+						continue;
+					}
+				}
+			}
+		}
+		Output << Temp_product.cct << ' ' << Temp_product.name << ' ' << Temp_product.price << ' ' << Product_Amount << '#' << endl;
+		Input.close();
+		Output.close();
+		Output.open("Stock.txt");
+		Input.open("Temp_Stock.txt");
+		while (!Input.eof())
+		{
+			Input >> Copy_String;
+			if (!Input.eof())
+			{
+				Output << Copy_String << ' ';
+				if (Copy_String[Copy_String.length() - 1] == '#')
+				{
+					Output << endl;
+				}
+			}
+		}
+		//Output << Temp_product.cct << ' ' << Temp_product.name << ' ' << Temp_product.price << ' ' << Product_Amount << '#' << endl;
+		//Output << Temp_product.name << ' ';
+		//Output << Temp_product.price << ' ';
+		//Output << Product_Amount << '#' << endl;
+
+	}
+	Input.close();
+	Output.close();
 	updateBill(&bill,product_cct);
 
 }
@@ -153,6 +215,19 @@ bool validCct(string product_cct) {
 	}
 	Stock.close();
 	return false;
+}
+
+int ConvertToNum(string Number)
+{
+	int Result = 0;
+	int Index = 0;
+	while (Number[Index] != '#')
+	{
+		Result *= 10;
+		Result += (Number[Index] - '0');
+		Index++;
+	}
+	return Result;
 }
 
 void updateBill(Bill*** bill,string product_cct) {

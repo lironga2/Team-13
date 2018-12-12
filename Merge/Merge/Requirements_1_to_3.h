@@ -53,3 +53,4 @@ void updateBill(Bill*** bill, string product_cct);
 void deleteExistProduct(Bill ** bill);
 void makePayment(Bill *bill);
 bool findFriendClub();
+int ConvertToNum(string Number);
