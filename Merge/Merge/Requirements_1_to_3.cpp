@@ -4,6 +4,7 @@
 #include<fstream>
 #include"Requirements_1_to_3.h"
 #include <time.h>
+#include<stdlib.h>
 using namespace std;
 
 static char todaydate[30];
@@ -78,6 +79,21 @@ void creatBill(string id)
 	bill->id = id;
 	// לא לשכוח לבדוק תקינות קלט ולהוסיף הודעת שגיאה במקרה והקלט לא תקין
 	do {
+		if (bill->num_of_product)
+		{
+			cout << "The products are:" << endl;
+			for (int i = 0; i < bill->num_of_product; i++)
+			{
+				cout << bill->product[i]->name << " - " << bill->product[i]->price << endl;
+			}
+			cout << "Amount to pay: " << bill->sum << endl;
+		}
+		else
+		{
+			cout << "There is no products in the bill" << endl;
+		}
+
+
 		cout << "1) Add a new product:" << endl;
 		cout << "2) Delete an existing product:" << endl;
 		cout << "3) Making a payment:" << endl;
@@ -216,6 +232,7 @@ void deleteExistProduct(Bill ** bill)
 		}
 		else if ((*(bill))->num_of_product > 1)
 		{
+			(*(bill))->sum -= (*bill)->product[index_to_delete]->price;
 			Product** Assist = new Product* [(*(bill))->num_of_product - 1];
 			int j = 0;
 			for (int i = 0; i < (*(bill))->num_of_product; i++)
@@ -230,7 +247,6 @@ void deleteExistProduct(Bill ** bill)
 			delete((*bill)->product);
 			(*bill)->product = Assist;
 			(*(bill))->num_of_product--;
-			(*(bill))->sum -= (*bill)->product[index_to_delete]->price;
 			Assist = nullptr;
 			cout << "product has deleted" << endl;
 		}
@@ -262,7 +278,7 @@ void makePayment(Bill * bill)
 		string card_number;
 		int month;
 		int year;
-		int CVV = 0;
+		string CVV;
 		bool friend_club = false;
 		char user_freind_club_choice;
 		bool flag = true;
@@ -352,7 +368,7 @@ void makePayment(Bill * bill)
 					{
 						cout << "validity invalid" << endl;
 					}
-					cout << "Enter validity: " << endl;
+					cout << "Enter validity: month/year" << endl;
 					cin >> month >> ch >> year;
 					if (year < lm.tm_year)
 					{
@@ -371,15 +387,29 @@ void makePayment(Bill * bill)
 				{
 					if (!validFlag)
 					{
-						cout << "CVV: " << endl;
+						cout << "CVV invalid " << endl;
 					}
 					cout << "Enter CVV: " << endl;
 					cin >> CVV;
-					if (CVV < 0 || CVV > 999)
+					if (CVV.length() != 3)
 					{
 						validFlag = false;
 					}
-				} while (CVV < 0 || CVV > 999);
+					else
+					{
+						for (int i = 0; i < CVV.length(); i++)
+						{
+							if (!((CVV[i] >='0') && (CVV[i] <= '9')))
+							{
+								validFlag = false;
+								break;
+							}
+							validFlag = true;
+						}
+						
+					}
+
+				} while (CVV.length() != 3 || !validFlag);
 				if (cash == bill->sum)
 				{
 					flag = false;
