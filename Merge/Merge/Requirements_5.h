@@ -16,8 +16,7 @@ typedef struct
 	int month;
 	int year;
 }Date;
-
-void Add_Club_Member(string worker_id)
+void UpdateDate()
 {
 	if (currDate_Flag)
 	{
@@ -26,7 +25,11 @@ void Add_Club_Member(string worker_id)
 		currDate_Flag = false;
 	}
 	sprintf(currDate, "%d.%d.%d", tm.tm_mday, tm.tm_mon, tm.tm_year);
-	cout << currDate;
+	cout << currDate << endl;
+}
+void Add_Club_Member(string worker_id)
+{
+	UpdateDate();
 	string first_name;
 	string last_name;
 	string id;

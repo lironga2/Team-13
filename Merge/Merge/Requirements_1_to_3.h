@@ -3,6 +3,7 @@
 #include<fstream>
 #include<string>
 
+
 using namespace std;
 static int invoice_number = 0;
 static int sale = 1; // global sale

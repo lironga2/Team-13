@@ -31,5 +31,10 @@ Total bill: 11400
 Total bill: 2000
 #15 11.12.2018 1 MacBook 12000
 Total bill: 0.9
+
 #16 11.12.2018 1 MacBook 12000
 Total bill: 1
+#17 12.12.2018 1 MacBook 12000
+Total bill: 12000
+#18 12.12.2018 1 MacBook 12000
+Total bill: 12000

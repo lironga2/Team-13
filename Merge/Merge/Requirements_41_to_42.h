@@ -4,7 +4,7 @@
 #include<string>
 #include"Requirements_1_to_3.h"
 #include "Requirements_5.h"
-#include "Requirement_6_to_8.h"
+#include "Requirement_6_to_10.h"
 using namespace std;
 
 
@@ -185,17 +185,17 @@ void general_worker(Worker* worker)
 		}
 		case 5:
 		{
-			//locateTransaction();
+			locateTransaction();
 			break;
 		}
 		case 6:
 		{
-			//dailySalesReport();
+			dailySalesReport(worker->id);
 			break;
 		}
 		case 7:
 		{
-			//dailyClubMebmer();
+			dailyClubMebmer(worker->id);
 			break;
 		}
 		case 0:
@@ -250,17 +250,17 @@ void shift_manager(Worker* worker)
 		}
 		case 5:
 		{
-			//locateTransaction();
+			locateTransaction();
 			break;
 		}
 		case 6:
 		{
-			//dailySalesReport();
+			dailySalesReport(worker->id);
 			break;
 		}
 		case 7:
 		{
-			//dailyClubMebmer();
+			dailyClubMebmer(worker->id);
 			break;
 		}
 		case 8:
