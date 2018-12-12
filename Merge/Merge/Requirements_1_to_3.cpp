@@ -198,11 +198,6 @@ void addProductToBill(Bill** bill)
 				}
 			}
 		}
-		//Output << Temp_product.cct << ' ' << Temp_product.name << ' ' << Temp_product.price << ' ' << Product_Amount << '#' << endl;
-		//Output << Temp_product.name << ' ';
-		//Output << Temp_product.price << ' ';
-		//Output << Product_Amount << '#' << endl;
-
 	}
 	Input.close();
 	Output.close();
@@ -290,7 +285,65 @@ void updateBill(Bill*** bill,string product_cct) {
 	}
 
 }
+void deleteProductFromStock(string product_cct)
+{
+	ifstream Input;
+	string Copy_String;
+	ofstream Output;
+	Output.open("Temp_Stock.txt");
+	Input.open("Stock.txt");
+	Product Temp_product;
+	int Product_Amount;
+	if (Input.is_open())
+	{
+		while (!(Input.eof()))
+		{
+			Input >> Copy_String;
+			if (!Input.eof())
+			{
+				if (product_cct.compare(Copy_String) == 0)
+				{
+					Temp_product.cct = Copy_String;
+					Input >> Temp_product.name;
+					Input >> Temp_product.price;
+					Input >> Copy_String;
+					Product_Amount = ConvertToNum(Copy_String);
+					Product_Amount += 1;
+				}
 
+
+				else
+				{
+					Output << Copy_String << ' ';
+					if (Copy_String[Copy_String.length() - 1] == '#')
+					{
+						Output << endl;
+						continue;
+					}
+				}
+			}
+		}
+		Output << Temp_product.cct << ' ' << Temp_product.name << ' ' << Temp_product.price << ' ' << Product_Amount << '#' << endl;
+		Input.close();
+		Output.close();
+		Output.open("Stock.txt");
+		Input.open("Temp_Stock.txt");
+		while (!Input.eof())
+		{
+			Input >> Copy_String;
+			if (!Input.eof())
+			{
+				Output << Copy_String << ' ';
+				if (Copy_String[Copy_String.length() - 1] == '#')
+				{
+					Output << endl;
+				}
+			}
+		}
+		Input.close();
+		Output.close();
+	}
+}
 void deleteExistProduct(Bill ** bill)
 {
 	int index_to_delete = -1;
@@ -329,6 +382,7 @@ void deleteExistProduct(Bill ** bill)
 				}
 				Assist[j] = new Product;
 				Assist[j++] = (*bill)->product[i];
+				deleteProductFromStock(product_cct);
 			}
 			delete((*bill)->product);
 			(*bill)->product = Assist;
@@ -341,12 +395,10 @@ void deleteExistProduct(Bill ** bill)
 			(*(bill))->num_of_product = 0;
 			delete((*bill)->product);
 			(*bill)->product = nullptr;
+			deleteProductFromStock(product_cct);
 			cout << "product has deleted" << endl;
 		}
 	}
-
-	//לא לשכוח להוסיף את המוצר חזרה למלאי
-
 }
 
 void makePayment(Bill * bill)
