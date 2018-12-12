@@ -79,7 +79,6 @@ void dailySalesReport(string worker_id)
 	fstream file_transaction;
 	string id_to_compare;
 	string number_transaction;
-	//string assist;
 	double sum_sales=0.0;
 	double temp=0.0;
 	bool flag = true;
@@ -103,7 +102,6 @@ void dailySalesReport(string worker_id)
 			if ((date_to_compare.compare(today) == 0) && (id_to_compare.compare(worker_id) == 0))
 			{
 				cout << "Number of transcation: " << number_transaction << endl;
-				//assist = number_transaction;
 				file_transaction >> number_transaction;
 				while ((number_transaction[0] != '#') && (!file_transaction.eof()))
 				{
@@ -128,7 +126,6 @@ void dailySalesReport(string worker_id)
 				}
 			}
 			else 
-				//file_transaction >> number_transaction;
 				while ((number_transaction[0] != '#') && (!file_transaction.eof()))
 				{
 					file_transaction >> number_transaction;
@@ -178,5 +175,36 @@ void returnProduct() //needs to check what to do with original transaction, now 
 	cout << "enter cct of product that you want to return" << endl;
 	cin >> product_cct;
 	deleteProductFromStock(product_cct);
-	cout << "product has returned" << endl;
+	cout << "product hasz returned" << endl;
+}
+
+void saleNewGiftCard()
+{
+	int giftcard_number=0;
+	int giftcard_value = 0;
+	char ch;
+	cout << "Enter the value of the giftcard that u want to buy" << endl;
+	cin >> giftcard_value;
+	fstream file_giftcard;
+	file_giftcard.open("GiftCard.txt");
+	if (file_giftcard.is_open())
+	{
+		while (!file_giftcard.eof())
+		{
+			file_giftcard >> ch;
+			if (ch == '#')
+			{
+				file_giftcard >> giftcard_number;
+			}
+		}
+	}
+	file_giftcard.close();
+	giftcard_number += 1;
+	file_giftcard.open("GiftCard.txt", std::fstream::app);
+	if (file_giftcard.is_open())
+	{
+		file_giftcard << '#' << giftcard_number << ' ' << giftcard_value << endl;
+	}
+	file_giftcard.close();
+	cout << "gift card sold succeeded , your amount in giftcard is: " << giftcard_value <<"\nyour giftcard number is: " << giftcard_number <<  endl;
 }
