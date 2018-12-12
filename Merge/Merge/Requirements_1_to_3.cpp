@@ -125,7 +125,7 @@ void creatBill(string id)
 
 void addProductToBill(Bill** bill)
 {
-
+	int toSend;
 	string product_cct;
 	do {
 		cout << "Please Enter Product cct:" << endl; //cct -> makat.
@@ -136,7 +136,6 @@ void addProductToBill(Bill** bill)
 	} while (!validCct(product_cct));
 	// if the cct is valid.
 	system("cls");
-	cout << "Product successfully added" << endl;
 	ifstream Input;
 	string Copy_String;
 	ofstream Output;
@@ -159,7 +158,17 @@ void addProductToBill(Bill** bill)
 					Input >> Temp_product.price;
 					Input >> Copy_String;
 					Product_Amount = ConvertToNum(Copy_String);
-					Product_Amount -= 1;
+					if (Product_Amount > 0)
+					{
+						Product_Amount -= 1;
+						toSend = 1;
+					}
+					else
+					{
+						cout << "product's amount too low, try  to add a different product" << endl;
+						toSend = 0;
+					}
+
 				}
 				else
 				{
@@ -197,8 +206,10 @@ void addProductToBill(Bill** bill)
 	}
 	Input.close();
 	Output.close();
-	updateBill(&bill,product_cct);
-
+	if (toSend) {
+		cout << "Product successfully added" << endl;
+		updateBill(&bill, product_cct);
+	}
 }
 // A function that checks if the cct that entered in a function addProductToBill() exists in the database.
 bool validCct(string product_cct) {

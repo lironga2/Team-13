@@ -110,22 +110,23 @@ void dailySalesReport(string worker_id)
 						cout << number_transaction;
 						file_transaction >> number_transaction;
 					}
-					else
-					{
-						cout << number_transaction << endl;
-						file_transaction >> number_transaction;
-					}
-					if (number_transaction == "bill:")
+					else if (number_transaction == "bill:")
 					{
 						cout << ' ' << number_transaction << endl;
 						file_transaction >> temp;
 						number_transaction = to_string(temp);
 						sum_sales += temp;
+						flag = false;
+					}
+					else
+					{
+						cout << number_transaction << endl;
+						file_transaction >> number_transaction;
 					}
 				}
 			}
 			else 
-				file_transaction >> number_transaction;
+				//file_transaction >> number_transaction;
 				while ((number_transaction[0] != '#') && (!file_transaction.eof()))
 				{
 					file_transaction >> number_transaction;
