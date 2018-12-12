@@ -1,3 +1,3 @@
-102 DellPc 4500 5# 
 101 MacBook 12000 7# 
-103 OpticMouse 120 6#
+103 OpticMouse 120 5# 
+102 DellPc 4500 3#

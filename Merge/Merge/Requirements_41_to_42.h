@@ -222,6 +222,7 @@ void shift_manager(Worker* worker)
 		cout << "press 5 to locate transaction" << endl;
 		cout << "press 6 to create your daily sells report" << endl;
 		cout << "press 7 to create your daily club members report" << endl;
+		cout << "press 8 to return product to store" << endl;
 		cout << "press 0 to back" << endl;
 		cin >> opt;
 		switch (opt)
@@ -265,7 +266,7 @@ void shift_manager(Worker* worker)
 		}
 		case 8:
 		{
-			//returnProduct();
+			returnProduct();
 			break;
 		}
 		case 9:

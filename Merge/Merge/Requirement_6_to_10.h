@@ -62,9 +62,11 @@ void locateTransaction()
 			cout << "Number of transcation:" << number_transaction << endl;
 			file_transaction >> transaction_to_compare;
 			
-			while (transaction_to_compare[0] != '#')
+			while ((transaction_to_compare[0] != '#') && (!file_transaction.eof()))
 			{
-				cout << transaction_to_compare << endl;
+				cout << transaction_to_compare<<' ';
+				if (!(transaction_to_compare.compare("Total") == 0))
+					cout << endl;
 				file_transaction >> transaction_to_compare;
 			}
 		}
@@ -167,4 +169,14 @@ void dailyClubMebmer(string worker_id)
 		}
 	}
 	cout << "Number of daily club members added: " << count_num_members << endl;
+}
+void returnProduct() //needs to check what to do with original transaction, now it only increase the product +1 in stock.txt
+					 //and not change sum
+{
+	string product_cct;
+	locateTransaction();
+	cout << "enter cct of product that you want to return" << endl;
+	cin >> product_cct;
+	deleteProductFromStock(product_cct);
+	cout << "product has returned" << endl;
 }

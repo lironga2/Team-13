@@ -54,3 +54,4 @@ void deleteExistProduct(Bill ** bill);
 void makePayment(Bill *bill);
 bool findFriendClub();
 int ConvertToNum(string Number);
+void deleteProductFromStock(string product_cct);

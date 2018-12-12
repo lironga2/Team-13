@@ -22,6 +22,7 @@ void deleteExistProduct(Bill ** bill);
 void makePayment(Bill *bill);
 bool findFriendClub();
 int ConvertToNum(string Number);
+void deleteProductFromStock(string product_cct);
 
 
 
@@ -310,8 +311,6 @@ void deleteProductFromStock(string product_cct)
 					Product_Amount = ConvertToNum(Copy_String);
 					Product_Amount += 1;
 				}
-
-
 				else
 				{
 					Output << Copy_String << ' ';
@@ -568,7 +567,7 @@ void makePayment(Bill * bill)
 		transaction <<'#' <<bill->current_account_number << ' ' << todaydate << ' ' << bill->id << ' ';
 		for (int i = 0; i < bill->num_of_product; i++)
 		{
-			transaction << bill->product[i]->name << ' ' << bill->product[i]->price << endl;
+			transaction << bill->product[i]->name << ' ' << bill->product[i]->cct << ' ' << bill->product[i]->price <<endl; //added cct to file
 		}
 		transaction << "Total bill: " << bill->sum << endl;
 		transaction.close();
