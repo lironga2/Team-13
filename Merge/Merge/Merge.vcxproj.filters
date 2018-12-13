@@ -24,7 +24,10 @@
     <ClInclude Include="Requirements_41_to_42.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Requirement_6_to_10.h">
+    <ClInclude Include="Requirement_6_to_12_and_15.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Requirement_16.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -140,7 +140,7 @@ void addProductToBill(Bill** bill)
 	ifstream Input;
 	string Copy_String;
 	ofstream Output;
-	Output.open("Temp_Stock.txt");
+	Output.open("Temp.txt");
 	Input.open("Stock.txt");
 	Product Temp_product;
 	int Product_Amount;
@@ -186,7 +186,7 @@ void addProductToBill(Bill** bill)
 		Input.close();
 		Output.close();
 		Output.open("Stock.txt");
-		Input.open("Temp_Stock.txt");
+		Input.open("Temp.txt");
 		while (!Input.eof())
 		{
 			Input >> Copy_String;
@@ -291,7 +291,7 @@ void deleteProductFromStock(string product_cct)
 	ifstream Input;
 	string Copy_String;
 	ofstream Output;
-	Output.open("Temp_Stock.txt");
+	Output.open("Temp.txt");
 	Input.open("Stock.txt");
 	Product Temp_product;
 	int Product_Amount;
@@ -326,7 +326,7 @@ void deleteProductFromStock(string product_cct)
 		Input.close();
 		Output.close();
 		Output.open("Stock.txt");
-		Input.open("Temp_Stock.txt");
+		Input.open("Temp.txt");
 		while (!Input.eof())
 		{
 			Input >> Copy_String;
@@ -422,6 +422,7 @@ void makePayment(Bill * bill)
 		bool validFlag = true;
 		fstream transaction;
 		char ch;
+		int cash_from_giftcard=0;
 
 		cout << "Is the client a club member? \n 1) Yes 2) No" << endl;
 		cin >> user_freind_club_choice;

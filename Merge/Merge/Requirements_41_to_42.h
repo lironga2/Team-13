@@ -4,7 +4,7 @@
 #include<string>
 #include"Requirements_1_to_3.h"
 #include "Requirements_5.h"
-#include "Requirement_6_to_10.h"
+#include "Requirement_6_to_12_and_15.h"
 using namespace std;
 
 
