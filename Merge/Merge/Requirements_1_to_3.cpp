@@ -5,6 +5,7 @@
 #include"Requirements_1_to_3.h"
 #include <time.h>
 #include<stdlib.h>
+
 using namespace std;
 
 static char todaydate[30];
@@ -423,6 +424,7 @@ void makePayment(Bill * bill)
 		fstream transaction;
 		char ch;
 		int cash_from_giftcard=0;
+		int manager_password;
 
 		cout << "Is the client a club member? \n 1) Yes 2) No" << endl;
 		cin >> user_freind_club_choice;
@@ -438,16 +440,31 @@ void makePayment(Bill * bill)
 					cin >> user_freind_club_choice;
 				}
 		} while (user_freind_club_choice == '1' && friend_club == false);
-
+		/*cout << "is the client have valid giftcard? 1) Yes 2) No" << endl;
+		cin >> user_freind_club_choice;
+		if (user_freind_club_choice == 1)
+		{
+			cout << "please enter Manager password " << endl;           --------- הכנסת מימוש גיפטקארד, קונפליקט עם include
+			cin >> manager_password;
+			if (manager_password == 1234) 
+			{
+				cash_from_giftcard = checkIfGiftCardExist();
+			}
+		}*/
 		cout << "The products are:" << endl;
 		for (int i = 0; i < bill->num_of_product; i++)
 		{
 			cout << bill->product[i]->name << " - " << bill->product[i]->price << endl;
 		}
-
-		cout << "Amount to pay: " << bill->sum << endl;
 		if (friend_club == true)
-			cout << "You saved 5%! " << endl;
+			cout << "You saved 5% because you are our club member!" << endl;
+		/*if (cash_from_giftcard)
+		{
+			bill->sum -= cash_from_giftcard;
+			cout << "after the use of the giftcard amount, your final bill is:" << bill->sum << endl;
+		}
+		else */
+			cout << "Amount to pay: " << bill->sum << endl;
 		do
 		{
 			cout << "How do you want to pay?: " << bill->sum << endl;

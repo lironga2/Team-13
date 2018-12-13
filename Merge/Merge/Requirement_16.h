@@ -1,11 +1,11 @@
+#include "Requirements_1_to_3.h"
 #pragma once
-#include "Requirement_6_to_12_and_15.h"
 int checkIfGiftCardExist()
 {
 	fstream file_giftcard;
 	string number_giftcard_to_cmp;
 	string number_giftcard;
-	int gift_use=0;
+	int gift_use = 0;
 	int giftcard_amount;
 
 	cout << "enter number of giftcard with the format #Num" << endl;
@@ -42,7 +42,7 @@ int checkIfGiftCardExist()
 	}
 	file_giftcard.close();
 }
-void editTxtGiftCard(int giftcard_amount,string giftcard_number)
+void editTxtGiftCard(int giftcard_amount, string giftcard_number)
 {
 	ifstream Input;
 	string Copy_String;
@@ -73,7 +73,7 @@ void editTxtGiftCard(int giftcard_amount,string giftcard_number)
 				}
 			}
 		}
-		Output <<"#" << temp_giftcard_number <<' ' << giftcard_amount << endl;
+		Output << "#" << temp_giftcard_number << ' ' << giftcard_amount << endl;
 		Input.close();
 		Output.close();
 		Output.open("GiftCard.txt");
