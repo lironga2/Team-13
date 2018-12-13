@@ -115,6 +115,13 @@ void creatBill(string id)
 		case '4': // לא לשכוח שחרור הקצאה לחשבון החדש וגם לעשות -- למספר חשבון הגלובאלי
 				  // לשנות דגל לשלילי ולמחוק כל מה שקיים בקובץ החשבון הנוכחי
 					flag = false;
+					if (bill->num_of_product)
+					{
+						for (int i = 0; i < bill->num_of_product; i++)
+						{
+							deleteProductFromStock(bill->product[i]->cct);
+						}
+					}
 					break;
 		default:
 			cout << "Invalid choice. Try again." << endl;
@@ -430,7 +437,6 @@ void makePayment(Bill * bill)
 			if (user_freind_club_choice == '1')
 				if (findFriendClub()) {
 					friend_club = true;
-					bill->sum *= 0.95;
 				}
 				else
 				{
@@ -455,7 +461,13 @@ void makePayment(Bill * bill)
 			cout << bill->product[i]->name << " - " << bill->product[i]->price << endl;
 		}
 		if (friend_club == true)
+		{
 			cout << "You saved 5% because you are our club member!" << endl;
+			for (int i = 0; i < bill->num_of_product; i++)
+			{
+				bill->product[i]->price *= 0.95;
+			}
+		}
 		if (cash_from_giftcard)
 		{
 			bill->sum -= cash_from_giftcard;
@@ -580,10 +592,10 @@ void makePayment(Bill * bill)
 			}
 		} while (flag);
 		transaction.open("Transaction.txt", std::fstream::app);
-		transaction <<'#' <<bill->current_account_number << ' ' << todaydate << ' ' << bill->id << ' ';
+		transaction <<'#' <<bill->current_account_number << ' ' << todaydate << ' ' << bill->id << endl;
 		for (int i = 0; i < bill->num_of_product; i++)
 		{
-			transaction << bill->product[i]->name << ' ' << bill->product[i]->cct << ' ' << bill->product[i]->price <<endl; //added cct to file
+			transaction << bill->product[i]->cct << ' ' << bill->product[i]->name  << ' ' << bill->product[i]->price <<endl; //added cct to file
 		}
 		transaction << "Total bill: " << bill->sum << endl;
 		transaction.close();

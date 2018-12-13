@@ -2,6 +2,7 @@
 #include"Requirements_1_to_3.h"
 #include "Requirements_5.h"
 #include<stdlib.h>
+using namespace std;
 
 void productInStock()
 {
@@ -43,9 +44,10 @@ void productPrice()
 		cout << "Product not in stock" << endl;
 }
 
-void locateTransaction()
+string locateTransaction()
 {
 	string number_transaction;
+	bool transaction_exist=false;
 	fstream file_transaction;
 	string transaction_to_compare; //variable to save num of transaction and then to save other variable
 
@@ -59,18 +61,28 @@ void locateTransaction()
 		file_transaction >> transaction_to_compare;
 		if (transaction_to_compare.compare(number_transaction) == 0)
 		{
+			transaction_exist = true;
 			cout << "Number of transcation:" << number_transaction << endl;
 			file_transaction >> transaction_to_compare;
-			
+
 			while ((transaction_to_compare[0] != '#') && (!file_transaction.eof()))
 			{
-				cout << transaction_to_compare<<' ';
+				cout << transaction_to_compare << ' ';
 				if (!(transaction_to_compare.compare("Total") == 0))
 					cout << endl;
 				file_transaction >> transaction_to_compare;
 			}
+			break;
 		}
 	}
+		if (transaction_exist)
+		{
+			return number_transaction;
+		}
+		else
+		{
+			return "number_transaction didnt found!";
+		}
 }
 
 void dailySalesReport(string worker_id) 
@@ -92,7 +104,8 @@ void dailySalesReport(string worker_id)
 	{
 		while (!file_transaction.eof())
 		{
-			if (flag) 
+			file_transaction >> number_transaction;
+			while ((number_transaction[0] != '#') &&(!file_transaction.eof()))
 			{
 				file_transaction >> number_transaction;
 			}
@@ -101,8 +114,10 @@ void dailySalesReport(string worker_id)
 
 			if ((date_to_compare.compare(today) == 0) && (id_to_compare.compare(worker_id) == 0))
 			{
+				flag = true;
 				cout << "Number of transcation: " << number_transaction << endl;
 				file_transaction >> number_transaction;
+				int Endl = 0;
 				while ((number_transaction[0] != '#') && (!file_transaction.eof()))
 				{
 					if (number_transaction == "Total") 
@@ -110,27 +125,40 @@ void dailySalesReport(string worker_id)
 						cout << number_transaction;
 						file_transaction >> number_transaction;
 					}
-					else if (number_transaction == "bill:")
+					if (number_transaction == "bill:")
 					{
-						cout << ' ' << number_transaction << endl;
+						cout << ' ' << number_transaction;
 						file_transaction >> temp;
 						number_transaction = to_string(temp);
 						sum_sales += temp;
 						flag = false;
-					}
-					else
-					{
 						cout << number_transaction << endl;
-						file_transaction >> number_transaction;
 					}
+						if (flag)
+						{
+							cout << number_transaction << ' ';
+							Endl++;
+							if (Endl % 3 == 0)
+							{
+								cout << endl;
+							}
+							file_transaction >> number_transaction;
+						}
+						if (!flag)
+						{
+							break;
+						}
 				}
 			}
-			else 
-				while ((number_transaction[0] != '#') && (!file_transaction.eof()))
-				{
-					file_transaction >> number_transaction;
-					flag = false;
-				}
+			//else 
+				//while ((number_transaction[0] != '#') && (!file_transaction.eof()))
+				//{
+				//	if (number_transaction[0] != '#')
+				//	{
+				//		file_transaction >> number_transaction;
+				//	}
+				//	flag = false;
+				//}
 		}
 		file_transaction.close();
 		cout << "Total profit of employee for today is: " << sum_sales << endl;
@@ -171,11 +199,88 @@ void returnProduct() //needs to check what to do with original transaction, now 
 					 //and not change sum
 {
 	string product_cct;
-	locateTransaction();
-	cout << "enter cct of product that you want to return" << endl;
-	cin >> product_cct;
-	deleteProductFromStock(product_cct);
-	cout << "product hasz returned" << endl;
+	string Transaction_Number = locateTransaction();
+	if (Transaction_Number.compare("number_transaction didnt found!") == 0)
+	{
+		cout << "number_transaction didnt found!" << endl;
+	}
+	else
+	{
+		cout << "enter cct of product that you want to return" << endl;
+		cin >> product_cct;
+		deleteProductFromStock(product_cct);
+		cout << "product has returned" << endl;
+		ifstream Input;
+		ofstream Output;
+		string Transfer;
+		bool Flag = true;
+		bool Bill_Flag = true;
+		Input.open("Transaction.txt");
+		Output.open("Temp.txt");
+		int Endl = 0;
+		double price;
+		while (!Input.eof())
+		{
+			Input >> Transfer;
+			{
+				if ((Transfer.compare("bill:") == 0) && Bill_Flag == false)
+				{
+					double new_price;
+					Output << Transfer << ' ';
+					Input >> new_price;
+					new_price -= price;
+					Output << to_string(new_price);
+					//Input >> Transfer;
+					Bill_Flag = true;
+					Endl++; Endl++;
+				}
+				else if(Bill_Flag)
+				{
+					Output << Transfer << ' ';
+					Endl++;
+				}
+				//Endl++;
+			}
+			if (Endl % 3 == 0)
+			{
+				Output << endl;
+			}
+			if (Transfer.compare(Transaction_Number) == 0)
+			{
+				while (!Input.eof() && Flag)
+				{
+					Input >> Transfer;
+					if (Transfer.compare(product_cct) == 0)
+					{
+
+						Flag = false;
+						Input >> Transfer;
+						Input >> price;
+						Bill_Flag = false;
+					}
+					else
+					{
+						Output << Transfer << ' ';
+						Endl++;
+						if (Endl % 3 == 0)
+						{
+							Output << endl;
+						}
+					}
+				}
+			}
+			else
+			{
+				Input >> Transfer;
+				Output << Transfer << ' ';
+				Endl++;
+				if (Endl % 3 == 0)
+				{
+					Output << endl;
+				}
+			}
+		}
+	}
 }
 
 void saleNewGiftCard()
