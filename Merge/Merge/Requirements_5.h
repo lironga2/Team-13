@@ -3,7 +3,9 @@
 #include<string>
 #include<fstream>
 #include <time.h>
+
 using namespace std;
+
 
 static char currDate[30];
 time_t t = time(NULL);

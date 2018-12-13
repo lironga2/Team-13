@@ -1,10 +1,10 @@
 #pragma once
 #include<iostream>
-#include<fstream>
 #include<string>
-
+#include<fstream>
 
 using namespace std;
+
 static int invoice_number = 0;
 static int sale = 1; // global sale
 

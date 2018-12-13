@@ -1,8 +1,6 @@
 #pragma once
-#include<iostream>
-#include<string>
-#include<fstream>
 #include"Requirements_1_to_3.h"
+#include "Requirement_16.h"
 #include <time.h>
 #include<stdlib.h>
 
@@ -440,17 +438,17 @@ void makePayment(Bill * bill)
 					cin >> user_freind_club_choice;
 				}
 		} while (user_freind_club_choice == '1' && friend_club == false);
-		/*cout << "is the client have valid giftcard? 1) Yes 2) No" << endl;
+		cout << "is the client have valid giftcard? 1) Yes 2) No" << endl;
 		cin >> user_freind_club_choice;
-		if (user_freind_club_choice == 1)
+		if (user_freind_club_choice == '1')
 		{
-			cout << "please enter Manager password " << endl;           --------- הכנסת מימוש גיפטקארד, קונפליקט עם include
+			cout << "please enter Manager password " << endl;          
 			cin >> manager_password;
 			if (manager_password == 1234) 
 			{
 				cash_from_giftcard = checkIfGiftCardExist();
 			}
-		}*/
+		}
 		cout << "The products are:" << endl;
 		for (int i = 0; i < bill->num_of_product; i++)
 		{
@@ -458,12 +456,12 @@ void makePayment(Bill * bill)
 		}
 		if (friend_club == true)
 			cout << "You saved 5% because you are our club member!" << endl;
-		/*if (cash_from_giftcard)
+		if (cash_from_giftcard)
 		{
 			bill->sum -= cash_from_giftcard;
 			cout << "after the use of the giftcard amount, your final bill is:" << bill->sum << endl;
 		}
-		else */
+		else 
 			cout << "Amount to pay: " << bill->sum << endl;
 		do
 		{
