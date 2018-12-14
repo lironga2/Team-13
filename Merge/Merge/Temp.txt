@@ -5,14 +5,14 @@
 103 OpticMouse 120 
 Total bill: 28620 
 #2 13.12.2018 2 
-
-bill: #3 2 
-
-OpticMouse 103 120 
-
-bill: #4 1 
-
-DellPc Total bill: -7500.000000#5 13.12.2018 
-1 101 MacBook 
-12000 Total bill: 
-12000 12000 12000 
+101 MacBook 12000 
+Total bill: 11400 
+#3 13.12.2018 2 
+103 OpticMouse 120 
+Total bill: 15 
+#4 13.12.2018 1 
+102 DellPc 4500 
+Total bill: 4500 
+#5 13.12.2018 1 
+101 MacBook 12000 
+Total bill: 12000 

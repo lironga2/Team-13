@@ -213,70 +213,70 @@ void returnProduct() //needs to check what to do with original transaction, now 
 		ifstream Input;
 		ofstream Output;
 		string Transfer;
+		bool boolflag = true;
 		bool Flag = true;
-		bool Bill_Flag = true;
 		Input.open("Transaction.txt");
 		Output.open("Temp.txt");
 		int Endl = 0;
 		double price;
+		double TotalPrice = 0;
 		while (!Input.eof())
 		{
+			if (boolflag)
 			Input >> Transfer;
-			{
-				if ((Transfer.compare("bill:") == 0) && Bill_Flag == false)
-				{
-					double new_price;
-					Output << Transfer << ' ';
-					Input >> new_price;
-					new_price -= price;
-					Output << to_string(new_price);
-					//Input >> Transfer;
-					Bill_Flag = true;
-					Endl++; Endl++;
-				}
-				else if(Bill_Flag)
-				{
-					Output << Transfer << ' ';
-					Endl++;
-				}
-				//Endl++;
-			}
-			if (Endl % 3 == 0)
-			{
-				Output << endl;
-			}
 			if (Transfer.compare(Transaction_Number) == 0)
 			{
-				while (!Input.eof() && Flag)
+				for (int i = 0; i < 3; i++)
+				{
+					Output << Transfer << ' ';
+					Input >> Transfer;
+				}
+				Output << endl;
+				boolflag = true;
+				if (Transfer.compare(product_cct) == 0 && (Flag))
 				{
 					Input >> Transfer;
-					if (Transfer.compare(product_cct) == 0)
-					{
+					Input >> price;
+					Transfer = to_string(price);
+					TotalPrice -= price;
+					Flag = false;
+					boolflag = true;
+				}
+				else if (Transfer.compare("Total") == 0)
+				{
+					Output << Transfer << ' ';
+					Input >> Transfer;
+					Output << Transfer << ' ';
+					Input >> Transfer;
+					Output << TotalPrice << endl;
+					Input >> Transfer;
+					boolflag = true;
+				}
+				else
+				{
+					Output << Transfer << ' ';
+					Input >> Transfer;
+					Output << Transfer << ' ';
+					Input >> price;
+					Output << price << endl;
+					Transfer = to_string(price);
+					TotalPrice += price;
+					boolflag = true;
+				}
+				
 
-						Flag = false;
-						Input >> Transfer;
-						Input >> price;
-						Bill_Flag = false;
-					}
-					else
+			}
+			else 
+			{
+				while (!(Transfer.compare(Transaction_Number) == 0) && (!Input.eof()))
+				{
+					for (int i = 0; i < 3; i++)
 					{
 						Output << Transfer << ' ';
-						Endl++;
-						if (Endl % 3 == 0)
-						{
-							Output << endl;
-						}
+						Input >> Transfer;
 					}
-				}
-			}
-			else
-			{
-				Input >> Transfer;
-				Output << Transfer << ' ';
-				Endl++;
-				if (Endl % 3 == 0)
-				{
 					Output << endl;
+					boolflag = false;
 				}
 			}
 		}
