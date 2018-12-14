@@ -5,9 +5,10 @@
 103 OpticMouse 120 
 Total bill: 28620 
 #2 13.12.2018 2 
-101 MacBook 12000 
-Total bill: 11400 
+
+Total bill: -600
 #3 13.12.2018 2 
+103 OpticMouse 120 
 103 OpticMouse 120 
 Total bill: 15 
 #4 13.12.2018 1 

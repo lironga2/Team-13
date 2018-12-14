@@ -195,8 +195,7 @@ void dailyClubMebmer(string worker_id)
 	}
 	cout << "Number of daily club members added: " << count_num_members << endl;
 }
-void returnProduct() //needs to check what to do with original transaction, now it only increase the product +1 in stock.txt
-					 //and not change sum
+void returnProduct() 
 {
 	string product_cct;
 	string Transaction_Number = locateTransaction();
@@ -237,34 +236,18 @@ void returnProduct() //needs to check what to do with original transaction, now 
 				{
 					Input >> Transfer;
 					Input >> price;
-					Transfer = to_string(price);
-					TotalPrice -= price;
+					while (Transfer.compare("bill:") != 0)
+					{
+						Input >> Transfer;
+						if (Transfer.compare("Total") == 0)
+							Output << endl;
+						Output << Transfer << ' ';
+					}
+					Input >> TotalPrice;
+					Output << TotalPrice - price << endl;
 					Flag = false;
 					boolflag = true;
 				}
-				else if (Transfer.compare("Total") == 0)
-				{
-					Output << Transfer << ' ';
-					Input >> Transfer;
-					Output << Transfer << ' ';
-					Input >> Transfer;
-					Output << TotalPrice << endl;
-					Input >> Transfer;
-					boolflag = true;
-				}
-				else
-				{
-					Output << Transfer << ' ';
-					Input >> Transfer;
-					Output << Transfer << ' ';
-					Input >> price;
-					Output << price << endl;
-					Transfer = to_string(price);
-					TotalPrice += price;
-					boolflag = true;
-				}
-				
-
 			}
 			else 
 			{
@@ -280,7 +263,20 @@ void returnProduct() //needs to check what to do with original transaction, now 
 				}
 			}
 		}
+	Input.close();
+	Output.close();
+	Input.open("Temp.txt");
+	Output.open("Transaction.txt");
+	while (!Input.eof())
+	{
+		Input >> Transfer;
+		Output << Transfer <<' ';
+		Endl++;
+		if (Endl % 3 == 0)
+			Output << endl;
 	}
+	}
+
 }
 
 void saleNewGiftCard()
