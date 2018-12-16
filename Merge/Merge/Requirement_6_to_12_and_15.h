@@ -197,6 +197,7 @@ void dailyClubMebmer(string worker_id)
 }
 void returnProduct() 
 {
+	UpdateDate();
 	string product_cct;
 	string Transaction_Number = locateTransaction();
 	if (Transaction_Number.compare("number_transaction didnt found!") == 0)
@@ -210,11 +211,13 @@ void returnProduct()
 		deleteProductFromStock(product_cct);
 		cout << "product has returned" << endl;
 		ifstream Input;
+		ofstream return_product;
 		ofstream Output;
 		string Transfer;
 		bool boolflag = true;
 		bool Flag = true;
 		Input.open("Transaction.txt");
+		return_product.open("ReturnProduct.txt" , std::fstream::app);
 		Output.open("Temp.txt");
 		int Endl = 0;
 		double price;
@@ -234,8 +237,11 @@ void returnProduct()
 				boolflag = true;
 				if (Transfer.compare(product_cct) == 0 && (Flag))
 				{
+					return_product << currDate << ' ' << Transfer << ' ';
 					Input >> Transfer;
+					return_product << Transfer << ' ';
 					Input >> price;
+					return_product << price << endl;
 					while (Transfer.compare("bill:") != 0)
 					{
 						Input >> Transfer;
@@ -265,6 +271,7 @@ void returnProduct()
 		}
 	Input.close();
 	Output.close();
+	return_product.close();
 	Input.open("Temp.txt");
 	Output.open("Transaction.txt");
 	while (!Input.eof())

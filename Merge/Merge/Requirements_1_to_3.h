@@ -7,6 +7,7 @@ using namespace std;
 
 static int invoice_number = 0;
 static int sale = 1; // global sale
+static bool if_club_member;
 
 typedef struct Product {
 	string name;

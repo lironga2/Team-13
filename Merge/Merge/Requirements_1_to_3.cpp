@@ -26,6 +26,9 @@ void deleteProductFromStock(string product_cct);
 
 
 void newBill(Bill** bill) {
+	bool friend_club = false;
+	char user_freind_club_choice;
+
 	*bill = new Bill;
 	if (!bill) {
 		cout << "Bad allocate." << endl;
@@ -33,6 +36,20 @@ void newBill(Bill** bill) {
 	}
 
 	invoice_number++;
+	cout << "Is the client a club member? \n 1) Yes 2) No" << endl;
+	cin >> user_freind_club_choice;
+	do {
+		if (user_freind_club_choice == '1')
+			if (findFriendClub()) {
+				friend_club = true;
+				if_club_member = friend_club;
+			}
+			else
+			{
+				cout << "friend member dose not found. do you want try again?\n 1) Yes 2) No" << endl;
+				cin >> user_freind_club_choice;
+			}
+	} while (user_freind_club_choice == '1' && friend_club == false);
 }
 
 void newProduct(Product** product) {
@@ -258,6 +275,9 @@ void updateBill(Bill*** bill,string product_cct) {
 		{
 			Stock >> name;
 			Stock >> price;
+			if (if_club_member)
+				price = price*0.95;
+			Stock.close();
 			break;
 		}
 	}
@@ -417,13 +437,13 @@ void makePayment(Bill * bill)
 	else
 	{
 		char payment_type;
+		float club_member_discount = 0.95;
 		long double cash = 0;
 		string card_number;
 		int month;
 		int year;
 		string CVV;
-		bool friend_club = false;
-		char user_freind_club_choice;
+		char user_giftcard_choice;
 		bool flag = true;
 		bool validFlag = true;
 		fstream transaction;
@@ -431,22 +451,10 @@ void makePayment(Bill * bill)
 		int cash_from_giftcard=0;
 		int manager_password;
 
-		cout << "Is the client a club member? \n 1) Yes 2) No" << endl;
-		cin >> user_freind_club_choice;
-		do {
-			if (user_freind_club_choice == '1')
-				if (findFriendClub()) {
-					friend_club = true;
-				}
-				else
-				{
-					cout << "friend member dose not found. do you want try again?\n 1) Yes 2) No" << endl;
-					cin >> user_freind_club_choice;
-				}
-		} while (user_freind_club_choice == '1' && friend_club == false);
+		
 		cout << "is the client have valid giftcard? 1) Yes 2) No" << endl;
-		cin >> user_freind_club_choice;
-		if (user_freind_club_choice == '1')
+		cin >> user_giftcard_choice;
+		if (user_giftcard_choice == '1')
 		{
 			cout << "please enter Manager password " << endl;          
 			cin >> manager_password;
@@ -455,19 +463,17 @@ void makePayment(Bill * bill)
 				cash_from_giftcard = checkIfGiftCardExist();
 			}
 		}
+
 		cout << "The products are:" << endl;
-		for (int i = 0; i < bill->num_of_product; i++)
-		{
-			cout << bill->product[i]->name << " - " << bill->product[i]->price << endl;
-		}
-		if (friend_club == true)
+		if (if_club_member == true)
 		{
 			cout << "You saved 5% because you are our club member!" << endl;
+		}		
 			for (int i = 0; i < bill->num_of_product; i++)
 			{
-				bill->product[i]->price *= 0.95;
+				cout << bill->product[i]->name << " - " << bill->product[i]->price << endl;
 			}
-		}
+
 		if (cash_from_giftcard)
 		{
 			bill->sum -= cash_from_giftcard;
@@ -595,7 +601,7 @@ void makePayment(Bill * bill)
 		transaction <<'#' <<bill->current_account_number << ' ' << todaydate << ' ' << bill->id << endl;
 		for (int i = 0; i < bill->num_of_product; i++)
 		{
-			transaction << bill->product[i]->cct << ' ' << bill->product[i]->name  << ' ' << bill->product[i]->price <<endl; //added cct to file
+			transaction << bill->product[i]->cct << ' ' << bill->product[i]->name  << ' ' << bill->product[i]->price <<endl; 
 		}
 		transaction << "Total bill: " << bill->sum << endl;
 		transaction.close();
@@ -603,6 +609,7 @@ void makePayment(Bill * bill)
 		getchar();
 		getchar();
 		system("cls");
+		if_club_member = false;
 	}
 }
 
