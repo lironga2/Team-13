@@ -601,9 +601,11 @@ void makePayment(Bill * bill)
 		transaction <<'#' <<bill->current_account_number << ' ' << todaydate << ' ' << bill->id << endl;
 		for (int i = 0; i < bill->num_of_product; i++)
 		{
+			//cout << bill->product[i]->cct << ' ' << bill->product[i]->name << ' ' << bill->product[i]->price << endl;
 			transaction << bill->product[i]->cct << ' ' << bill->product[i]->name  << ' ' << bill->product[i]->price <<endl; 
 		}
 		transaction << "Total bill: " << bill->sum << endl;
+		//cout << "Total bill: " << bill->sum << endl;
 		transaction.close();
 		cout << "transaction number: " << bill->current_account_number << " payed thank you" << endl;
 		getchar();

@@ -46,6 +46,7 @@ void productPrice()
 
 string locateTransaction()
 {
+	int Endl = 0; // counter to endl every 3 lines
 	string number_transaction;
 	bool transaction_exist=false;
 	fstream file_transaction;
@@ -62,13 +63,18 @@ string locateTransaction()
 		if (transaction_to_compare.compare(number_transaction) == 0)
 		{
 			transaction_exist = true;
-			cout << "Number of transcation:" << number_transaction << endl;
+			cout << "Number of transcation: " << number_transaction << endl;
 			file_transaction >> transaction_to_compare;
-
+			cout << "Date of transcation: " << transaction_to_compare << endl;
+			file_transaction >> transaction_to_compare;
+			cout << "Id of seller: " << transaction_to_compare << endl;
+			cout << "Products: " << endl;
+			file_transaction >> transaction_to_compare;
 			while ((transaction_to_compare[0] != '#') && (!file_transaction.eof()))
 			{
 				cout << transaction_to_compare << ' ';
-				if (!(transaction_to_compare.compare("Total") == 0))
+				Endl++;
+				if (Endl % 3 == 0)
 					cout << endl;
 				file_transaction >> transaction_to_compare;
 			}
@@ -150,15 +156,6 @@ void dailySalesReport(string worker_id)
 						}
 				}
 			}
-			//else 
-				//while ((number_transaction[0] != '#') && (!file_transaction.eof()))
-				//{
-				//	if (number_transaction[0] != '#')
-				//	{
-				//		file_transaction >> number_transaction;
-				//	}
-				//	flag = false;
-				//}
 		}
 		file_transaction.close();
 		cout << "Total profit of employee for today is: " << sum_sales << endl;
@@ -214,7 +211,7 @@ void returnProduct()
 		ofstream return_product;
 		ofstream Output;
 		string Transfer;
-		bool boolflag = true;
+		bool Done_Flag = true;
 		bool Flag = true;
 		Input.open("Transaction.txt");
 		return_product.open("ReturnProduct.txt" , std::fstream::app);
@@ -224,64 +221,65 @@ void returnProduct()
 		double TotalPrice = 0;
 		while (!Input.eof())
 		{
-			if (boolflag)
 			Input >> Transfer;
 			if (Transfer.compare(Transaction_Number) == 0)
 			{
-				for (int i = 0; i < 3; i++)
+				while (!Transfer.compare("Total") == 0 && (!Input.eof()))
 				{
-					Output << Transfer << ' ';
-					Input >> Transfer;
-				}
-				Output << endl;
-				boolflag = true;
-				if (Transfer.compare(product_cct) == 0 && (Flag))
-				{
-					return_product << currDate << ' ' << Transfer << ' ';
-					Input >> Transfer;
-					return_product << Transfer << ' ';
-					Input >> price;
-					return_product << price << endl;
-					while (Transfer.compare("bill:") != 0)
+					if (Transfer.compare(product_cct) == 0 && (Flag))
 					{
 						Input >> Transfer;
-						if (Transfer.compare("Total") == 0)
-							Output << endl;
-						Output << Transfer << ' ';
+						Input >> price;
+						Input >> Transfer;
+						Flag = false;
 					}
-					Input >> TotalPrice;
-					Output << TotalPrice - price << endl;
-					Flag = false;
-					boolflag = true;
+					else 
+					{
+						Output << Transfer << ' ';
+						Input >> Transfer;
+						Output << Transfer << ' ';
+						Input >> Transfer;
+						Output << Transfer << endl;
+						Input >> Transfer;
+					}
 				}
+				Output << Transfer << ' ';
+				Input >> Transfer;
+				Output << Transfer << ' ';
+				Input >> TotalPrice;
+				Output << TotalPrice - price << endl;
 			}
 			else 
 			{
 				while (!(Transfer.compare(Transaction_Number) == 0) && (!Input.eof()))
 				{
-					for (int i = 0; i < 3; i++)
+					for (int i = 0; ((i < 3)); i++)
 					{
 						Output << Transfer << ' ';
 						Input >> Transfer;
 					}
 					Output << endl;
-					boolflag = false;
 				}
 			}
 		}
-	Input.close();
-	Output.close();
-	return_product.close();
-	Input.open("Temp.txt");
-	Output.open("Transaction.txt");
-	while (!Input.eof())
-	{
-		Input >> Transfer;
-		Output << Transfer <<' ';
-		Endl++;
-		if (Endl % 3 == 0)
-			Output << endl;
-	}
+			Input.close();
+			Output.close();
+			return_product.close();
+			Input.open("Temp.txt");
+			Output.open("Transaction.txt");
+			while (!Input.eof())
+			{
+				Input >> Transfer;
+				if (!Input.eof())
+				{
+					Output << Transfer << ' ';
+					Endl++;
+					if (Endl % 3 == 0)
+						Output << endl;
+				}
+			}
+		Input.close();
+		Output.close();
 	}
 
 }
@@ -315,4 +313,103 @@ void saleNewGiftCard()
 	}
 	file_giftcard.close();
 	cout << "gift card sold succeeded , your amount in giftcard is: " << giftcard_value <<"\nyour giftcard number is: " << giftcard_number <<  endl;
+}
+
+void dailyGeneralSalesReport() {
+	string date_to_compare;
+	string id;
+	fstream file_transaction;
+	string number_transaction;
+	double sum_sales = 0.0;
+	double temp = 0.0;
+	bool flag = true;
+	string today;
+
+	UpdateDate();
+	today = currDate;
+
+	file_transaction.open("Transaction.txt");
+	if (file_transaction.is_open())
+	{
+		while (!file_transaction.eof())
+		{
+			file_transaction >> number_transaction;
+			while ((number_transaction[0] != '#') && (!file_transaction.eof()))
+			{
+				file_transaction >> number_transaction;
+			}
+			file_transaction >> date_to_compare;
+			file_transaction >> id;
+
+			if ((date_to_compare.compare(today) == 0))
+			{
+				flag = true;
+				cout << "Number of transcation: " << number_transaction << endl;
+				file_transaction >> number_transaction;
+				int Endl = 0;
+				while ((number_transaction[0] != '#') && (!file_transaction.eof()))
+				{
+					if (number_transaction == "Total")
+					{
+						cout << number_transaction;
+						file_transaction >> number_transaction;
+					}
+					if (number_transaction == "bill:")
+					{
+						cout << ' ' << number_transaction;
+						file_transaction >> temp;
+						number_transaction = to_string(temp);
+						sum_sales += temp;
+						flag = false;
+						cout << number_transaction << endl;
+					}
+					if (flag)
+					{
+						cout << number_transaction << ' ';
+						Endl++;
+						if (Endl % 3 == 0)
+						{
+							cout << endl;
+						}
+						file_transaction >> number_transaction;
+					}
+					if (!flag)
+					{
+						break;
+					}
+				}
+			}
+		}
+		file_transaction.close();
+		cout << "Total profit of all workers for today is: " << sum_sales << endl;
+	}
+}
+void dailyReturnedProductReport()
+{
+	UpdateDate();
+	ifstream file_returned_product;
+	string to_compare;
+	bool Flag = false;
+	file_returned_product.open("ReturnProduct.txt");
+	file_returned_product >> to_compare;
+	while (!file_returned_product.eof())
+	{
+		if (to_compare.compare(currDate) == 0)
+		{
+			if (!Flag) 
+			{
+				cout << "returend product today: " << endl;
+				Flag = true;
+			}
+			
+			file_returned_product >> to_compare;
+			cout << to_compare << ' ';
+			file_returned_product >> to_compare;
+			cout << to_compare << ' ';
+			file_returned_product >> to_compare;
+			cout << to_compare << endl;
+			file_returned_product >> to_compare;
+		}
+	}
+	file_returned_product.close();
 }

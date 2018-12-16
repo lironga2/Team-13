@@ -27,7 +27,6 @@ void UpdateDate()
 		currDate_Flag = false;
 	}
 	sprintf(currDate, "%d.%d.%d", tm.tm_mday, tm.tm_mon, tm.tm_year);
-	cout << currDate << endl;
 }
 void Add_Club_Member(string worker_id)
 {

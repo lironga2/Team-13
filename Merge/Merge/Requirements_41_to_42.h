@@ -224,6 +224,8 @@ void shift_manager(Worker* worker)
 		cout << "press 7 to create your daily club members report" << endl;
 		cout << "press 8 to return product to store" << endl;
 		cout << "press 11 to sale new giftcard" << endl;
+		cout << "press 12 to create general daily sells report" << endl;
+		cout << "press 13 to create daily return product report" << endl;
 		cout << "press 0 to back" << endl;
 		cin >> opt;
 		switch (opt)
@@ -283,6 +285,16 @@ void shift_manager(Worker* worker)
 		case 11:
 		{
 			saleNewGiftCard();
+			break;
+		}
+		case 12:
+		{
+			dailyGeneralSalesReport();
+			break;
+		}
+		case 13:
+		{
+			dailyReturnedProductReport();
 			break;
 		}
 		case 0:
