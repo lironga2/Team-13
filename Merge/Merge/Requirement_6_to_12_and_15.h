@@ -228,8 +228,11 @@ void returnProduct()
 				{
 					if (Transfer.compare(product_cct) == 0 && (Flag))
 					{
+						return_product << currDate << ' ' << Transfer << ' ';
 						Input >> Transfer;
+						return_product << Transfer << ' ';
 						Input >> price;
+						return_product << price << endl;
 						Input >> Transfer;
 						Flag = false;
 					}
