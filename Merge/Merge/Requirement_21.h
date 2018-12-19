@@ -96,7 +96,7 @@ void changeAccess()
 			}
 			else {
 				flag = true;
-				level_to_change = int(level_to_change_char);
+				level_to_change = level_to_change_char - '0';
 			}
 		} while (!flag);
 
