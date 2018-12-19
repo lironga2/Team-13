@@ -6,7 +6,7 @@
 #include "Requirements_5.h"
 #include "Requirement_6_to_12_and_15.h"
 #include"Requirment_13_14.h"
-#include"Requirment_21.h"
+#include"Requirement_21.h"
 
 using namespace std;
 
@@ -231,6 +231,7 @@ void shift_manager(Worker* worker)
 		cout << "press 6 to create your daily sells report" << endl;
 		cout << "press 7 to create your daily club members report" << endl;
 		cout << "press 8 to return product to store" << endl;
+		cout << "press 9 to choose excellent worker bonus" << endl;
 		cout << "press 10 to remove excellent worker bonus" << endl;
 		cout << "press 11 to sale new giftcard" << endl;
 		cout << "press 12 to create general daily sells report" << endl;
@@ -283,11 +284,13 @@ void shift_manager(Worker* worker)
 			}
 			case 9:
 			{
-				//workerBonus();
+				system("cls");
+				workerBonus();
 				break;
 			}
 			case 10:
 			{
+				system("cls");
 				removeBonus();
 				break;
 			}
@@ -309,7 +312,7 @@ void shift_manager(Worker* worker)
 			//Temp!
 			case 14:
 			{
-				changeAccsess();
+				//changeAccsess();
 				break;
 			}
 			case 0:
