@@ -28,6 +28,20 @@ void UpdateDate()
 	}
 	sprintf(currDate, "%d.%d.%d", tm.tm_mday, tm.tm_mon, tm.tm_year);
 }
+
+bool checkIfNum(string temp) {
+	for (int i = 0; i < temp.length(); i++) {
+		if (temp[i] > '9' || temp[i] < '0')
+			return false;
+	}
+	return true;
+}
+
+bool checkIfNum(char temp) {
+	return temp >= '0' && temp <= '9';
+}
+
+
 void Add_Club_Member(string worker_id)
 {
 	UpdateDate();
@@ -49,11 +63,13 @@ void Add_Club_Member(string worker_id)
 		}
 		cout << "Enter customer id" << endl;
 		std::getline(std::cin, id);
-		if (id.length() != 9)
+		if (id.length() != 9 || !checkIfNum(id))
 		{
 			flag = false;
 		}
-	} while (id.length() != 9);
+		else
+			flag = true;
+	} while (!flag);
 	cout << "Enter customer first name" << endl;
 	//cin.ignore();
 	std::getline(std::cin, first_name);
