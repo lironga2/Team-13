@@ -1,6 +1,7 @@
 #pragma once
 #include"Requirements_1_to_3.h"
 #include "Requirement_16.h"
+#include"Requirement_17.h"
 #include <time.h>
 #include<stdlib.h>
 
@@ -13,7 +14,7 @@ static bool Date_Flag = true;
 
 void newBill(Bill** bill);
 void newProduct(Product** product);
-void creatBill(string id);
+void creatBill(string id, int level);
 void addProductToBill(Bill** bill);
 bool validCct(string product_cct);
 void updateBill(Bill*** bill,string product_cct);
@@ -22,6 +23,7 @@ void makePayment(Bill *bill);
 bool findFriendClub();
 int ConvertToNum(string Number);
 void deleteProductFromStock(string product_cct);
+void Manager_Or_Shift_Manager_Options(Bill* bill);
 
 
 
@@ -61,7 +63,7 @@ void newProduct(Product** product) {
 }
 
 //The menu that appears after selecting Create new account from the main menu. Demand Analysis Number 1.
-void creatBill(string id)
+void creatBill(string id,int level)
 {
 	if(Date_Flag)
 	{
@@ -75,6 +77,7 @@ void creatBill(string id)
 	Bill *bill;
 	newBill(&bill);
 	int Transaction_Number = 0;
+	int manager_password;
 	char ch = '0';
 	ifstream Transaction;
 	Transaction.open("Transaction.txt");
@@ -95,6 +98,7 @@ void creatBill(string id)
 	bool flag = true;
 	char user_choise;
 	bill->id = id;
+	bill->level = level;
 	// לא לשכוח לבדוק תקינות קלט ולהוסיף הודעת שגיאה במקרה והקלט לא תקין
 	do {
 		if (bill->num_of_product)
@@ -115,7 +119,8 @@ void creatBill(string id)
 		cout << "1) Add a new product:" << endl;
 		cout << "2) Delete an existing product:" << endl;
 		cout << "3) Making a payment:" << endl;
-		cout << "4) Back:" << endl;
+		cout << "4) Shift manager / Manager options:" << endl;
+		cout << "5) Back:" << endl;
 		cin >> user_choise;
 		switch (user_choise)
 		{
@@ -129,7 +134,22 @@ void creatBill(string id)
 				makePayment(bill);
 				flag = false;
 			break;
-		case '4': // לא לשכוח שחרור הקצאה לחשבון החדש וגם לעשות -- למספר חשבון הגלובאלי
+		case '4':
+				if (bill->level >= 2)
+				{
+					Manager_Or_Shift_Manager_Options(bill);
+				}
+				else
+				{
+					cout << "please enter Manager password " << endl;
+					cin >> manager_password;
+					if (manager_password == 1234)
+					{
+						Manager_Or_Shift_Manager_Options(bill);
+					}
+				}
+				break;
+		case '5': // לא לשכוח שחרור הקצאה לחשבון החדש וגם לעשות -- למספר חשבון הגלובאלי
 				  // לשנות דגל לשלילי ולמחוק כל מה שקיים בקובץ החשבון הנוכחי
 					flag = false;
 					if (bill->num_of_product)
@@ -645,4 +665,27 @@ bool findFriendClub() {
 	}
 	ClubMember.close();
 	return false;
+}
+
+void Manager_Or_Shift_Manager_Options(Bill* bill)
+{
+	bool flag = true;
+	char user_choise;
+	do
+	{
+		cout << "1) Give the client a discount" << endl;
+		cout << "0) Back" << endl;
+		cin >> user_choise;
+		switch (user_choise)
+		{
+		case '1':
+				giveCleintDiscount(&bill);
+				break;
+		case '0':
+				flag = false;
+				break;
+		default:
+			break;
+		}
+	} while (flag);
 }

@@ -10,3 +10,6 @@ Total bill: 4275
 102 DellPc 4500
 102 DellPc 4500
 Total bill: 9120
+#4 20.12.2018 202020202
+101 MacBook 9000
+Total bill: 9000
