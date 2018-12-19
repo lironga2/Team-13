@@ -6,7 +6,7 @@
 #include "Requirements_5.h"
 #include "Requirement_6_to_12_and_15.h"
 #include"Requirment_13_14.h"
-#include"Requirment_21.h"
+#include"Requirement_21.h"
 
 using namespace std;
 
@@ -31,6 +31,7 @@ void load_details(string user_name);
 void menu(Worker* worker);
 void general_worker(Worker* worker);
 void shift_manager(Worker* worker);
+void store_manager(Worker* worker);
 
 
 
@@ -145,7 +146,7 @@ void menu(Worker* worker)
 	}
 	case 4:
 	{
-		//store_manager(worker);
+		store_manager(worker);
 		break;
 	}
 	}
@@ -306,12 +307,6 @@ void shift_manager(Worker* worker)
 				dailyReturnedProductReport();
 				break;
 			}
-			//Temp!
-			case 14:
-			{
-				changeAccsess();
-				break;
-			}
 			case 0:
 			{
 				Login();
@@ -322,5 +317,109 @@ void shift_manager(Worker* worker)
 	} while (!flag);
 
 }
+void store_manager(Worker* worker)
+{
+	int opt;
+	bool flag = false;
 
-//b
+	do
+	{
+		cout << "welcome to store manager menu" << endl;
+		cout << "press 1 to create bill" << endl;
+		cout << "press 2 to add club member" << endl;
+		cout << "press 3 to check if product in stock" << endl;
+		cout << "press 4 to check product price" << endl;
+		cout << "press 5 to locate transaction" << endl;
+		cout << "press 6 to create your daily sells report" << endl;
+		cout << "press 7 to create your daily club members report" << endl;
+		cout << "press 8 to return product to store" << endl;
+		cout << "press 10 to remove excellent worker bonus" << endl;
+		cout << "press 11 to sale new giftcard" << endl;
+		cout << "press 12 to create general daily sells report" << endl;
+		cout << "press 13 to create daily return product report" << endl;
+		cout << "press 14 to change access to employee" << endl; //....
+		cout << "press 0 to back" << endl;
+		cin >> opt;
+		switch (opt)
+		{
+		case 1:
+		{
+			system("cls");
+			creatBill(worker->id);
+			break;
+		}
+		case 2:
+		{
+			system("cls");
+			Add_Club_Member(worker->id);
+			break;
+		}
+		case 3:
+		{
+			productInStock();
+			break;
+		}
+		case 4:
+		{
+			productPrice();
+			break;
+		}
+		case 5:
+		{
+			locateTransaction();
+			break;
+		}
+		case 6:
+		{
+			dailySalesReport(worker->id);
+			break;
+		}
+		case 7:
+		{
+			dailyClubMebmer(worker->id);
+			break;
+		}
+		case 8:
+		{
+			returnProduct();
+			break;
+		}
+		case 9:
+		{
+			//workerBonus();
+			break;
+		}
+		case 10:
+		{
+			removeBonus();
+			break;
+		}
+		case 11:
+		{
+			saleNewGiftCard();
+			break;
+		}
+		case 12:
+		{
+			dailyGeneralSalesReport();
+			break;
+		}
+		case 13:
+		{
+			dailyReturnedProductReport();
+			break;
+		}
+		case 14:
+		{
+			changeAccess();
+			break;
+		}
+		case 0:
+		{
+			Login();
+			flag = true;
+			break;
+		}
+		}
+	} while (!flag);
+}
