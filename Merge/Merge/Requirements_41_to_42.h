@@ -10,9 +10,6 @@
 
 using namespace std;
 
-
-
-
 typedef struct {
 	string username;
 	string id;
@@ -341,6 +338,7 @@ void store_manager(Worker* worker)
 		cout << "press 12 to create general daily sells report" << endl;
 		cout << "press 13 to create daily return product report" << endl;
 		cout << "press 14 to change access to employee" << endl; //....
+		cout << "press 15 to add amount of money to worker salary" << endl;
 		cout << "press 0 to back" << endl;
 		cin >> opt;
 		switch (opt)
@@ -389,7 +387,7 @@ void store_manager(Worker* worker)
 		}
 		case 9:
 		{
-			//workerBonus();
+			workerBonus();
 			break;
 		}
 		case 10:
@@ -415,6 +413,11 @@ void store_manager(Worker* worker)
 		case 14:
 		{
 			changeAccess();
+			break;
+		}
+		case 15:
+		{
+			changeEmployeeSalary();
 			break;
 		}
 		case 0:

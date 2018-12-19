@@ -5,3 +5,8 @@ Total bill: 12120
 #2 16.12.2018 1 
 102 DellPc 4275 
 Total bill: 4275 
+#3 19.12.2018 423123123
+103 OpticMouse 120
+102 DellPc 4500
+102 DellPc 4500
+Total bill: 9120

@@ -29,6 +29,8 @@ void UpdateDate()
 	sprintf(currDate, "%d.%d.%d", tm.tm_mday, tm.tm_mon, tm.tm_year);
 }
 
+
+
 bool checkIfNum(string temp) {
 	for (int i = 0; i < temp.length(); i++) {
 		if (temp[i] > '9' || temp[i] < '0')
@@ -41,6 +43,20 @@ bool checkIfNum(char temp) {
 	return temp >= '0' && temp <= '9';
 }
 
+double convertStringToNum(string temp)
+{
+	int multy = 1;
+	double num_to_return = 0;
+	if (checkIfNum(temp))
+	{
+		for (int i = temp.length()-1; i >= 0; i--)
+		{
+			num_to_return += multy * (temp[i] - '0');
+			multy *= 10;
+		}
+	}
+	return num_to_return;
+}
 
 void Add_Club_Member(string worker_id)
 {
