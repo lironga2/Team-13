@@ -16,6 +16,8 @@ typedef struct {
 	string last_name;
 	int level;
 	int phone_number;
+	double salary;
+	string is_excellent;
 }Worker;
 
 
@@ -105,6 +107,8 @@ void load_details(string user_name)
 				UsersData >> worker->last_name;
 				UsersData >> worker->level;
 				UsersData >> worker->phone_number;
+				UsersData >> worker->salary;
+				UsersData >> worker->is_excellent;
 				flag = true;
 			}
 		}
@@ -161,49 +165,49 @@ void general_worker(Worker* worker)
 		cin >> opt;
 		switch (opt)
 		{
-		case 1:
-		{
-			system("cls");
-			creatBill(worker->id);
-			break;
-		}
-		case 2:
-		{
-			system("cls");
-			Add_Club_Member(worker->id);
-			break;
-		}
-		case 3:
-		{
-			productInStock();
-			break;
-		}
-		case 4:
-		{
-			productPrice();
-			break;
-		}
-		case 5:
-		{
-			locateTransaction();
-			break;
-		}
-		case 6:
-		{
-			dailySalesReport(worker->id);
-			break;
-		}
-		case 7:
-		{
-			dailyClubMebmer(worker->id);
-			break;
-		}
-		case 0:
-		{
-			Login();
-			flag = true;
-			break;
-		}
+			case 1:
+			{
+				system("cls");
+				creatBill(worker->id);
+				break;
+			}
+			case 2:
+			{
+				system("cls");
+				Add_Club_Member(worker->id);
+				break;
+			}
+			case 3:
+			{
+				productInStock();
+				break;
+			}
+			case 4:
+			{
+				productPrice();
+				break;
+			}
+			case 5:
+			{
+				locateTransaction();
+				break;
+			}
+			case 6:
+			{
+				dailySalesReport(worker->id);
+				break;
+			}
+			case 7:
+			{
+				dailyClubMebmer(worker->id);
+				break;
+			}
+			case 0:
+			{
+				Login();
+				flag = true;
+				break;
+			}
 		}
 	} while (!flag);
 }
@@ -230,79 +234,79 @@ void shift_manager(Worker* worker)
 		cin >> opt;
 		switch (opt)
 		{
-		case 1:
-		{
-			system("cls");
-			creatBill(worker->id);
-			break;
-		}
-		case 2:
-		{
-			system("cls");
-			Add_Club_Member(worker->id);
-			break;
-		}
-		case 3:
-		{
-			productInStock();
-			break;
-		}
-		case 4:
-		{
-			productPrice();
-			break;
-		}
-		case 5:
-		{
-			locateTransaction();
-			break;
-		}
-		case 6:
-		{
-			dailySalesReport(worker->id);
-			break;
-		}
-		case 7:
-		{
-			dailyClubMebmer(worker->id);
-			break;
-		}
-		case 8:
-		{
-			returnProduct();
-			break;
-		}
-		case 9:
-		{
-			//workerBonus();
-			break;
-		}
-		case 10:
-		{
-			//removeBonus();
-			break;
-		}
-		case 11:
-		{
-			saleNewGiftCard();
-			break;
-		}
-		case 12:
-		{
-			dailyGeneralSalesReport();
-			break;
-		}
-		case 13:
-		{
-			dailyReturnedProductReport();
-			break;
-		}
-		case 0:
-		{
-			Login();
-			flag = true;
-			break;
-		}
+			case 1:
+			{
+				system("cls");
+				creatBill(worker->id);
+				break;
+			}
+			case 2:
+			{
+				system("cls");
+				Add_Club_Member(worker->id);
+				break;
+			}
+			case 3:
+			{
+				productInStock();
+				break;
+			}
+			case 4:
+			{
+				productPrice();
+				break;
+			}
+			case 5:
+			{
+				locateTransaction();
+				break;
+			}
+			case 6:
+			{
+				dailySalesReport(worker->id);
+				break;
+			}
+			case 7:
+			{
+				dailyClubMebmer(worker->id);
+				break;
+			}
+			case 8:
+			{
+				returnProduct();
+				break;
+			}
+			case 9:
+			{
+				//workerBonus();
+				break;
+			}
+			case 10:
+			{
+				//removeBonus();
+				break;
+			}
+			case 11:
+			{
+				saleNewGiftCard();
+				break;
+			}
+			case 12:
+			{
+				dailyGeneralSalesReport();
+				break;
+			}
+			case 13:
+			{
+				dailyReturnedProductReport();
+				break;
+			}
+			case 0:
+			{
+				Login();
+				flag = true;
+				break;
+			}
 		}
 	} while (!flag);
 
