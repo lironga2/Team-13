@@ -5,6 +5,9 @@
 #include"Requirements_1_to_3.h"
 #include "Requirements_5.h"
 #include "Requirement_6_to_12_and_15.h"
+#include"Requirment_13_14.h"
+#include"Requirment_21.h"
+
 using namespace std;
 
 
@@ -16,7 +19,7 @@ typedef struct {
 	string first_name;
 	string last_name;
 	int level;
-	int phone_number;
+	string phone_number;
 	double salary;
 	string is_excellent;
 }Worker;
@@ -228,6 +231,7 @@ void shift_manager(Worker* worker)
 		cout << "press 6 to create your daily sells report" << endl;
 		cout << "press 7 to create your daily club members report" << endl;
 		cout << "press 8 to return product to store" << endl;
+		cout << "press 10 to remove excellent worker bonus" << endl;
 		cout << "press 11 to sale new giftcard" << endl;
 		cout << "press 12 to create general daily sells report" << endl;
 		cout << "press 13 to create daily return product report" << endl;
@@ -284,7 +288,7 @@ void shift_manager(Worker* worker)
 			}
 			case 10:
 			{
-				//removeBonus();
+				removeBonus();
 				break;
 			}
 			case 11:
@@ -300,6 +304,12 @@ void shift_manager(Worker* worker)
 			case 13:
 			{
 				dailyReturnedProductReport();
+				break;
+			}
+			//Temp!
+			case 14:
+			{
+				changeAccsess();
 				break;
 			}
 			case 0:
