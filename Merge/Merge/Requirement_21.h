@@ -1,6 +1,6 @@
 #pragma once
 #include "Requirements_5.h"
-//this header contain delete and add employees , change salary and change level , report of excellent employee.
+//this header contain delete and add employees , change salary and change level , report of excellent employee, locate employee , club member all time report.
 typedef struct {
 	string username;
 	string id;
@@ -506,8 +506,8 @@ void ExcellentWorkersReport()
 void locateEmployee()
 {
 	system("cls");
-	Employee* worker = new Employee;
 	ifstream Input;
+	Employee* worker = new Employee;
 	string role;
 	string id;
 
@@ -574,4 +574,36 @@ string returnRole(int num)
 		}
 	}
 	return role;
+}
+void allTimeClubMemeberReport()
+{
+	system("cls");
+	ifstream Input;
+	string file_data;
+
+	Input.open("ClubMember.txt");
+	if (Input)
+	{
+		cout << "Club members of our store:" << endl;
+		Input >> file_data;
+		while (!Input.eof())
+		{
+			for (int i = 0; i < 8; i++)
+			{
+				if (!Input.eof())
+				{
+					cout << file_data << ' ';
+					Input >> file_data;
+					if (checkIfWorkerFound(file_data))
+					{
+						cout << file_data << endl;
+						Input >> file_data;
+					}
+				}
+			}
+			
+		}
+		Input.close();
+		cout << endl;
+	}
 }
