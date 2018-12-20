@@ -610,7 +610,7 @@ void allTimeClubMemeberReport()
 void salaryReport() 
 {
 	system("cls");
-	cout << "Salary report of store:" << endl;
+	cout << "Salary report of store: " << endl;
 	Employee* worker = new Employee;
 	ifstream Input;
 	bool flag = false;
