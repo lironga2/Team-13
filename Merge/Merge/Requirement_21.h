@@ -1,6 +1,6 @@
 #pragma once
 #include "Requirements_5.h"
-//this header contain delete and add employees , change salary and change level.
+//this header contain delete and add employees , change salary and change level , report of excellent employee.
 typedef struct {
 	string username;
 	string id;
@@ -12,6 +12,7 @@ typedef struct {
 	string is_excellent;
 }Employee;
 
+string returnRole(int);
 void deleteFromeUserAndPass(string); //signature only
 
 bool checkIfValidId(string id)
@@ -474,7 +475,6 @@ void ExcellentWorkersReport()
 	system("cls");
 	Employee* worker = new Employee;
 	ifstream Input;
-	string file_data;
 	bool flag = false;
 	Input.open("Employee.txt");
 	if (Input)
@@ -502,4 +502,76 @@ void ExcellentWorkersReport()
 		}
 		Input.close();
 	}
+}
+void locateEmployee()
+{
+	system("cls");
+	Employee* worker = new Employee;
+	ifstream Input;
+	string role;
+	string id;
+
+	do {
+		cout << "Enter id of employee that you want to see his details" << endl;
+		cin >> id;
+		if (!checkIfWorkerFound(id))
+			cout << "Worker not found, please try again" << endl;
+	} while (!checkIfWorkerFound(id));
+
+	Input.open("Employee.txt");
+	if (Input)
+	{
+		Input >> worker->username;
+		while (!Input.eof())
+		{
+			Input >> worker->id;
+			Input >> worker->first_name;
+			Input >> worker->last_name;
+			Input >> worker->level;
+			role = returnRole(worker->level);
+			Input >> worker->phone_number;
+			Input >> worker->salary;
+			Input >> worker->is_excellent;
+			if (worker->id.compare(id) == 0)
+			{
+				cout << worker->username << ' ' << worker->id << ' ' << worker->first_name << ' ' << worker->last_name << ' ' << role << ' '
+					<< worker->phone_number << ' ' << worker->salary << ' ' << worker->is_excellent << endl << endl;
+			}
+			Input >> worker->username;
+		}
+		Input.close();
+	}
+}
+
+string returnRole(int num)
+{
+	string role;
+	switch (num)
+	{
+		case 1:
+		{
+			role = "General-worker";
+			break;
+		}
+		case 2:
+		{
+			role = "Shift-manager";
+			break;
+		}
+		case 3:
+		{
+			role = "Supply-manager";
+			break;
+		}
+		case 4:
+		{
+			role = "Store-manger";
+			break;
+		}
+		default:
+		{
+			break;
+		}
+	}
+	return role;
 }
