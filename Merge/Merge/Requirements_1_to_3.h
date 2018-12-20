@@ -25,11 +25,12 @@ typedef struct Bill {
 	bool ifSale = false; 
 	bool friend_club = false;
 	string id;
+	int level;
 };
 
 void newBill(Bill** bill);
 void newProduct(Product** product);
-void creatBill(string id);
+void creatBill(string id,int level);
 void addProductToBill(Bill** bill);
 bool validCct(string product_cct);
 void updateBill(Bill*** bill, string product_cct);
@@ -38,3 +39,4 @@ void makePayment(Bill *bill);
 bool findFriendClub();
 int ConvertToNum(string Number);
 void deleteProductFromStock(string product_cct);
+void Manager_Or_Shift_Manager_Options(Bill* bill);

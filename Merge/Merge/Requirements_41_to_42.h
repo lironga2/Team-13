@@ -170,7 +170,7 @@ void general_worker(Worker* worker)
 			case 1:
 			{
 				system("cls");
-				creatBill(worker->id);
+				creatBill(worker->id,worker->level);
 				break;
 			}
 			case 2:
@@ -241,7 +241,7 @@ void shift_manager(Worker* worker)
 			case 1:
 			{
 				system("cls");
-				creatBill(worker->id);
+				creatBill(worker->id,worker->level);
 				break;
 			}
 			case 2:
@@ -351,7 +351,7 @@ void store_manager(Worker* worker)
 		case 1:
 		{
 			system("cls");
-			creatBill(worker->id);
+			creatBill(worker->id,worker->level);
 			break;
 		}
 		case 2:
