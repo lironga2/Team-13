@@ -607,3 +607,32 @@ void allTimeClubMemeberReport()
 		cout << endl;
 	}
 }
+void salaryReport() 
+{
+	system("cls");
+	cout << "Salary report of store:" << endl;
+	Employee* worker = new Employee;
+	ifstream Input;
+	bool flag = false;
+	double totalSalary=0;
+	Input.open("Employee.txt");
+	if (Input)
+	{
+		Input >> worker->username;
+		while (!Input.eof())
+		{
+			Input >> worker->id;
+			Input >> worker->first_name;
+			Input >> worker->last_name;
+			Input >> worker->level;
+			Input >> worker->phone_number;
+			Input >> worker->salary;
+			totalSalary += worker->salary;
+			Input >> worker->is_excellent;
+			cout << "Worker:" << worker->id  << ' ' << worker->first_name << ' ' << worker->last_name << ' ' << "Salary:" << worker->salary << endl;
+			Input >> worker->username;
+		}
+		cout << "Total salary of all employees: " << totalSalary << endl << endl;
+		Input.close();
+	}
+}

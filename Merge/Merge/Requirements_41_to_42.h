@@ -349,6 +349,7 @@ void store_manager(Worker* worker)
 		cout << "press 18 to check which employee is excellent" << endl;
 		cout << "press 19 to locate employee" << endl;
 		cout << "press 20 to generate all-time club members report" << endl;
+		cout << "press 21 to generate salary report of all employees" << endl;
 		cout << "press 0 to back" << endl;
 		cin >> opt;
 		switch (opt)
@@ -453,6 +454,11 @@ void store_manager(Worker* worker)
 		case 20:
 		{
 			allTimeClubMemeberReport();
+			break;
+		}
+		case 21:
+		{
+			salaryReport();
 			break;
 		}
 		case 0:
