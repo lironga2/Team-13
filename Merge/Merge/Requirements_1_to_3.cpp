@@ -460,8 +460,6 @@ void makePayment(Bill * bill)
 	{
 		char payment_type;
 		float club_member_discount = 0.95;
-		float employee_discount = 0.9;
-		char user_discount_choice;
 		long double cash = 0;
 		string card_number;
 		int month;
@@ -475,13 +473,9 @@ void makePayment(Bill * bill)
 		int cash_from_giftcard=0;
 		string manager_password;
 
-		//cout << "do you want to give the client 10% discount of his bill? 1) Yes 2) No" << endl; ---- not working for now
-		//cin >> user_discount_choice;
-		//if (user_discount_choice = '1')
-		//	extra_discount = true;
 		cout << "is the client have valid giftcard? 1) Yes 2) No" << endl;
 		cin >> user_giftcard_choice;
-		if ((user_giftcard_choice == '1'))// || (user_discount_choice == '1') )
+		if ((user_giftcard_choice == '1'))
 		{
 			cout << "please enter Manager password " << endl;          
 			cin >> manager_password;
@@ -492,11 +486,6 @@ void makePayment(Bill * bill)
 			}
 		}
 
-		/*cout << "The products are:" << endl;
-		if (extra_discount)
-		{
-			cout << "you got 10% discount of all your bill!" << endl;
-		}*/
 		if (if_club_member)
 		{
 			cout << "You saved 5% because you are our club member!" << endl;
