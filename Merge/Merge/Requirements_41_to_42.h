@@ -344,6 +344,7 @@ void store_manager(Worker* worker)
 		cout << "press 13 to create daily return product report" << endl;
 		cout << "press 14 to change access to employee" << endl; //....
 		cout << "press 15 to add amount of money to worker salary" << endl;
+		cout << "press 16 to add new employee" << endl;
 		cout << "press 0 to back" << endl;
 		cin >> opt;
 		switch (opt)
@@ -423,6 +424,11 @@ void store_manager(Worker* worker)
 		case 15:
 		{
 			changeEmployeeSalary();
+			break;
+		}
+		case 16:
+		{
+			addNewEmployee();
 			break;
 		}
 		case 0:

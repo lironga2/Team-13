@@ -11,6 +11,11 @@ typedef struct {
 	string is_excellent;
 }Employee;
 
+
+bool checkIfValidId(string id)
+{
+	return(id.length() == 9 && checkIfNum(id));
+}
 bool checkIfWorkerFound(string id_to_compare)
 {
 	ifstream Input;
@@ -316,4 +321,48 @@ void changeAccess()
 	}
 	Input.close();
 	Output.close();
+}
+void addNewEmployee() 
+{
+	Employee* worker = new Employee;
+	string file_user; 
+	ifstream Input;
+	ofstream Output;
+	bool flag = true;
+	string password;
+	cout << "enter employee details" << endl;
+	cout << "Enter eployee username" << endl;
+	cin >> worker->username;
+	cout << "Enter employee password" << endl;
+	cin >> password;
+	do
+	{
+		cout << "Enter eployee id" << endl;
+		cin >> worker->id;
+		if (checkIfWorkerFound(worker->id))
+			cout << "Worker already registered in the system,please try again" << endl;
+		if (!checkIfValidId(worker->id))
+			cout << "Id is not valid, please try again." << endl;
+	} while (checkIfWorkerFound(worker->id) || !checkIfValidId(worker->id));
+	cout << "Enter eployee first name" << endl;
+	cin >> worker->first_name;
+	cout << "Enter eployee last name" << endl;
+	cin >> worker->last_name;
+	cout << "Enter eployee level access (1=general worker, 2= shift manager , 3= supply manager 4= store manager)" << endl;
+	cin >> worker->level;
+	cout << "Enter eployee phone number" << endl;
+	cin >> worker->phone_number;
+	cout << "Enter eployee basic salary" << endl;
+	cin >> worker->salary;
+	worker->is_excellent= "No";
+
+
+	Output.open("Employee.txt", std::fstream::app);
+	Output << worker->username << ' ' << worker->id << ' ' << worker->first_name << ' ' << worker->last_name << ' ' << worker->level << ' ' <<
+		worker->phone_number << ' ' << worker->salary << ' ' << worker->is_excellent << endl;
+	Output.close();
+	Output.open("UserAndPass.txt",std::fstream::app);
+	Output << worker->username << ' ' << password << endl;
+	Output.close();
+
 }
