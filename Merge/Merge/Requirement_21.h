@@ -325,7 +325,6 @@ void changeAccess()
 void addNewEmployee() 
 {
 	Employee* worker = new Employee;
-	string file_user; 
 	ifstream Input;
 	ofstream Output;
 	bool flag = true;
@@ -364,5 +363,46 @@ void addNewEmployee()
 	Output.open("UserAndPass.txt",std::fstream::app);
 	Output << worker->username << ' ' << password << endl;
 	Output.close();
-
 }
+void deleteExistEmployee() /// need to fixed
+{
+	Employee* worker = new Employee;
+	string file_user;
+	string file_user2;
+	string user_to_remove;
+	bool flag = true;
+	ifstream Input;
+	ofstream Output;
+	string id;
+	do {
+		cout << "Enter id of employee that you want to remove" << endl;
+		cin >> id;
+		if (!checkIfWorkerFound(id))
+			cout << "Worker not found, please try again" << endl;
+		}while (!checkIfWorkerFound(id));
+		Output.open("Temp.txt");
+		Input.open("Employee.txt");
+
+		while (!Input.eof())
+		{
+			Input >> worker->username;
+			Input >> worker->id;
+			if (id.compare(worker->id) == 0 && flag)
+			{
+				user_to_remove = worker->username;
+				flag = false;
+				while (!(file_user.compare("Yes") == 0 || file_user.compare("No") == 0))
+					Input >> file_user;
+			}
+			else
+				if (file_user.compare("Yes") == 0 || file_user.compare("No") == 0)
+				{
+					Output << file_user << endl;
+				}
+				else
+				{
+					Output << file_user << ' ';
+				}
+		}
+	}
+
