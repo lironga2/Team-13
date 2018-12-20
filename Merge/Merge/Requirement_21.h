@@ -11,6 +11,7 @@ typedef struct {
 	string is_excellent;
 }Employee;
 
+void deleteFromeUserAndPass(string); //signature only
 
 bool checkIfValidId(string id)
 {
@@ -72,7 +73,7 @@ void changeEmployeeSalary()
 		cout << "Enter employee id to change salary: ";
 		cin >> id_to_change_salary;
 
-		if (id_to_change_salary.length() != 9 || !checkIfNum(id_to_change_salary) || !checkIfWorkerFound(id_to_change_salary))
+		if (!checkIfValidId(id_to_change_salary) || !checkIfWorkerFound(id_to_change_salary))
 		{
 			flag = false;
 		}
@@ -241,7 +242,7 @@ void changeAccess()
 			cout << "Enter employee id to change access: ";
 			cin >> id_access_to_change;
 			
-			if (id_access_to_change.length() != 9 || !checkIfNum(id_access_to_change)|| !checkIfWorkerFound(id_access_to_change))
+			if (!checkIfValidId(id_access_to_change) || !checkIfWorkerFound(id_access_to_change))
 			{
 				flag = false;
 			}
@@ -366,6 +367,7 @@ void addNewEmployee()
 }
 void deleteExistEmployee() /// need to fixed
 {
+	system("cls");
 	Employee* worker = new Employee;
 	string file_user;
 	string file_user2;
@@ -379,30 +381,90 @@ void deleteExistEmployee() /// need to fixed
 		cin >> id;
 		if (!checkIfWorkerFound(id))
 			cout << "Worker not found, please try again" << endl;
-		}while (!checkIfWorkerFound(id));
-		Output.open("Temp.txt");
-		Input.open("Employee.txt");
+	}while (!checkIfWorkerFound(id));
+	
+	cout << "User and his details has been deleted from the system" << endl;
+	Output.open("Temp.txt");
+	Input.open("Employee.txt");
 
-		while (!Input.eof())
+	while (!Input.eof())
+	{
+		Input >> worker->username;
+		Input >> worker->id;
+		Input >> worker->first_name;
+		Input >> worker->last_name;
+		Input >> worker->level;
+		Input >> worker->phone_number;
+		Input >> worker->salary;
+		Input >> worker->is_excellent;
+		if (id.compare(worker->id) == 0)
 		{
-			Input >> worker->username;
-			Input >> worker->id;
-			if (id.compare(worker->id) == 0 && flag)
-			{
-				user_to_remove = worker->username;
-				flag = false;
-				while (!(file_user.compare("Yes") == 0 || file_user.compare("No") == 0))
-					Input >> file_user;
-			}
-			else
-				if (file_user.compare("Yes") == 0 || file_user.compare("No") == 0)
-				{
-					Output << file_user << endl;
-				}
-				else
-				{
-					Output << file_user << ' ';
-				}
+			user_to_remove = worker->username;
+		}
+		else
+		{
+			Output << worker->username << ' ' << worker->id << ' ' << worker->first_name << ' ' << worker->last_name << ' ' <<
+			worker->level << ' ' << worker->phone_number << ' ' << worker->salary << ' ' << worker->is_excellent << endl;
 		}
 	}
+	Input.close();
+	Output.close();
+	Input.open("Temp.txt");
+	Output.open("Employee.txt");
+	Input >> file_user;
+	while (!Input.eof())
+	{
+		if ((file_user.compare("Yes") == 0) || (file_user.compare("No") == 0))
+		{
+			Output << file_user << endl;
+		}
+		else
+		{
+			Output << file_user << ' ';
+		}
+		Input >> file_user;
+	}
+	Input.close();
+	Output.close();
+	deleteFromeUserAndPass(user_to_remove);
 
+}
+void deleteFromeUserAndPass(string user_to_remove)
+{
+	ifstream Input;
+	ofstream Output;
+	string file_data;
+
+	Input.open("UserAndPass.txt");
+	Output.open("Temp.txt");
+	Input >> file_data;
+	while (!Input.eof())
+	{
+		if (file_data.compare(user_to_remove) == 0)
+		{
+			Input >> file_data;
+			Input >> file_data;
+		}
+		else
+		{
+			Output << file_data << ' ';
+			Input >> file_data;
+			Output << file_data << endl;
+			Input >> file_data;
+		}
+	}
+	Input.close();
+	Output.close();
+	Input.open("Temp.txt");
+	Output.open("UserAndPass.txt");
+	Input >> file_data;
+	while (!Input.eof())
+	{
+		Output << file_data << ' ';
+		Input >> file_data;
+		Output << file_data << endl;
+		Input >> file_data;
+	}
+	Input.close();
+	Output.close();
+}
