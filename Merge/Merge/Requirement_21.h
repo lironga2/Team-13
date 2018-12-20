@@ -1,5 +1,6 @@
 #pragma once
 #include "Requirements_5.h"
+//this header contain delete and add employees , change salary and change level.
 typedef struct {
 	string username;
 	string id;
@@ -365,7 +366,7 @@ void addNewEmployee()
 	Output << worker->username << ' ' << password << endl;
 	Output.close();
 }
-void deleteExistEmployee() /// need to fixed
+void deleteExistEmployee() 
 {
 	system("cls");
 	Employee* worker = new Employee;
@@ -467,4 +468,38 @@ void deleteFromeUserAndPass(string user_to_remove)
 	}
 	Input.close();
 	Output.close();
+}
+void ExcellentWorkersReport()
+{
+	system("cls");
+	Employee* worker = new Employee;
+	ifstream Input;
+	string file_data;
+	bool flag = false;
+	Input.open("Employee.txt");
+	if (Input)
+	{
+		Input >> worker->username;
+		while (!Input.eof())
+		{
+			Input >> worker->id;
+			Input >> worker->first_name;
+			Input >> worker->last_name;
+			Input >> worker->level;
+			Input >> worker->phone_number;
+			Input >> worker->salary;
+			Input >> worker->is_excellent;
+			if ((worker->is_excellent.compare("Yes") == 0) && !(flag))
+			{
+				flag = true;
+				cout << "The current excellent employee is: \n" << worker->id << ' ' << worker->first_name << ' ' << worker->last_name << endl << endl;
+			}
+			Input >> worker->username;
+		}
+		if (!flag)
+		{
+			cout << "there is no excellent worker right now" << endl;
+		}
+		Input.close();
+	}
 }

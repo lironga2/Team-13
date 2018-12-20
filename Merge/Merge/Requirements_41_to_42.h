@@ -346,6 +346,7 @@ void store_manager(Worker* worker)
 		cout << "press 15 to add amount of money to worker salary" << endl;
 		cout << "press 16 to add new employee" << endl;
 		cout << "press 17 to remove exist employee" << endl;
+		cout << "press 18 to check which employee is excellent" << endl;
 		cout << "press 0 to back" << endl;
 		cin >> opt;
 		switch (opt)
@@ -435,6 +436,11 @@ void store_manager(Worker* worker)
 		case 17:
 		{
 			deleteExistEmployee();
+			break;
+		}
+		case 18:
+		{
+			ExcellentWorkersReport();
 			break;
 		}
 		case 0:
