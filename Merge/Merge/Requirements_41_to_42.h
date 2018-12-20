@@ -307,6 +307,11 @@ void shift_manager(Worker* worker)
 				dailyReturnedProductReport();
 				break;
 			}
+			case 14:
+			{
+				//zReport();
+				break;
+			}
 			case 0:
 			{
 				Login();

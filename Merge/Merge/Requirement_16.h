@@ -6,6 +6,7 @@ void editTxtGiftCard(int giftcard_amount, string giftcard_number)
 	string Copy_String;
 	ofstream Output;
 	string temp_giftcard_number;
+	string date;
 	int amount;
 
 	Output.open("Temp.txt");
@@ -21,6 +22,7 @@ void editTxtGiftCard(int giftcard_amount, string giftcard_number)
 				{
 					temp_giftcard_number = Copy_String;
 					Input >> amount;
+					Input >> date;
 					
 
 				}
@@ -28,11 +30,13 @@ void editTxtGiftCard(int giftcard_amount, string giftcard_number)
 				{
 					Output << Copy_String << ' ';
 					Input >> Copy_String;
+					Output << Copy_String << ' ';
+					Input >> Copy_String;
 					Output << Copy_String << endl;
 				}
 			}
 		}
-		Output << temp_giftcard_number << ' ' << giftcard_amount << endl;
+		Output << temp_giftcard_number << ' ' << giftcard_amount << ' '<< date << endl;
 		Input.close();
 		Output.close();
 		Output.open("GiftCard.txt");
@@ -42,6 +46,8 @@ void editTxtGiftCard(int giftcard_amount, string giftcard_number)
 			Input >> Copy_String;
 			if (!Input.eof())
 			{
+				Output << Copy_String << ' ';
+				Input >> Copy_String;
 				Output << Copy_String << ' ';
 				Input >> Copy_String;
 				Output << Copy_String << endl;
@@ -57,6 +63,7 @@ int checkIfGiftCardExist()
 	fstream file_giftcard;
 	string number_giftcard_to_cmp;
 	string number_giftcard;
+	string date;
 	int gift_use = 0;
 	int giftcard_amount;
 
@@ -71,6 +78,7 @@ int checkIfGiftCardExist()
 			if ((number_giftcard.compare(number_giftcard_to_cmp) == 0))
 			{
 				file_giftcard >> giftcard_amount;
+				file_giftcard >> date;
 				if (giftcard_amount < 1)
 				{
 					cout << "your giftcard is empty, you cant use it." << endl;

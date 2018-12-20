@@ -189,7 +189,7 @@ void addProductToBill(Bill** bill)
 					}
 					else
 					{
-						cout << "product's amount too low, try  to add a different product" << endl;
+						cout << "product's amount too low, try ëto add a different product" << endl;
 						toSend = 0;
 					}
 
@@ -275,6 +275,8 @@ void updateBill(Bill*** bill,string product_cct) {
 		{
 			Stock >> name;
 			Stock >> price;
+			//if (extra_discount)
+			//	price = price*0.9;
 			if (if_club_member)
 				price = price*0.95;
 			Stock.close();
@@ -438,6 +440,8 @@ void makePayment(Bill * bill)
 	{
 		char payment_type;
 		float club_member_discount = 0.95;
+		float employee_discount = 0.9;
+		char user_discount_choice;
 		long double cash = 0;
 		string card_number;
 		int month;
@@ -449,23 +453,31 @@ void makePayment(Bill * bill)
 		fstream transaction;
 		char ch;
 		int cash_from_giftcard=0;
-		int manager_password;
+		string manager_password;
 
-		
+		//cout << "do you want to give the client 10% discount of his bill? 1) Yes 2) No" << endl; ---- not working for now
+		//cin >> user_discount_choice;
+		//if (user_discount_choice = '1')
+		//	extra_discount = true;
 		cout << "is the client have valid giftcard? 1) Yes 2) No" << endl;
 		cin >> user_giftcard_choice;
-		if (user_giftcard_choice == '1')
+		if ((user_giftcard_choice == '1'))// || (user_discount_choice == '1') )
 		{
 			cout << "please enter Manager password " << endl;          
 			cin >> manager_password;
-			if (manager_password == 1234) 
+			if ((manager_password.compare("1234") == 0))
 			{
-				cash_from_giftcard = checkIfGiftCardExist();
+				if (user_giftcard_choice == '1')
+					cash_from_giftcard = checkIfGiftCardExist();
 			}
 		}
 
-		cout << "The products are:" << endl;
-		if (if_club_member == true)
+		/*cout << "The products are:" << endl;
+		if (extra_discount)
+		{
+			cout << "you got 10% discount of all your bill!" << endl;
+		}*/
+		if (if_club_member)
 		{
 			cout << "You saved 5% because you are our club member!" << endl;
 		}		
@@ -473,7 +485,7 @@ void makePayment(Bill * bill)
 			{
 				cout << bill->product[i]->name << " - " << bill->product[i]->price << endl;
 			}
-
+			
 		if (cash_from_giftcard)
 		{
 			bill->sum -= cash_from_giftcard;
@@ -601,17 +613,16 @@ void makePayment(Bill * bill)
 		transaction <<'#' <<bill->current_account_number << ' ' << todaydate << ' ' << bill->id << endl;
 		for (int i = 0; i < bill->num_of_product; i++)
 		{
-			//cout << bill->product[i]->cct << ' ' << bill->product[i]->name << ' ' << bill->product[i]->price << endl;
 			transaction << bill->product[i]->cct << ' ' << bill->product[i]->name  << ' ' << bill->product[i]->price <<endl; 
 		}
 		transaction << "Total bill: " << bill->sum << endl;
-		//cout << "Total bill: " << bill->sum << endl;
 		transaction.close();
 		cout << "transaction number: " << bill->current_account_number << " payed thank you" << endl;
 		getchar();
 		getchar();
 		system("cls");
 		if_club_member = false;
+		//extra_discount = false;
 	}
 }
 

@@ -254,14 +254,22 @@ void returnProduct()
 			}
 			else 
 			{
-				while (!(Transfer.compare(Transaction_Number) == 0) && (!Input.eof()))
+				while (!(Transfer.compare("Total") == 0) && (!Input.eof()))
 				{
-					for (int i = 0; ((i < 3)); i++)
-					{
-						Output << Transfer << ' ';
-						Input >> Transfer;
-					}
-					Output << endl;
+					Output << Transfer << ' ';
+					Input >> Transfer;
+					Output << Transfer << ' ';
+					Input >> Transfer;
+					Output << Transfer << endl;
+					Input >> Transfer;
+				}
+				if (!Input.eof())
+				{
+					Output << Transfer << ' ';
+					Input >> Transfer;
+					Output << Transfer << ' ';
+					Input >> Transfer;
+					Output << Transfer << endl;
 				}
 			}
 		}
@@ -289,6 +297,7 @@ void returnProduct()
 
 void saleNewGiftCard()
 {
+	UpdateDate();
 	int giftcard_number=0;
 	int giftcard_value = 0;
 	char ch;
@@ -312,7 +321,7 @@ void saleNewGiftCard()
 	file_giftcard.open("GiftCard.txt", std::fstream::app);
 	if (file_giftcard.is_open())
 	{
-		file_giftcard << '#' << giftcard_number << ' ' << giftcard_value << endl;
+		file_giftcard << '#' << giftcard_number << ' ' << giftcard_value << ' ' << currDate << endl;
 	}
 	file_giftcard.close();
 	cout << "gift card sold succeeded , your amount in giftcard is: " << giftcard_value <<"\nyour giftcard number is: " << giftcard_number <<  endl;
@@ -397,7 +406,7 @@ void dailyReturnedProductReport()
 	file_returned_product >> to_compare;
 	while (!file_returned_product.eof())
 	{
-		if (to_compare.compare(currDate) == 0)
+		if (to_compare.compare(currDate) == 0 && !file_returned_product.eof())
 		{
 			if (!Flag) 
 			{
@@ -413,6 +422,9 @@ void dailyReturnedProductReport()
 			cout << to_compare << endl;
 			file_returned_product >> to_compare;
 		}
+		file_returned_product >> to_compare;
 	}
 	file_returned_product.close();
 }
+
+//zReport
