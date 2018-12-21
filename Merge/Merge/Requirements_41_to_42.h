@@ -7,8 +7,10 @@
 #include "Requirement_6_to_12_and_15.h"
 #include"Requirment_13_14.h"
 #include"Requirement_21.h"
+#include"Requirement_20.h"
 
 using namespace std;
+
 
 typedef struct {
 	string username;
@@ -234,6 +236,7 @@ void shift_manager(Worker* worker)
 		cout << "press 11 to sale new giftcard" << endl;
 		cout << "press 12 to create general daily sells report" << endl;
 		cout << "press 13 to create daily return product report" << endl;
+		cout << "press 14 to create z report and close the cash box" << endl;
 		cout << "press 0 to back" << endl;
 		cin >> opt;
 		switch (opt)
@@ -309,7 +312,10 @@ void shift_manager(Worker* worker)
 			}
 			case 14:
 			{
-				//zReport();
+				system("cls");
+				UpdateDate();
+				string today = currDate;
+				Z_Report_Close_Cashbox(today);
 				break;
 			}
 			case 0:

@@ -1,4 +1,4 @@
 Store revenue:
-money in box: 54115
+in box: 54115
 Store expenses:
 Total money: 0 

@@ -19,3 +19,6 @@ Total bill: 12000
 #6 20.12.2018 202020202 
 101 MacBook 12000 
 Total bill: 12000 
+#7 21.12.2018 123123123
+101 MacBook 12000
+Total bill: 12000
