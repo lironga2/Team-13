@@ -2,6 +2,7 @@
 #include<iostream>
 #include<fstream>
 #include<string>
+//#include"Requirement_26.h"
 
 using namespace std;
 
@@ -97,13 +98,14 @@ void Z_Report_Close_Cashbox(string todaydate)
 	while (!Input.eof())
 	{	
 		Input >> Transfer;
+		if (!Input.eof())
+		{
 			if (Transfer.compare("revenue:") == 0)
 			{
 				Output << Transfer << endl;
-				Input >> Transfer;
 				continue;
 			}
-			 if (Transfer.compare("box:") == 0)
+			if (Transfer.compare("box:") == 0)
 			{
 				Output << Transfer << ' ';
 				Input >> CashBox;
@@ -116,7 +118,20 @@ void Z_Report_Close_Cashbox(string todaydate)
 				Output << Transfer << endl;
 				continue;
 			}
+			if (Transfer.compare("money:") == 0)
+			{
 				Output << Transfer << ' ';
+				Input >> Transfer;
+				Output << Transfer << endl;
+				continue;
+			}
+			if (Transfer.compare("sale:") == 0)
+			{
+				Output << Transfer << endl;
+				continue;
+			}
+			Output << Transfer << ' ';
+		}
 	}
 	cout << "today total store revenue: " << Today_Money << endl;
 	cout << "--------------------------------------------------------------------" << endl;
@@ -132,7 +147,6 @@ void Z_Report_Close_Cashbox(string todaydate)
 			if (Transfer.compare("revenue:") == 0)
 			{
 				Output << Transfer << endl;
-				Input >> Transfer;
 				continue;
 			}
 			if (Transfer.compare("box:") == 0)
@@ -143,6 +157,18 @@ void Z_Report_Close_Cashbox(string todaydate)
 				continue;
 			}
 			if (Transfer.compare("expenses:") == 0)
+			{
+				Output << Transfer << endl;
+				continue;
+			}
+			if (Transfer.compare("money:") == 0)
+			{
+				Output << Transfer << ' ';
+				Input >> Transfer;
+				Output << Transfer << endl;
+				continue;
+			}
+			if (Transfer.compare("sale:") == 0)
 			{
 				Output << Transfer << endl;
 				continue;

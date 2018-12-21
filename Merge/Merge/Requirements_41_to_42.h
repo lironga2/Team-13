@@ -8,6 +8,7 @@
 #include"Requirment_13_14.h"
 #include"Requirement_21.h"
 #include"Requirement_20.h"
+//#include"Requirement_26.h"
 
 using namespace std;
 
@@ -356,6 +357,7 @@ void store_manager(Worker* worker)
 		cout << "press 19 to locate employee" << endl;
 		cout << "press 20 to generate all-time club members report" << endl;
 		cout << "press 21 to generate salary report of all employees" << endl;
+		cout << "press 22 to sale management" << endl;
 		cout << "press 0 to back" << endl;
 		cin >> opt;
 		switch (opt)
@@ -465,6 +467,16 @@ void store_manager(Worker* worker)
 		case 21:
 		{
 			salaryReport();
+			break;
+		}
+		case 22:
+		{
+			Sale_Management(&ifSale, &Sale_Percent, &sale);
+			//Update_Sale_Flag(&ifSale);
+			//if (ifSale)
+			//{
+			//	Update_Sale(&Sale_Percent);
+			//}
 			break;
 		}
 		case 0:

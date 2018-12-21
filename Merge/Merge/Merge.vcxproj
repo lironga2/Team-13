@@ -147,6 +147,7 @@
     <ClInclude Include="Requirement_17.h" />
     <ClInclude Include="Requirement_16.h" />
     <ClInclude Include="Requirement_21.h" />
+    <ClInclude Include="Requirement_26.h" />
     <ClInclude Include="Requirement_6_to_12_and_15.h" />
     <ClInclude Include="Requirements_1_to_3.h" />
     <ClInclude Include="Requirements_41_to_42.h" />

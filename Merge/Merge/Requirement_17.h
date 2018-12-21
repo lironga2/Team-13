@@ -1,6 +1,7 @@
 #pragma once
 #include<iostream>
 #include"Requirements_1_to_3.h"
+//#include"Requirement_26.h"
 
 using namespace std;
 
@@ -27,14 +28,14 @@ void giveCleintDiscount(Bill** bill)
 		{
 			flag = false;
 		}
-		Deal_Price -= (Discount/100);
-		(*bill)->sum = 0;
-		for (int i = 0; i < (*bill)->num_of_product; i++)
-		{
-			(*bill)->product[i]->price *= Deal_Price;
-			(*bill)->sum += (*bill)->product[i]->price;
-		}
 	} while (flag);
+	Deal_Price -= (Discount/100);
+	(*bill)->sum = 0;
+	for (int i = 0; i < (*bill)->num_of_product; i++)
+	{
+		(*bill)->product[i]->price *= Deal_Price;
+		(*bill)->sum += (*bill)->product[i]->price;
+	}
 	system("cls");
 	cout << "Discount of: " << Discount << "% was given to client successfully" << endl;
 }

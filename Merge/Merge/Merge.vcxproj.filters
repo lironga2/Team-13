@@ -42,6 +42,9 @@
     <ClInclude Include="Requirement_20.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Requirement_26.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="driver.cpp">
