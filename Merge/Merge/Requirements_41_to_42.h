@@ -8,6 +8,7 @@
 #include"Requirment_13_14.h"
 #include"Requirement_21.h"
 #include"Requirement_20.h"
+#include"Requirement_34.h"
 //#include"Requirement_26.h"
 
 using namespace std;
@@ -32,6 +33,7 @@ void menu(Worker* worker);
 void general_worker(Worker* worker);
 void shift_manager(Worker* worker);
 void store_manager(Worker* worker);
+void procurement_manager(Worker * worker);
 
 
 
@@ -141,7 +143,7 @@ void menu(Worker* worker)
 	}
 	case 3:
 	{
-		//supply_manager(worker);   
+		procurement_manager(worker);
 		break;
 	}
 	case 4:
@@ -329,6 +331,72 @@ void shift_manager(Worker* worker)
 	} while (!flag);
 
 }
+
+void procurement_manager(Worker * worker)
+{
+	int opt;
+	bool flag = false;
+
+	do
+	{
+		cout << "welcome to procurement manager menu" << endl;
+		//cout << "press 1 to create new order" << endl;
+		cout << "press 2 to add product to stock" << endl;
+		//cout << "press 3 to delete product from stock" << endl;
+		//cout << "press 4 to change product price" << endl;
+		//cout << "press 5 to view sells report " << endl;
+		//cout << "press 6 to generate missing product in stock report" << endl;
+		//cout << "press 7 to generate product in stock report" << endl;
+		//cout << "press 8 to generate orders report" << endl;
+		//cout << "press 0 to back" << endl;
+		cin >> opt;
+		switch (opt)
+		{
+		case 1:
+		{
+			system("cls");
+			break;
+		}
+		case 2:
+		{
+			system("cls");
+			Add_Product_To_Stock();
+			break;
+		}
+		case 3:
+		{
+			break;
+		}
+		case 4:
+		{
+			break;
+		}
+		case 5:
+		{
+			break;
+		}
+		case 6:
+		{
+			break;
+		}
+		case 7:
+		{
+			break;
+		}
+		case 8:
+		{
+			break;
+		}
+		case 0:
+		{
+			Login();
+			flag = true;
+			break;
+		}
+		}
+	} while (!flag);
+}
+
 void store_manager(Worker* worker)
 {
 	int opt;
