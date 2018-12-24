@@ -137,3 +137,106 @@ string Convert_To_String(int Amount)
 	string Str = String_Amount;
 	return Str;
 }
+bool isProductCctExist(string cct)
+{
+	ifstream Input;
+	string transfer;
+	Input.open("Stock.txt");
+	if (Input)
+	{
+		Input >> transfer;
+		while (!Input.eof())
+		{
+			if (transfer.compare(cct) == 0)
+				return true;
+			Input >> transfer;
+		}
+	}
+	Input.close();
+	return false;
+
+}
+void changeProductPrice()
+{
+	system("cls");
+	string product_cct;
+	ifstream Input;
+	ofstream Output;
+	string transfer;
+	int price_to_change;
+	bool flag = true;
+	
+	do
+	{
+		if (!flag)
+			cout << "product not in stock, enter cct again" << endl;
+		cout << "enter product cct that u want to change his price" << endl;
+		cin >> product_cct;
+		flag = false;
+	}
+		while (!isProductCctExist(product_cct));
+	
+	do
+	{
+		cout << "enter new price" << endl;
+		cin >> price_to_change;
+		if (price_to_change < 1)
+		{
+			cout << "price not valid, please try again" << endl;
+		}
+	} while (price_to_change < 1);
+
+	cout << "Product price changed." << endl;
+	Input.open("Stock.txt");
+	Output.open("Temp.txt");
+	if (Input)
+	{
+		Input >> transfer;
+		while (!Input.eof())
+		{
+			if (product_cct.compare(transfer) == 0)
+			{
+				Output << transfer<< ' ';
+				Input >> transfer;
+				Output << transfer<< ' ';
+				Input >> transfer;
+				Output << price_to_change << ' ';
+				Input >> transfer;
+				Output << transfer << endl;
+				Input >> transfer;
+			}
+			else
+			{
+				Output << transfer << ' ';
+				Input >> transfer;
+				Output << transfer << ' ';
+				Input >> transfer;
+				Output << transfer << ' ';
+				Input >> transfer;
+				Output << transfer << endl;
+				Input >> transfer;
+			}
+		}
+	}
+	Input.close();
+	Output.close();
+	Output.open("Stock.txt");
+	Input.open("Temp.txt");
+	if (Input)
+	{
+		Input >> transfer;
+		while (!Input.eof())
+		{
+			Output << transfer << ' ';
+			Input >> transfer;
+			Output << transfer << ' ';
+			Input >> transfer;
+			Output << transfer << ' ';
+			Input >> transfer;
+			Output << transfer << endl;
+			Input >> transfer;
+		}
+	}
+	Input.close();
+	Output.close();
+}

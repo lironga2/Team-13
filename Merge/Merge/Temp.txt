@@ -1,4 +1,3 @@
-Store revenue:
-money in box: 54115
-Store expenses:
-Total money: 0 
+103 OpticMouse 120 52#
+102 DellPc 5000 69#
+101 MacBook 12000 42#
