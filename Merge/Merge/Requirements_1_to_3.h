@@ -308,6 +308,7 @@ bool validCct(string product_cct) {
 		Stock >> file_cct;
 		if (file_cct.compare(product_cct) == 0)
 		{
+			Stock.close();
 			return true;
 		}
 	}
