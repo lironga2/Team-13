@@ -28,7 +28,7 @@ void Stock_Report()
 			{
 				if (flag)
 				{
-					cout << "Product table:" << endl;
+					cout << "Stock product table:" << endl;
 					cout << "product cct\t" << "  " << "product name\tproduct amount" << endl;
 					cout << "----------------------------------------------" << endl;
 					flag = false;

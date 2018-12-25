@@ -3,6 +3,7 @@
 #include"Requirements_1_to_3.h"
 #include"Requirement_38.h"
 #include"Requirement_39.h"
+#include"Requirement_31.h"
 
 using namespace std;
 
@@ -10,6 +11,7 @@ string Convert_To_String(int Amount);
 
 void Add_Product_To_Stock()
 {
+	Install_Supllayer_Product();
 	ifstream Input;
 	ofstream Output;
 	string Search;
@@ -20,14 +22,32 @@ void Add_Product_To_Stock()
 	string The_Amount_To_Add;
 	string The_Current_Amount;
 	bool Flag = true;
+	bool If_Cct_Supplayer = false;
 	char User_Option;
 	while (Flag)
 	{
 		Stock_Report();
+		cout << endl;
 		Stock_Shortage();
+		cout << endl;
+		//Print_Supllayer_Product();
 		bool Exsist_Flag = false;
-		cout << "Enter product cct: ";
-		cin >> Product_To_Add.cct;
+		//do
+		//{
+			cout << "Enter product cct: ";
+			cin >> Product_To_Add.cct;
+		//	for (int i = 0; i < SIZE; i++)
+		//	{
+		//		if (Product_To_Add.cct.compare(Supllayer[i].Product->cct) == 0)
+		//		{
+		//			If_Cct_Supplayer = true;
+		//		}
+		//	}
+		//	if (!If_Cct_Supplayer)
+		//	{
+		//		cout << "Invalid cct.Try again." << endl;
+		//	}
+		//} while (!If_Cct_Supplayer);
 		cout << "Enter product amount: ";
 		cin >> Product_Amount_To_Add;
 		Input.open("Stock.txt");
