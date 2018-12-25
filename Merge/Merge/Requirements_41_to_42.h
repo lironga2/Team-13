@@ -12,6 +12,7 @@
 #include"Requirement_39.h"
 #include"Requirement_38.h"
 #include"Requirement_37.h"
+#include"Requirement_35.h"
 //#include"Requirement_26.h"
 
 using namespace std;
@@ -345,7 +346,7 @@ void procurement_manager(Worker * worker)
 		cout << "welcome to procurement manager menu" << endl;
 		//cout << "press 1 to create new order" << endl;
 		cout << "press 2 to add product to stock" << endl;
-		//cout << "press 3 to delete product from stock" << endl;
+		cout << "press 3 to delete product from stock" << endl;
 		cout << "press 4 to change product price" << endl;
 		cout << "press 5 to view sells report " << endl;
 		cout << "press 6 to generate missing product in stock report" << endl;
@@ -368,6 +369,8 @@ void procurement_manager(Worker * worker)
 		}
 		case 3:
 		{
+			system("cls");
+			Remove_Product_From_Stock();
 			break;
 		}
 		case 4:

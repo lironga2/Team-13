@@ -1,6 +1,8 @@
 #pragma once
 #pragma once
 #include"Requirements_1_to_3.h"
+#include"Requirement_38.h"
+#include"Requirement_39.h"
 
 using namespace std;
 
@@ -21,6 +23,8 @@ void Add_Product_To_Stock()
 	char User_Option;
 	while (Flag)
 	{
+		Stock_Report();
+		Stock_Shortage();
 		bool Exsist_Flag = false;
 		cout << "Enter product cct: ";
 		cin >> Product_To_Add.cct;
@@ -37,16 +41,24 @@ void Add_Product_To_Stock()
 				Input >> Product_In_Stock.price;
 				Input >> The_Current_Amount;
 				Product_Amount_In_Stock = ConvertToNum(The_Current_Amount);
+				The_Amount_To_Add = Convert_To_String(Product_Amount_In_Stock + Product_Amount_To_Add);
 				if (Product_In_Stock.cct.compare(Product_To_Add.cct) == 0)
 				{
-					The_Amount_To_Add = Convert_To_String(Product_Amount_In_Stock + Product_Amount_To_Add);
+					int New_Amount = Product_Amount_In_Stock + Product_Amount_To_Add;
+					if (New_Amount < 0)
+					{
+						New_Amount = 0;
+						The_Amount_To_Add = "0#";
+					}
+					
 					Output << Product_In_Stock.cct << ' ';
 					Output << Product_In_Stock.name << ' ';
 					Output << Product_In_Stock.price << ' ';
 					Output << The_Amount_To_Add << endl;
+					cout << "the current product amount: " << Product_Amount_In_Stock << endl;
 					Exsist_Flag = true;
 					cout << "successfully update the product : " << "cct: " << Product_In_Stock.cct << " name: " << Product_In_Stock.name << endl;
-					cout << "New amount is: " << Product_Amount_In_Stock + Product_Amount_To_Add << endl;
+					cout << "New amount is: " << New_Amount << endl;
 				}
 				//else if ((Product_In_Stock.cct.compare(Product_To_Add.cct) == 0 && Product_In_Stock.name.compare(Product_To_Add.name) != 0))
 				//{
