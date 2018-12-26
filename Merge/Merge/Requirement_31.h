@@ -20,43 +20,107 @@ typedef struct Order
 	The_Product* Product;
 };
 
-static Order* Supllayer;
+static Order* Supplier;
+static int Supplier_Product_Amount = 0;
+static bool Install_Supplier_Product_Flag = true;
 
-
-void Install_Supllayer_Product()
+void Install_Supplier_Product()
 {
-	Supllayer = new Order[SIZE];
-	for (int i = 0; i < SIZE; i++)
+	if (Install_Supplier_Product_Flag)
 	{
-	Supllayer[i].Product = new The_Product;
+		Supplier = new Order[SIZE];
+		ifstream Input;
+		string transfer;
+		Input.open("Supplier.txt");
+		while (!Input.eof())
+		{
+			Input >> transfer;
+			if (!Input.eof())
+			{
+				if (transfer[0] == '#')
+				{
+					Supplier_Product_Amount++;
+				}
+			}
+		}
+		Input.close();
+		for (int i = 0; i < Supplier_Product_Amount; i++)
+		{
+			Supplier[i].Product = new The_Product;
+		}
+		Input.open("Supplier.txt");
+		while (!Input.eof())
+		{
+			Input >> transfer;
+			for (int i = 0; i < Supplier_Product_Amount; i++)
+			{
+				if (!Input.eof())
+				{
+					Input >> Supplier[i].Product->cct;
+					Input >> Supplier[i].Product->name;
+					Input >> Supplier[i].Product->price;
+					Input >> transfer;
+				}
+			}
+		}
+		Input.close();
+		Install_Supplier_Product_Flag = false;
 	}
-	Supllayer[0].Product->cct = "101";
-	Supllayer[0].Product->name = "MacBook";
-	Supllayer[0].Product->price = 6000;
-	Supllayer[1].Product->cct = "102";
-	Supllayer[1].Product->name = "DellPc";
-	Supllayer[1].Product->price = 2250;
-	Supllayer[2].Product->cct = "103";
-	Supllayer[2].Product->name = "OpticMouse";
-	Supllayer[2].Product->price = 60;
-	Supllayer[3].Product->cct = "104";
-	Supllayer[3].Product->name = "IpadPro";
-	Supllayer[3].Product->price = 2000;
-	Supllayer[4].Product->cct = "105";
-	Supllayer[4].Product->name = "IphoneXs";
-	Supllayer[4].Product->price = 3000;
-	Supllayer[5].Product->cct = "106";
-	Supllayer[5].Product->name = "AirPods";
-	Supllayer[5].Product->price = 350;
+
 }
 
-void Print_Supllayer_Product()
+void Print_Supplier_Product()
 {
-	cout << "Supllayer product table:" << endl;
+	cout << "Supplier product table:" << endl;
 	cout << "product cct\t" << "  " << "product name\tproduct price" << endl;
-	for (int i = 0; i < SIZE; i++)
+	for (int i = 0; i < Supplier_Product_Amount; i++)
 	{
-		cout << Supllayer[i].Product->cct << "\t\t  " << Supllayer[i].Product->name << "\t" << Supllayer[i].Product->price << endl;
+		cout << Supplier[i].Product->cct << "\t\t  " << Supplier[i].Product->name << "\t" << Supplier[i].Product->price << endl;
 		cout << "----------------------------------------------" << endl;
 	}
 }
+
+void Create_New_Order()
+{
+	Install_Supplier_Product();
+	char Option;
+	bool Flag = true;
+	while (Flag)
+	{
+		cout << "Press 1) to add product to order" << endl;
+		cout << "Press 2) to remove product from order" << endl;
+		cout << "Press 3) to complete the order" << endl;
+		switch (Option)
+		{
+			case '1':
+			{
+				system("cls");
+				Print_Supplier_Product();
+				//Add_Product_To_Order();
+				break;
+			}
+			case '2':
+			{
+				system("cls");
+				//Print_Order();
+				//Remove_Product_From_Order();
+				break;
+			}
+			case '3':
+			{
+				system("cls");
+				//Complete_Order();
+				Flag = false;
+				break;
+			}
+			default:
+			{
+				cout << "Invalid option" << endl;
+				break;
+			}
+		}
+	}
+
+}
+
+void 

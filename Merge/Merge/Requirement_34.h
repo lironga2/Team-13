@@ -11,7 +11,7 @@ string Convert_To_String(int Amount);
 
 void Add_Product_To_Stock()
 {
-	Install_Supllayer_Product();
+	//Install_Supplier_Product();
 	ifstream Input;
 	ofstream Output;
 	string Search;
@@ -26,11 +26,11 @@ void Add_Product_To_Stock()
 	char User_Option;
 	while (Flag)
 	{
-		Stock_Report();
+		//Stock_Report();
 		cout << endl;
-		Stock_Shortage();
+		//Stock_Shortage();
 		cout << endl;
-		//Print_Supllayer_Product();
+		//Print_Supplier_Product();
 		bool Exsist_Flag = false;
 		//do
 		//{
@@ -38,16 +38,16 @@ void Add_Product_To_Stock()
 			cin >> Product_To_Add.cct;
 		//	for (int i = 0; i < SIZE; i++)
 		//	{
-		//		if (Product_To_Add.cct.compare(Supllayer[i].Product->cct) == 0)
+		//		if (Product_To_Add.cct.compare(Supplier[i].Product->cct) == 0)
 		//		{
-		//			If_Cct_Supplayer = true;
+		//			If_Cct_Supplier = true;
 		//		}
 		//	}
-		//	if (!If_Cct_Supplayer)
+		//	if (!If_Cct_Supplier)
 		//	{
 		//		cout << "Invalid cct.Try again." << endl;
 		//	}
-		//} while (!If_Cct_Supplayer);
+		//} while (!If_Cct_Supplier);
 		cout << "Enter product amount: ";
 		cin >> Product_Amount_To_Add;
 		Input.open("Stock.txt");
