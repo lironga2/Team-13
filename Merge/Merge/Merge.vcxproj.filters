@@ -69,12 +69,21 @@
     <ClInclude Include="Requirement_40.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="minunit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="driver.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="Requirements_1_to_3.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>

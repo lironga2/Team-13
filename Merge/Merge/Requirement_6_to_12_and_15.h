@@ -427,5 +427,3 @@ void dailyReturnedProductReport()
 	}
 	file_returned_product.close();
 }
-
-//zReport
