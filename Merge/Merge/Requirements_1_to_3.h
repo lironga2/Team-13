@@ -705,7 +705,8 @@ void makePayment(Bill * bill)
 	}
 }
 
-bool findFriendClub() {
+bool findFriendClub() 
+{
 	string phone_number;
 	bool phone_flag = true;
 	do
