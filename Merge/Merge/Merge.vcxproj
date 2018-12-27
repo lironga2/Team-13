@@ -144,7 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Requirement_32.h" />
-    <ClInclude Include="Requirement_31.h" />
+    <ClInclude Include="Requirement_31_to_33.h" />
     <ClInclude Include="Requirement_35.h" />
     <ClInclude Include="Requirement_37.h" />
     <ClInclude Include="Requirement_38.h" />

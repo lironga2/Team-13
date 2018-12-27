@@ -60,10 +60,10 @@
     <ClInclude Include="Requirement_35.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Requirement_31.h">
+    <ClInclude Include="Requirement_32.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Requirement_32.h">
+    <ClInclude Include="Requirement_31_to_33.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
