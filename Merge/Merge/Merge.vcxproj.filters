@@ -66,6 +66,9 @@
     <ClInclude Include="Requirement_31_to_33.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Requirement_40.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="driver.cpp">

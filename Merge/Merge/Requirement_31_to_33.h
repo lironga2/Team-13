@@ -3,6 +3,7 @@
 #include<fstream>
 #include<string>
 #include"Requirements_5.h"
+#include"Requirement_34.h"
 //#include"Requirement_32.h"
 
 using namespace std;
@@ -27,6 +28,7 @@ void Create_New_Order();
 void Add_Product_To_Order();
 void Print_Order();
 void Remove_Product_From_Order();
+void Complete_Order();
 
 static Order* Supplier;
 static int Supplier_Product_Amount = 0;
@@ -94,7 +96,7 @@ void Create_New_Order()
 	string Option_Validation;
 	int Option;
 	bool Flag = true;
-	while (Flag)
+		while (Flag)
 	{
 		cout << "Press 1) to add product to order" << endl;
 		cout << "Press 2) to remove product from order" << endl;
@@ -122,7 +124,7 @@ void Create_New_Order()
 			case 3:
 			{
 				system("cls");
-				//Complete_Order();
+				Complete_Order();
 				Flag = false;
 				break;
 			}
@@ -257,4 +259,221 @@ void Print_Order()
 		cout << "Total order price: " << Supplier->Sum << endl;
 		cout << "----------------------------------------------" << endl;
 	}
+}
+
+void Complete_Order()
+{
+	ifstream Input;
+	ofstream Output;
+	double CashBox;
+	string Transfer;
+	Input.open("Financial balance.txt");
+	Output.open("Temp.txt");
+	while (!Input.eof())
+	{
+		Input >> Transfer;
+		if (!Input.eof())
+		{
+			if (Transfer.compare("revenue:") == 0)
+			{
+				Output << Transfer << endl;
+				continue;
+			}
+			if (Transfer.compare("box:") == 0)
+			{
+				Output << Transfer << ' ';
+				Input >> CashBox;
+				//CashBox -= Supplier->Sum;
+				Output << CashBox << endl;
+				continue;
+			}
+			if (Transfer.compare("expenses:") == 0)
+			{
+				Output << Transfer << endl;
+				continue;
+			}
+			if (Transfer.compare("money:") == 0)
+			{
+				Output << Transfer << ' ';
+				double Current_Money;
+				Input >> Current_Money;
+				Current_Money += Supplier->Sum;
+				Output << Current_Money << endl;
+				continue;
+			}
+			if (Transfer.compare("sale:") == 0)
+			{
+				Output << Transfer << endl;
+				continue;
+			}
+			Output << Transfer << ' ';
+		}
+	}
+	Input.close();
+	Output.close();
+	Input.open("Temp.txt");
+	Output.open("Financial balance.txt");
+	while (!Input.eof())
+	{
+		Input >> Transfer;
+		if (!Input.eof())
+		{
+			if (Transfer.compare("revenue:") == 0)
+			{
+				Output << Transfer << endl;
+				continue;
+			}
+			if (Transfer.compare("box:") == 0)
+			{
+				Output << Transfer << ' ';
+				Input >> Transfer;
+				Output << Transfer << endl;
+				continue;
+			}
+			if (Transfer.compare("expenses:") == 0)
+			{
+				Output << Transfer << endl;
+				continue;
+			}
+			if (Transfer.compare("money:") == 0)
+			{
+				Output << Transfer << ' ';
+				Input >> Transfer;
+				Output << Transfer << endl;
+				continue;
+			}
+			if (Transfer.compare("sale:") == 0)
+			{
+				Output << Transfer << endl;
+				continue;
+			}
+			Output << Transfer << ' ';
+		}
+	}
+	Input.close();
+	Output.close();
+	Input.open("Stock.txt");
+	Output.open("Temp.txt");
+	The_Product Temp_Product;
+	bool Flag = true;
+	int k = 0;
+	int* arr = new int[Supplier_Product_Amount];
+	for (int i = 0; i < Supplier_Product_Amount; i++)
+	{
+		arr[i] = -1;
+	}
+	for (int i = 0; i < Supplier_Product_Amount; i++)
+	{
+		if (Supplier[i].Product->amount > 0)
+		{
+			arr[i] = i;
+		}
+	}
+	while (!Input.eof())
+	{
+		Input >> Temp_Product.cct;
+		if (!Input.eof())
+		{
+			Input >> Temp_Product.name;
+			Input >> Temp_Product.price;
+			string Temp;
+			Input >> Temp;
+			Temp_Product.amount = ConvertToNum(Temp);
+			for (int i = 0; i < Supplier_Product_Amount; i++)
+			{
+				if (Temp_Product.cct.compare(Supplier[i].Product->cct) == 0 && Supplier[i].Product->amount > 0)
+				{
+					Output << Temp_Product.cct << ' ';
+					Output << Temp_Product.name << ' ';
+					Output << Temp_Product.price << ' ';
+					int Temp_Amount = Temp_Product.amount + Supplier[i].Product->amount;
+					Temp = Convert_To_String(Temp_Amount);
+					Output << Temp << endl;
+					arr[i] =-1;
+					Flag = false;
+				}
+			}
+			if (Flag)
+			{
+				Output << Temp_Product.cct << ' ';
+				Output << Temp_Product.name << ' ';
+				Output << Temp_Product.price << ' ';
+				Output << Temp << endl;
+			}
+		}
+	}
+	for (int i = 0; i < Supplier_Product_Amount; i++)
+	{
+		if (arr[i] != -1)
+		{
+			string Temp;
+			Output << Supplier[i].Product->cct << ' ';
+			Output << Supplier[i].Product->name << ' ';
+			double New_Price = Supplier[i].Product->price * 2;
+			Output << New_Price << ' ';
+			Temp = Convert_To_String(Supplier[i].Product->amount);
+			Output << Temp << endl;
+		}
+	}
+	Input.close();
+	Output.close();
+
+	Input.open("Temp.txt");
+	Output.open("Stock.txt");
+	while (!Input.eof())
+	{
+		Input >> Temp_Product.cct;
+		if (!Input.eof())
+		{
+			string Temp;
+			Input >> Temp_Product.name;
+			Input >> Temp_Product.price;
+			Input >> Temp;
+			Output << Temp_Product.cct << ' ';
+			Output << Temp_Product.name << ' ';
+			Output << Temp_Product.price << ' ';
+			Output << Temp << endl;
+
+		}
+	}
+	Input.close();
+	Output.close();
+	Input.open("Orders.txt");
+	int Order_Number = 1;
+	while (!Input.eof())
+	{
+		string Temp;
+		Input >> Temp;
+		if (!Input.eof())
+		{
+			if (Temp[0] == '#')
+			{
+				Order_Number++;
+			}
+		}
+	}
+	Input.close();
+	UpdateDate();
+	Output.open("Orders.txt", std::fstream::app);
+	{
+		Output << '#' << Order_Number << ' ' << currDate << endl;
+		for (int i = 0; i < Supplier_Product_Amount; i++)
+		{
+			if (Supplier[i].Product->amount > 0)
+			{
+				Output << Supplier[i].Product->cct << ' ';
+				Output << Supplier[i].Product->name << ' ';
+				Output << Supplier[i].Product->price << ' ';
+				Output << Supplier[i].Product->amount << endl;
+			}
+		}
+		Output << "Total payment:" << ' '<< Supplier->Sum << endl;
+	}
+	Output.close();
+
+	for (int i = 0; i < Supplier_Product_Amount; i++)
+	{
+		Supplier[i].Product->amount = 0;
+	}
+	Supplier->Sum = 0;
 }

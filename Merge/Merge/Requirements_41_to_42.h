@@ -15,6 +15,7 @@
 #include"Requirement_35.h"
 #include"Requirement_31_to_33.h"
 #include"Requirement_32.h"
+#include"Requirement_40.h"
 //#include"Requirement_26.h"
 
 using namespace std;
@@ -353,7 +354,7 @@ void procurement_manager(Worker * worker)
 		cout << "press 5 to view sells report " << endl;
 		cout << "press 6 to generate missing product in stock report" << endl;
 		cout << "press 7 to generate product in stock report" << endl;
-		//cout << "press 8 to generate orders report" << endl;
+		cout << "press 8 to generate orders report" << endl;
 		cout << "press 0 to back" << endl;
 		cin >> opt;
 		switch (opt)
@@ -396,11 +397,14 @@ void procurement_manager(Worker * worker)
 		}
 		case 7:
 		{
+			system("cls");
 			Stock_Report();
 			break;
 		}
 		case 8:
 		{
+			system("cls");
+			Orders_Report();
 			break;
 		}
 		case 0:
