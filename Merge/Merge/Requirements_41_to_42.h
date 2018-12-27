@@ -3,8 +3,8 @@
 #include<fstream>
 #include<string>
 #include"Requirements_1_to_3.h"
-#include "Requirements_5.h"
-#include "Requirement_6_to_12_and_15.h"
+#include"Requirements_5.h"
+#include"Requirement_6_to_12_and_15.h"
 #include"Requirment_13_14.h"
 #include"Requirement_21.h"
 #include"Requirement_20.h"
@@ -13,6 +13,8 @@
 #include"Requirement_38.h"
 #include"Requirement_37.h"
 #include"Requirement_35.h"
+#include"Requirement_31_33.h"
+#include"Requirement_32.h"
 //#include"Requirement_26.h"
 
 using namespace std;
@@ -344,7 +346,7 @@ void procurement_manager(Worker * worker)
 	do
 	{
 		cout << "welcome to procurement manager menu" << endl;
-		//cout << "press 1 to create new order" << endl;
+		cout << "press 1 to create new order" << endl;
 		cout << "press 2 to add product to stock" << endl;
 		cout << "press 3 to delete product from stock" << endl;
 		cout << "press 4 to change product price" << endl;
@@ -358,6 +360,7 @@ void procurement_manager(Worker * worker)
 		{
 		case 1:
 		{
+			Create_New_Order();
 			system("cls");
 			break;
 		}
