@@ -11,6 +11,7 @@ void Orders_Report()
 	string Transfer3;
 	string Transfer4;
 	Input.open("Orders.txt");
+	cout << "----------------------------------------------" << endl;
 	while (!Input.eof())
 	{
 		Input >> Transfer1;
