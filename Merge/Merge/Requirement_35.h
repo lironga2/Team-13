@@ -6,7 +6,7 @@
 void Remove_Product_From_Stock()
 {
 	Stock_Report();
-	Stock_Shortage();
+	//Stock_Shortage();
 	ifstream Input;
 	ofstream Output;
 	string Cct_To_remove;
@@ -30,6 +30,7 @@ void Remove_Product_From_Stock()
 				if (Product.cct.compare(Cct_To_remove) == 0)
 				{
 					cout << "Product has been removed from the stock" << endl;
+					Output << Product.cct << ' ' << Product.name << ' ' << Product.price << ' ' << "0#" << endl;
 					continue;
 				}
 				Output << Product.cct << ' ' << Product.name << ' ' << Product.price << ' ' << Amount << endl;
