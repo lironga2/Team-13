@@ -3,9 +3,12 @@
 #include"Requirement_38.h"
 #include"Requirement_39.h"
 
-void Remove_Product_From_Stock()
+string Remove_Product_From_Stock(string test_cct ="NO")
 {
-	Stock_Report();
+	if (test_cct.compare("NO") == 0)
+	{
+		Stock_Report();
+	}
 	//Stock_Shortage();
 	ifstream Input;
 	ofstream Output;
@@ -13,8 +16,15 @@ void Remove_Product_From_Stock()
 	string Amount;
 	string transfer;
 	Product Product;
+	if(test_cct.compare("NO") == 0)
+	{
 	cout << "Enter Product cct: ";
 	cin >> Cct_To_remove;
+	}
+	else
+	{
+		Cct_To_remove = test_cct;
+	}
 	Input.open("Stock.txt");
 	Output.open("Temp.txt");
 	if (isProductCctExist(Cct_To_remove))
@@ -29,7 +39,10 @@ void Remove_Product_From_Stock()
 				Input >> Amount;
 				if (Product.cct.compare(Cct_To_remove) == 0)
 				{
-					cout << "Product has been removed from the stock" << endl;
+					if (test_cct.compare("NO") == 0)
+					{
+						cout << "Product has been removed from the stock" << endl;
+					}
 					Output << Product.cct << ' ' << Product.name << ' ' << Product.price << ' ' << "0#" << endl;
 					continue;
 				}
@@ -38,28 +51,37 @@ void Remove_Product_From_Stock()
 		}
 		Input.close();
 		Output.close();
-		Output.open("Stock.txt");
-		Input.open("Temp.txt");
-		if (Input)
+		if (test_cct.compare("NO") == 0)
 		{
-			Input >> transfer;
-			while (!Input.eof())
+			Output.open("Stock.txt");
+			Input.open("Temp.txt");
+			if (Input)
 			{
-				Output << transfer << ' ';
 				Input >> transfer;
-				Output << transfer << ' ';
-				Input >> transfer;
-				Output << transfer << ' ';
-				Input >> transfer;
-				Output << transfer << endl;
-				Input >> transfer;
+				while (!Input.eof())
+				{
+					Output << transfer << ' ';
+					Input >> transfer;
+					Output << transfer << ' ';
+					Input >> transfer;
+					Output << transfer << ' ';
+					Input >> transfer;
+					Output << transfer << endl;
+					Input >> transfer;
+				}
 			}
+			Input.close();
+			Output.close();
 		}
-		Input.close();
-		Output.close();
 	}
 	else
 	{
-		cout << "Product isn't exists int the stock" << endl;
+		if (test_cct.compare("NO") == 0)
+		{
+			cout << "Product isn't exists int the stock" << endl;
+		}
+			return "Product isn't exists int the stock";
 	}
+	return "Product has been removed from the stock";
+
 }

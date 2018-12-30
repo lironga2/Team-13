@@ -19,6 +19,7 @@ bool checkIfValidId(string id)
 {
 	return(id.length() == 9 && checkIfNum(id));
 }
+
 bool checkIfWorkerFound(string id_to_compare)
 {
 	ifstream Input;
@@ -38,7 +39,7 @@ bool checkIfWorkerFound(string id_to_compare)
 	return false;
 }
 
-void changeEmployeeSalary()  
+string changeEmployeeSalary(string test_id = "NO", string test_amount = "NO")
 {
 	Employee* worker = new Employee;
 	string file_user;
@@ -49,31 +50,40 @@ void changeEmployeeSalary()
 	string id_to_change_salary;
 	string amount_string;
 	double amount;
-	
-	cout << "Workers list:" << endl;
-	Input.open("Employee.txt");
-	Input >> transfer;
-	while (!Input.eof())
+	if (test_id.compare("NO") == 0)
 	{
-		if (!Input.eof())
-		{
-			if ((transfer.compare("Yes") == 0) || (transfer.compare("No") == 0))
-				cout << transfer << endl;
-			else
-				cout << transfer << ' ';
-		}
+		cout << "Workers list:" << endl;
+		Input.open("Employee.txt");
 		Input >> transfer;
+		while (!Input.eof())
+		{
+			if (!Input.eof())
+			{
+				if ((transfer.compare("Yes") == 0) || (transfer.compare("No") == 0))
+					cout << transfer << endl;
+				else
+					cout << transfer << ' ';
+			}
+			Input >> transfer;
+		}
+		Input.close();
 	}
-	Input.close();
 	do
 	{
-		if (!flag)
+		if (test_id.compare("NO") == 0)
 		{
-			cout << "Id invalid" << endl;
+			if (!flag)
+			{
+				cout << "Id invalid" << endl;
+			}
+
+			cout << "Enter employee id to change salary: ";
+			cin >> id_to_change_salary;
 		}
-		
-		cout << "Enter employee id to change salary: ";
-		cin >> id_to_change_salary;
+		else
+		{
+			id_to_change_salary = test_id;
+		}
 
 		if (!checkIfValidId(id_to_change_salary) || !checkIfWorkerFound(id_to_change_salary))
 		{
@@ -84,13 +94,19 @@ void changeEmployeeSalary()
 	} while (!flag);
 	do
 	{
-		if (!flag)
+		if (test_amount.compare("NO") == 0)
 		{
-			cout << "Amount invalid" << endl;
+			if (!flag)
+			{
+				cout << "Amount invalid" << endl;
+			}
+			cout << "Enter amount of money to add to employee salary: ";
+			cin >> amount_string;
 		}
-		cout << "Enter amount of money to add to employee salary: ";
-		cin >> amount_string;
-
+		else
+		{
+			amount_string = test_amount;
+		}
 		if (!checkIfNum(amount_string))
 		{
 			flag = false;
@@ -141,21 +157,32 @@ void changeEmployeeSalary()
 	}
 	Input.close();
 	Output.close();
-	Output.open("Employee.txt");
-	Input.open("Temp.txt");
-	Input >> file_user;
-	while (!Input.eof())
+	if (test_id.compare("NO") == 0)
 	{
-		if (!Input.eof())
+		Output.open("Employee.txt");
+		Input.open("Temp.txt");
+		Input >> file_user;
+		while (!Input.eof())
 		{
-			Output << file_user << ' ';
-			if ((file_user.compare("Yes") == 0) || (file_user.compare("No") == 0))
-				Output << endl;
-			Input >> file_user;
+			if (!Input.eof())
+			{
+				Output << file_user << ' ';
+				if ((file_user.compare("Yes") == 0) || (file_user.compare("No") == 0))
+					Output << endl;
+				Input >> file_user;
+			}
 		}
+		Input.close();
+		Output.close();
 	}
-	Input.close();
-	Output.close();
+	if (test_id.compare("NO") != 0)
+	{
+		return "Update success";
+	}
+	else
+	{
+		return "Done";
+	}
 
 
 }
@@ -205,7 +232,7 @@ double returnChangeSalary(int level, int  level_to_change) {
 	return ChangeSalary;
 }
 
-void changeAccess()
+string changeAccess(string test_id = "NO", char test_level = '6')
 {
 	Employee* worker = new Employee;
 	string file_user;
@@ -216,34 +243,36 @@ void changeAccess()
 	int level_to_change;
 	char level_to_change_char;
 	string transfer;
-	
-	cout << "Workers list:" << endl;
-	Input.open("Employee.txt");
-	bool input_flag = true;
-	while (!Input.eof())
+	if (test_id.compare("NO") == 0)
 	{
-		if (input_flag)
+		cout << "Workers list:" << endl;
+		Input.open("Employee.txt");
+		bool input_flag = true;
+		while (!Input.eof())
 		{
+			if (input_flag)
+			{
+				Input >> transfer;
+			}
+			cout << transfer << ' ';
+			if (transfer.compare("No") == 0 || transfer.compare("Yes") == 0)
+			{
+				cout << endl;
+			}
 			Input >> transfer;
+			input_flag = false;
 		}
-		cout << transfer << ' ';
-		if (transfer.compare("No") == 0 || transfer.compare("Yes") == 0)
-		{
-			cout << endl;
-		}
-		Input >> transfer;
-		input_flag = false;
-	}
-	Input.close();
+		Input.close();
 		do
 		{
+
 			if (!flag)
 			{
 				cout << "Id invalid" << endl;
 			}
 			cout << "Enter employee id to change access: ";
 			cin >> id_access_to_change;
-			
+
 			if (!checkIfValidId(id_access_to_change) || !checkIfWorkerFound(id_access_to_change))
 			{
 				flag = false;
@@ -251,7 +280,7 @@ void changeAccess()
 			else
 				flag = true;
 		} while (!flag);
-		do 
+		do
 		{
 			if (!flag)
 			{
@@ -259,7 +288,7 @@ void changeAccess()
 			}
 			cout << "Enter level to change: ";
 			cin >> level_to_change_char;
-			
+
 			if (!checkIfNum(level_to_change_char) || (level_to_change_char <= '0' || level_to_change_char > '4'))
 			{
 				flag = false;
@@ -269,7 +298,15 @@ void changeAccess()
 				level_to_change = level_to_change_char - '0';
 			}
 		} while (!flag);
-
+	}
+	else
+	{
+		id_access_to_change = test_id;
+		level_to_change_char = test_level;
+		level_to_change = level_to_change_char - '0';
+		if (((!checkIfValidId(id_access_to_change) || !checkIfWorkerFound(id_access_to_change) || !checkIfNum(level_to_change_char) || (level_to_change_char <= '0' || level_to_change_char > '4'))))
+			return "invalid change";
+	}
 	Output.open("Temp.txt");
 	Input.open("Employee.txt");
 	if (Input.is_open())
@@ -309,22 +346,27 @@ void changeAccess()
 	}
 	Input.close();
 	Output.close();
-	Output.open("Employee.txt");
-	Input.open("Temp.txt");
-	Input >> file_user;
-	while (!Input.eof())
+	if (test_id.compare("NO") == 0)
 	{
-		if (!Input.eof()) 
+		Output.open("Employee.txt");
+		Input.open("Temp.txt");
+		Input >> file_user;
+		while (!Input.eof())
 		{
-			Output << file_user << ' ';
-			if ((file_user.compare("Yes") == 0) || (file_user.compare("No") == 0))
-				Output << endl;
-			Input >> file_user;
+			if (!Input.eof())
+			{
+				Output << file_user << ' ';
+				if ((file_user.compare("Yes") == 0) || (file_user.compare("No") == 0))
+					Output << endl;
+				Input >> file_user;
+			}
 		}
+		Input.close();
+		Output.close();
 	}
-	Input.close();
-	Output.close();
+	return "Access successfully update";
 }
+
 void addNewEmployee() 
 {
 	Employee* worker = new Employee;

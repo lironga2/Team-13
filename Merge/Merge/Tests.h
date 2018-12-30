@@ -2,6 +2,7 @@
 #include"minunit.h"
 #include"Requirement_21.h"
 #include"Requirements_5.h"
+#include"Requirement_21.h"
 #include<time.h>
 #include <stdlib.h>
 int tests_run = 0;
@@ -78,6 +79,28 @@ static char * test_is_valid()
 	mu_assert("Error in check if is valid, should be true", isValid("lironga2", "123456") == true);
 	return 0;
 }
+static char * change_employee_salary()
+{
+	mu_assert("Error in change employee sallary , should be Update success", changeEmployeeSalary("147852369", "3000") == "Update success");
+	return 0;
+}
+static char * remove_product_from_stock()
+{
+	mu_assert("Error in  remove product from stock, should be Product has been removed from the stock", Remove_Product_From_Stock("101") == "Product has been removed from the stock");
+	return 0;
+}
+
+static char * add_product_amount_to_exist_product_stock()
+{
+	mu_assert("Error in  add product to stock, should be product amount successfully added", Add_Product_To_Stock("101",8) == "product amount successfully added");
+	return 0;
+}
+static char * test_changeAccess()
+{
+	mu_assert("Error in  change access, should be product amount successfully added", changeAccess("147852369",'4') == "Access successfully update");
+	return 0;
+}
+
 
 
 static char * all_tests()
@@ -96,6 +119,10 @@ static char * all_tests()
 	mu_run_test(test_check_If_All_String_Num);
 	mu_run_test(test_if_Load_Details);
 	mu_run_test(test_is_valid);
+	mu_run_test(change_employee_salary);
+	mu_run_test(remove_product_from_stock);
+	mu_run_test(add_product_amount_to_exist_product_stock);
+	mu_run_test(test_changeAccess);
 	return 0;
 }
 
