@@ -545,21 +545,27 @@ void ExcellentWorkersReport()
 		Input.close();
 	}
 }
-void locateEmployee()
+string locateEmployee(string test_id="NO")
 {
 	system("cls");
 	ifstream Input;
 	Employee* worker = new Employee;
 	string role;
 	string id;
-
-	do {
-		cout << "Enter id of employee that you want to see his details" << endl;
-		cin >> id;
-		if (!checkIfWorkerFound(id))
-			cout << "Worker not found, please try again" << endl;
-	} while (!checkIfWorkerFound(id));
-
+	bool Found_Flag = false;
+	if (test_id.compare("NO") == 0)
+	{
+		do {
+			cout << "Enter id of employee that you want to see his details" << endl;
+			cin >> id;
+			if (!checkIfWorkerFound(id))
+				cout << "Worker not found, please try again" << endl;
+		} while (!checkIfWorkerFound(id));
+	}
+	else 
+	{
+		id = test_id;
+	}
 	Input.open("Employee.txt");
 	if (Input)
 	{
@@ -576,12 +582,29 @@ void locateEmployee()
 			Input >> worker->is_excellent;
 			if (worker->id.compare(id) == 0)
 			{
-				cout << worker->username << ' ' << worker->id << ' ' << worker->first_name << ' ' << worker->last_name << ' ' << role << ' '
-					<< worker->phone_number << ' ' << worker->salary << ' ' << worker->is_excellent << endl << endl;
+				if (test_id.compare("NO") == 0)
+				{
+					cout << worker->username << ' ' << worker->id << ' ' << worker->first_name << ' ' << worker->last_name << ' ' << role << ' '
+						<< worker->phone_number << ' ' << worker->salary << ' ' << worker->is_excellent << endl << endl;
+				}
+				Found_Flag = true;
+				break;
 			}
 			Input >> worker->username;
 		}
 		Input.close();
+		if (Found_Flag)
+		{
+			return worker->phone_number;
+		}
+		else
+		{
+			if (test_id.compare("NO") == 0)
+			{
+				cout << "Worker not found" << endl;
+			}
+			return"Worker not found";
+		}
 	}
 }
 

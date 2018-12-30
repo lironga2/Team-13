@@ -72,15 +72,22 @@ int productInStock(string test ="NO")
 	return 1;
 }
 
-void productPrice() 
+string productPrice(string test_cct="NO") 
 {
 	string cct;
 	fstream Stock;
 	string file_cct;
 	string product_name;
 	string product_price;
-	cout << "Enter product cct that u want to check his price" << endl;
-	cin >> cct;
+	if (test_cct.compare("NO") == 0)
+	{
+		cout << "Enter product cct that u want to check his price" << endl;
+		cin >> cct;
+	}
+	else
+	{
+		cct = test_cct;
+	}
 	if (validCct(cct))
 	{
 		Stock.open("Stock.txt");
@@ -90,13 +97,24 @@ void productPrice()
 			if (file_cct.compare(cct) == 0)
 			{
 				Stock >> product_name >> product_price;
-				cout << product_name << "price is: " << product_price << endl;
+				if (test_cct.compare("NO") == 0)
+				{
+					cout << product_name << "price is: " << product_price << endl;
+				}
+				Stock.close();
+				return product_price;
 			}
 		}
 		Stock.close();
 	}
 	else
-		cout << "Product not in stock" << endl;
+	{
+		if (test_cct.compare("NO") == 0)
+		{
+			cout << "Product not in stock" << endl;
+		}
+		return "Product not in stock";
+	}
 }
 
 string locateTransaction()

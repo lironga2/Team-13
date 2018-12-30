@@ -95,12 +95,21 @@ static char * add_product_amount_to_exist_product_stock()
 	mu_assert("Error in  add product to stock, should be product amount successfully added", Add_Product_To_Stock("101",8) == "product amount successfully added");
 	return 0;
 }
-static char * test_changeAccess()
+static char * test_change_access()
 {
-	mu_assert("Error in  change access, should be product amount successfully added", changeAccess("147852369",'4') == "Access successfully update");
+	mu_assert("Error in  change access, should be Access successfully update", changeAccess("147852369",'4') == "Access successfully update");
 	return 0;
 }
-
+static char * test_locate_employee()
+{
+	mu_assert("Error in locate employee, should be 0541478521", locateEmployee("147852369") == "0541478521");
+	return 0;
+}
+static char * test_product_price()
+{
+	mu_assert("Error in locate product price, should be 12000", productPrice("101") == "12000");
+	return 0;
+}
 
 
 static char * all_tests()
@@ -122,7 +131,9 @@ static char * all_tests()
 	mu_run_test(change_employee_salary);
 	mu_run_test(remove_product_from_stock);
 	mu_run_test(add_product_amount_to_exist_product_stock);
-	mu_run_test(test_changeAccess);
+	mu_run_test(test_change_access);
+	mu_run_test(test_locate_employee);
+	mu_run_test(test_product_price);
 	return 0;
 }
 
