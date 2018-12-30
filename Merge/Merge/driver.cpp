@@ -6,7 +6,7 @@
 int main()
 {
 	test();
-	Login();
+	cout << Login() << endl;
 	return 0;
 }
 

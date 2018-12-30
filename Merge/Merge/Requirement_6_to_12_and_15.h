@@ -5,17 +5,71 @@
 #include<stdlib.h>
 using namespace std;
 
-void productInStock()
+int productInStock(string test ="NO")
 {
 	string cct;
-	cout << "Enter product cct" << endl;
-	cin >> cct;
+	if (test.compare("NO") == 0)
+	{
+		cout << "Enter product cct" << endl;
+		cin >> cct;
+	}
+	else 
+		cct = test;
 	if (validCct(cct))
 	{
-		cout << "Product in stock" << endl;
+		ifstream Input;
+		Input.open("Stock.txt");
+		string Copy_String;
+		while (!(Input.eof()))
+		{
+			Input >> Copy_String;
+			if (!Input.eof())
+			{
+				if (cct.compare(Copy_String) == 0)
+				{
+					Input >> Copy_String;
+					Input >> Copy_String;
+					Input >> Copy_String;
+					int Product_Amount;
+					Product_Amount = ConvertToNum(Copy_String);
+					if (Product_Amount > 0)
+					{
+						if (test.compare("NO") == 0)
+						{
+							cout << "Product in stock , amount = :" << Product_Amount << endl;
+						}
+						else
+						{
+							Input.close();
+							return 1;
+						}
+					}
+					else
+					{
+						if (test.compare("NO") == 0)
+						{
+							cout << "Product in stock, but amount is 0 " << endl;
+						}
+						else
+						{
+							Input.close();
+							return 0;
+						}
+					}
+				}
+			}
+		}
+		Input.close();
 	}
 	else
-		cout << " Product not in stock" << endl;
+	{
+		if (test.compare("NO") == 0)
+		{
+			cout << "Product not sell in the store" << endl;
+		}
+		return 0;
+	}
+	return 1;
 }
 
 void productPrice() 

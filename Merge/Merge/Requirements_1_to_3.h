@@ -3,7 +3,8 @@
 #include<string>
 #include<fstream>
 #include"Requirement_26.h"
-
+#include <time.h>
+#include<stdlib.h>
 using namespace std;
 
 static int invoice_number = 0;
@@ -30,28 +31,10 @@ typedef struct Bill {
 	int level;
 };
 
-//void newBill(Bill** bill);
-//void newProduct(Product** product);
-//void creatBill(string id,int level);
-//void addProductToBill(Bill** bill);
-//bool validCct(string product_cct);
-//void updateBill(Bill*** bill, string product_cct);
-//void deleteExistProduct(Bill ** bill);
-//void makePayment(Bill *bill);
-//bool findFriendClub();
-//int ConvertToNum(string Number);
-//void deleteProductFromStock(string product_cct);
-//void Manager_Or_Shift_Manager_Options(Bill* bill);
-
 #pragma once
-#include"Requirements_1_to_3.h"
-#include "Requirement_16.h"
 #include"Requirement_17.h"
-//#include"Requirement_26.h"
-#include <time.h>
-#include<stdlib.h>
+#include "Requirement_16.h"
 
-using namespace std;
 
 static char todaydate[30];
 time_t l = time(NULL);
@@ -66,7 +49,7 @@ bool validCct(string product_cct);
 void updateBill(Bill*** bill, string product_cct);
 void deleteExistProduct(Bill ** bill);
 void makePayment(Bill *bill);
-bool findFriendClub();
+bool findFriendClub(string test="1234");
 int ConvertToNum(string Number);
 void deleteProductFromStock(string product_cct);
 void Manager_Or_Shift_Manager_Options(Bill* bill);
@@ -705,23 +688,30 @@ void makePayment(Bill * bill)
 	}
 }
 
-bool findFriendClub() 
+bool findFriendClub(string test) 
 {
 	string phone_number;
 	bool phone_flag = true;
-	do
+	if (test.compare("1234") == 0)
 	{
-		if (!phone_flag)
+		do
 		{
-			cout << "phone number invalid" << endl;
-		}
-		cout << "Enter customer's phone number: " << endl;
-		cin >> phone_number;
-		if (phone_number.length() != 10)
-		{
-			phone_flag = false;
-		}
-	} while (phone_number.length() != 10);
+			if (!phone_flag)
+			{
+				cout << "phone number invalid" << endl;
+			}
+			cout << "Enter customer's phone number: " << endl;
+			cin >> phone_number;
+			if (phone_number.length() != 10)
+			{
+				phone_flag = false;
+			}
+		} while (phone_number.length() != 10);
+	}
+	else
+	{
+		phone_number = test;
+	}
 	string member_phone;
 	ifstream ClubMember;
 	ClubMember.open("ClubMember.txt");

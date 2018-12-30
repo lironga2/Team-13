@@ -60,9 +60,6 @@
     <ClInclude Include="Requirement_35.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Requirement_32.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Requirement_31_to_33.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -78,12 +75,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="driver.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Requirements_1_to_3.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>

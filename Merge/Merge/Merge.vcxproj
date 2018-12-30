@@ -144,7 +144,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="minunit.h" />
-    <ClInclude Include="Requirement_32.h" />
     <ClInclude Include="Requirement_31_to_33.h" />
     <ClInclude Include="Requirement_35.h" />
     <ClInclude Include="Requirement_37.h" />
@@ -166,8 +165,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="driver.cpp" />
-    <ClCompile Include="Requirements_1_to_3.cpp" />
-    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

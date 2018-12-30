@@ -38,12 +38,26 @@ static char * test_valid_Cct()
 	mu_assert("Error in valid cct, should be true ", validCct("101") == true);
 	return 0;
 }
-//static char * test_find_friend_club()
-//{
-//	mu_assert("Error in finding friend club, should be true ", findFriendClub("0526256397") == true);
-//	return 0;
-//}
-
+static char * test_find_friend_club()
+{
+	mu_assert("Error in finding friend club, should be true ", findFriendClub("0526256397") == true);
+	return 0;
+}
+static char * test_login()
+{
+	mu_assert("Error in login to store system,should be: your log to system", Login("l", "1") == "your log to system");
+	return 0;
+}
+static char * test_product_In_Stock()
+{
+	mu_assert("Error test product in store,should be: 1", productInStock("101") == 1);
+	return 0;
+}
+static char * test_check_If_Gift_Card_Exist()
+{
+	mu_assert("Error test gift card exist #1,should be: 1", checkIfGiftCardExist("#1") == 1);
+	return 0;
+}
 
 
 static char * all_tests()
@@ -54,7 +68,10 @@ static char * all_tests()
 	mu_run_test(test_check_If_Num);
 	mu_run_test(test_convert_String_To_Num);
 	mu_run_test(test_valid_Cct);
-	/*mu_run_test(test_find_friend_club);*/
+	mu_run_test(test_find_friend_club);
+	mu_run_test(test_login);
+	mu_run_test(test_product_In_Stock);
+	mu_run_test(test_check_If_Gift_Card_Exist);
 	return 0;
 }
 

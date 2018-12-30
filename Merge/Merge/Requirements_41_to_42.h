@@ -14,7 +14,6 @@
 #include"Requirement_37.h"
 #include"Requirement_35.h"
 #include"Requirement_31_to_33.h"
-#include"Requirement_32.h"
 #include"Requirement_40.h"
 //#include"Requirement_26.h"
 
@@ -33,7 +32,7 @@ typedef struct {
 }Worker;
 
 
-void Login();
+string Login(string test_user_name = "NO", string test_password = "NO");
 bool isValid(string user, string pass);
 void load_details(string user_name);
 void menu(Worker* worker);
@@ -44,36 +43,46 @@ void procurement_manager(Worker * worker);
 
 
 
-void Login()
+string Login(string test_user_name,string test_password)
 {
 	bool flag = false;
 	char exit;
 	string user_name;
 	string password;
 	//getting user name and password from user
-	do
+	if (test_user_name.compare("NO") == 0)
 	{
-		cout << "Please enter your username" << endl;
-		cin >> user_name;
-		cout << "Please enter your password" << endl;
-		cin >> password;
-		//checking if user name and right password exists
-		if (isValid(user_name, password))
+		do
 		{
-			cout << "You have been connected to user:" << user_name << endl;
-			flag = true;
-		}
-		else
-		{
-			cout << "User name or password are incorrect" << endl;
-			cout << "If you want try again press Y or y to exit press any other key" << endl;
-			cin >> exit;
-		}
-	} while ((!flag) && ((exit == 'y') || (exit == 'Y')));
+			cout << "Please enter your username" << endl;
+			cin >> user_name;
+			cout << "Please enter your password" << endl;
+			cin >> password;
+			//checking if user name and right password exists
+			if (isValid(user_name, password))
+			{
+				cout << "You have been connected to user:" << user_name << endl;
+				flag = true;
+			}
+			else
+			{
+				cout << "User name or password are incorrect" << endl;
+				cout << "If you want try again press Y or y to exit press any other key" << endl;
+				cin >> exit;
+			}
+		} while ((!flag) && ((exit == 'y') || (exit == 'Y')));
+	}
+	else
+	{
+		if(isValid(test_user_name, test_password))
+			return "your log to system";
+		return "invalid";
+	}
 	if (flag)
 	{
 		load_details(user_name);
 	}
+	return "GECM software solutions ltd :)\n";
 }
 
 bool isValid(string user, string pass)
