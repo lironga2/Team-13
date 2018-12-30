@@ -34,7 +34,7 @@ typedef struct {
 
 string Login(string test_user_name = "NO", string test_password = "NO");
 bool isValid(string user, string pass);
-void load_details(string user_name);
+string load_details(string user_name, string test = "NO");
 void menu(Worker* worker);
 void general_worker(Worker* worker);
 void shift_manager(Worker* worker);
@@ -100,16 +100,17 @@ bool isValid(string user, string pass)
 			UsersData >> file_pass;
 			if ((user.compare(file_user) == 0) && (pass.compare(file_pass) == 0))
 			{
+				UsersData.close();
 				return true;
 			}
 		}
+		UsersData.close();
 		return false;
 	}
-	UsersData.close();
 }
 
 
-void load_details(string user_name)
+string load_details(string user_name,string test)
 {
 
 	Worker* worker = new Worker;
@@ -137,7 +138,12 @@ void load_details(string user_name)
 		}
 	}
 	UsersData.close();
-	menu(worker);
+	if (test.compare("NO") == 0)
+	{
+		menu(worker);
+		return "0";
+	}
+	return worker->first_name;
 }
 //first menu of worker, checks which level the employee have and choose the right menu
 void menu(Worker* worker)

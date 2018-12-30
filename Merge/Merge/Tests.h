@@ -58,6 +58,26 @@ static char * test_check_If_Gift_Card_Exist()
 	mu_assert("Error test gift card exist #1,should be: 1", checkIfGiftCardExist("#1") == 1);
 	return 0;
 }
+static char * test_convert_to_string()
+{
+	mu_assert("Error test convert to string 12345,should be: 12345#", Convert_To_String(12345) == "12345#");
+	return 0;
+}
+static char * test_check_If_All_String_Num()
+{
+	mu_assert("Error in check if num, should be true sent should be true", checkIfNum("1234") == true);
+	return 0;
+}
+static char * test_if_Load_Details()
+{
+	mu_assert("Error in check if load details, should be gilad", load_details("giladco", "YES") == "gilad");
+	return 0;
+}
+static char * test_is_valid()
+{
+	mu_assert("Error in check if is valid, should be true", isValid("lironga2", "123456") == true);
+	return 0;
+}
 
 
 static char * all_tests()
@@ -72,6 +92,10 @@ static char * all_tests()
 	mu_run_test(test_login);
 	mu_run_test(test_product_In_Stock);
 	mu_run_test(test_check_If_Gift_Card_Exist);
+	mu_run_test(test_convert_to_string);
+	mu_run_test(test_check_If_All_String_Num);
+	mu_run_test(test_if_Load_Details);
+	mu_run_test(test_is_valid);
 	return 0;
 }
 
