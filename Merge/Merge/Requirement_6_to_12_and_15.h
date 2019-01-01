@@ -8,6 +8,37 @@ using namespace std;
 int productInStock(string test ="NO")
 {
 	string cct;
+	ifstream Input;
+	string Product_Name;
+	string Product_Cct;
+	string The_Amount;
+	bool flag = true;
+	if (test.compare("NO") == 0)
+	{
+		Input.open("Stock.txt");
+
+		while (!Input.eof())
+		{
+			Input >> Product_Cct;
+			if (!Input.eof())
+			{
+				Input >> Product_Name;
+				Input >> The_Amount;
+				Input >> The_Amount;
+				if (flag)
+				{
+					cout << "Stock product table:" << endl;
+					cout << "product cct\t" << "  " << "product name" << endl;
+					cout << "----------------------------------------------" << endl;
+					flag = false;
+				}
+
+				cout << Product_Cct << "\t\t  " << Product_Name << endl;
+				cout << "----------------------------------------------" << endl;
+			}
+		}
+		Input.close();
+	}
 	if (test.compare("NO") == 0)
 	{
 		cout << "Enter product cct" << endl;
@@ -36,6 +67,7 @@ int productInStock(string test ="NO")
 					{
 						if (test.compare("NO") == 0)
 						{
+							system("cls");
 							cout << "Product in stock , amount = :" << Product_Amount << endl;
 						}
 						else
@@ -48,6 +80,7 @@ int productInStock(string test ="NO")
 					{
 						if (test.compare("NO") == 0)
 						{
+							system("cls");
 							cout << "Product in stock, but amount is 0 " << endl;
 						}
 						else
@@ -65,6 +98,7 @@ int productInStock(string test ="NO")
 	{
 		if (test.compare("NO") == 0)
 		{
+			system("cls");
 			cout << "Product not sell in the store" << endl;
 		}
 		return 0;
@@ -79,6 +113,36 @@ string productPrice(string test_cct="NO")
 	string file_cct;
 	string product_name;
 	string product_price;
+	ifstream Input;
+	string Product_Name;
+	string Product_Cct;
+	string The_Amount;
+	bool flag = true;
+	if (test_cct.compare("NO") == 0)
+	{
+		Input.open("Stock.txt");
+		while (!Input.eof())
+		{
+			Input >> Product_Cct;
+			if (!Input.eof())
+			{
+				Input >> Product_Name;
+				Input >> The_Amount;
+				Input >> The_Amount;
+				if (flag)
+				{
+					cout << "Stock product table:" << endl;
+					cout << "product cct\t" << "  " << "product name" << endl;
+					cout << "----------------------------------------------" << endl;
+					flag = false;
+				}
+
+				cout << Product_Cct << "\t\t  " << Product_Name << endl;
+				cout << "----------------------------------------------" << endl;
+			}
+		}
+		Input.close();
+	}
 	if (test_cct.compare("NO") == 0)
 	{
 		cout << "Enter product cct that u want to check his price" << endl;
@@ -99,6 +163,7 @@ string productPrice(string test_cct="NO")
 				Stock >> product_name >> product_price;
 				if (test_cct.compare("NO") == 0)
 				{
+					system("cls");
 					cout << product_name << "price is: " << product_price << endl;
 				}
 				Stock.close();
@@ -111,6 +176,7 @@ string productPrice(string test_cct="NO")
 	{
 		if (test_cct.compare("NO") == 0)
 		{
+			system("cls");
 			cout << "Product not in stock" << endl;
 		}
 		return "Product not in stock";
@@ -371,11 +437,20 @@ void returnProduct()
 void saleNewGiftCard()
 {
 	UpdateDate();
+	string val;
 	int giftcard_number=0;
 	int giftcard_value = 0;
 	char ch;
-	cout << "Enter the value of the giftcard that u want to buy" << endl;
-	cin >> giftcard_value;
+	do
+	{
+		cout << "Enter the value of the giftcard that u want to buy" << endl;
+		cin >> val; //Change the type of the giftcard_value argument to string.
+		giftcard_value = convertStringToNum(val);
+		if (giftcard_value < 0)
+		{
+			cout << "The Value of giftcard invlaid try again" << endl;
+		}
+	} while (giftcard_value < 0);
 	fstream file_giftcard;
 	file_giftcard.open("GiftCard.txt");
 	if (file_giftcard.is_open())

@@ -61,11 +61,13 @@ string Login(string test_user_name,string test_password)
 			//checking if user name and right password exists
 			if (isValid(user_name, password))
 			{
-				cout << "You have been connected to user:" << user_name << endl;
+				system("cls");
+				cout << "You have been connected to:";
 				flag = true;
 			}
 			else
 			{
+				system("cls");
 				cout << "User name or password are incorrect" << endl;
 				cout << "If you want try again press Y or y to exit press any other key" << endl;
 				cin >> exit;
@@ -140,6 +142,7 @@ string load_details(string user_name,string test)
 	UsersData.close();
 	if (test.compare("NO") == 0)
 	{
+		cout << worker->first_name << ' ' << worker->last_name << endl;
 		menu(worker);
 		return "0";
 	}
@@ -153,13 +156,11 @@ void menu(Worker* worker)
 	{
 	case 1:
 	{
-		system("cls");
 		general_worker(worker);
 		break;
 	}
 	case 2:
 	{
-		system("cls");
 		shift_manager(worker);
 		break;
 	}
