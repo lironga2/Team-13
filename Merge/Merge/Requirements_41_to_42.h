@@ -177,6 +177,7 @@ void menu(Worker* worker)
 }
 void general_worker(Worker* worker)
 {
+	string Option;
 	int opt;
 	bool flag = false;
 
@@ -191,7 +192,8 @@ void general_worker(Worker* worker)
 		cout << "press 6 to create your daily sells report" << endl;
 		cout << "press 7 to create your daily club members report" << endl;
 		cout << "press 0 to back" << endl;
-		cin >> opt;
+		cin >> Option;
+		opt = convertStringToNum(Option);
 		switch (opt)
 		{
 			case 1:
@@ -208,26 +210,31 @@ void general_worker(Worker* worker)
 			}
 			case 3:
 			{
+				system("cls");
 				productInStock();
 				break;
 			}
 			case 4:
 			{
+				system("cls");
 				productPrice();
 				break;
 			}
 			case 5:
 			{
+				system("cls");
 				locateTransaction();
 				break;
 			}
 			case 6:
 			{
+				system("cls");
 				dailySalesReport(worker->id);
 				break;
 			}
 			case 7:
 			{
+				system("cls");
 				dailyClubMebmer(worker->id);
 				break;
 			}
@@ -237,11 +244,16 @@ void general_worker(Worker* worker)
 				flag = true;
 				break;
 			}
+			default:
+				system("cls");
+				cout << "Option invalid try again" << endl;
+				break;
 		}
 	} while (!flag);
 }
 void shift_manager(Worker* worker)
 {
+	string Option;
 	int opt;
 	bool flag = false;
 
@@ -263,7 +275,8 @@ void shift_manager(Worker* worker)
 		cout << "press 13 to create daily return product report" << endl;
 		cout << "press 14 to create z report and close the cash box" << endl;
 		cout << "press 0 to back" << endl;
-		cin >> opt;
+		cin >> Option;
+		opt = convertStringToNum(Option);
 		switch (opt)
 		{
 			case 1:
@@ -280,31 +293,37 @@ void shift_manager(Worker* worker)
 			}
 			case 3:
 			{
+				system("cls");
 				productInStock();
 				break;
 			}
 			case 4:
 			{
+				system("cls");
 				productPrice();
 				break;
 			}
 			case 5:
 			{
+				system("cls");
 				locateTransaction();
 				break;
 			}
 			case 6:
 			{
+				system("cls");
 				dailySalesReport(worker->id);
 				break;
 			}
 			case 7:
 			{
+				system("cls");
 				dailyClubMebmer(worker->id);
 				break;
 			}
 			case 8:
 			{
+				system("cls");
 				returnProduct();
 				break;
 			}
@@ -322,16 +341,20 @@ void shift_manager(Worker* worker)
 			}
 			case 11:
 			{
+				//fix make payment.
+				system("cls");
 				saleNewGiftCard();
 				break;
 			}
 			case 12:
 			{
+				system("cls");
 				dailyGeneralSalesReport();
 				break;
 			}
 			case 13:
 			{
+				system("cls");
 				dailyReturnedProductReport();
 				break;
 			}
@@ -349,6 +372,10 @@ void shift_manager(Worker* worker)
 				flag = true;
 				break;
 			}
+			default:
+				system("cls");
+				cout << "Option invalid try again" << endl;
+				break;
 		}
 	} while (!flag);
 
@@ -356,6 +383,7 @@ void shift_manager(Worker* worker)
 
 void procurement_manager(Worker * worker)
 {
+	string Option;
 	int opt;
 	bool flag = false;
 
@@ -371,7 +399,8 @@ void procurement_manager(Worker * worker)
 		cout << "press 7 to generate product in stock report" << endl;
 		cout << "press 8 to generate orders report" << endl;
 		cout << "press 0 to back" << endl;
-		cin >> opt;
+		cin >> Option;
+		opt = convertStringToNum(Option);
 		switch (opt)
 		{
 		case 1:
@@ -428,12 +457,17 @@ void procurement_manager(Worker * worker)
 			flag = true;
 			break;
 		}
+		default:
+			system("cls");
+			cout << "Option invalid try again" << endl;
+			break;
 		}
 	} while (!flag);
 }
 
 void store_manager(Worker* worker)
 {
+	string Option;
 	int opt;
 	bool flag = false;
 
@@ -445,24 +479,20 @@ void store_manager(Worker* worker)
 		cout << "press 3 to check if product in stock" << endl;
 		cout << "press 4 to check product price" << endl;
 		cout << "press 5 to locate transaction" << endl;
-		cout << "press 6 to create your daily sells report" << endl;
-		cout << "press 7 to create your daily club members report" << endl;
-		cout << "press 8 to return product to store" << endl;
-		cout << "press 10 to remove excellent worker bonus" << endl;
-		cout << "press 11 to sale new giftcard" << endl;
-		cout << "press 12 to create general daily sells report" << endl;
-		cout << "press 13 to create daily return product report" << endl;
-		cout << "press 14 to change access to employee" << endl; //....
-		cout << "press 15 to add amount of money to worker salary" << endl;
-		cout << "press 16 to add new employee" << endl;
-		cout << "press 17 to remove exist employee" << endl;
-		cout << "press 18 to check which employee is excellent" << endl;
-		cout << "press 19 to locate employee" << endl;
-		cout << "press 20 to generate all-time club members report" << endl;
-		cout << "press 21 to generate salary report of all employees" << endl;
-		cout << "press 22 to sale management" << endl;
+		cout << "press 6 to return product to store" << endl;
+		cout << "press 7 to choose excellent worker bonus" << endl;
+		cout << "press 8 to remove excellent worker bonus" << endl;
+		cout << "press 9 to sale new giftcard" << endl;
+		cout << "press 10 to change access to employee" << endl; //....
+		cout << "press 11 to add new employee" << endl;
+		cout << "press 12 to remove exist employee" << endl;
+		cout << "press 13 to add amount of money to worker salary" << endl;
+		cout << "press 14 to sale management" << endl;
+		cout << "press 15 to locate employee" << endl;
+		cout << "press 16 to generate reports menu" << endl;
 		cout << "press 0 to back" << endl;
-		cin >> opt;
+		cin >> Option;
+		opt = convertStringToNum(Option);
 		switch (opt)
 		{
 		case 1:
@@ -479,107 +509,167 @@ void store_manager(Worker* worker)
 		}
 		case 3:
 		{
+			system("cls");
 			productInStock();
 			break;
 		}
 		case 4:
 		{
+			system("cls");
 			productPrice();
 			break;
 		}
 		case 5:
 		{
+			system("cls");
 			locateTransaction();
 			break;
 		}
 		case 6:
 		{
-			dailySalesReport(worker->id);
+			system("cls");
+			returnProduct();
 			break;
 		}
 		case 7:
 		{
-			dailyClubMebmer(worker->id);
+			system("cls");
+			workerBonus();
 			break;
 		}
 		case 8:
 		{
-			returnProduct();
+			system("cls");
+			removeBonus();
 			break;
 		}
 		case 9:
 		{
-			workerBonus();
+			system("cls");
+			saleNewGiftCard();
 			break;
 		}
 		case 10:
 		{
-			removeBonus();
+			system("cls");
+			changeAccess();
 			break;
 		}
 		case 11:
 		{
-			saleNewGiftCard();
+			system("cls");
+			addNewEmployee();
 			break;
 		}
 		case 12:
 		{
-			dailyGeneralSalesReport();
+			system("cls");
+			deleteExistEmployee();
 			break;
 		}
 		case 13:
 		{
-			dailyReturnedProductReport();
+			system("cls");
+			changeEmployeeSalary();
 			break;
 		}
 		case 14:
 		{
-			changeAccess();
+			system("cls");
+			Sale_Management(&ifSale, &Sale_Percent, &sale);
 			break;
 		}
 		case 15:
 		{
-			changeEmployeeSalary();
+			system("cls");
+			locateEmployee();
 			break;
 		}
 		case 16:
 		{
-			addNewEmployee();
-			break;
-		}
-		case 17:
-		{
-			deleteExistEmployee();
-			break;
-		}
-		case 18:
-		{
-			ExcellentWorkersReport();
-			break;
-		}
-		case 19:
-		{
-			locateEmployee();
-			break;
-		}
-		case 20:
-		{
-			allTimeClubMemeberReport();
-			break;
-		}
-		case 21:
-		{
-			salaryReport();
-			break;
-		}
-		case 22:
-		{
-			Sale_Management(&ifSale, &Sale_Percent, &sale);
-			//Update_Sale_Flag(&ifSale);
-			//if (ifSale)
-			//{
-			//	Update_Sale(&Sale_Percent);
-			//}
+			string Report_Chocie;
+			int Report_Option;
+			bool Report_Flag = true;
+
+			do
+			{
+				cout << "welcome to generate reports menu" << endl;
+				cout << "press 1 to create your daily sells report" << endl;
+				cout << "press 2 to create your daily club members report" << endl;
+				cout << "press 3 to create general daily sells report" << endl;
+				cout << "press 4 to create daily return product report" << endl;
+				cout << "press 5 to create z report and close the cash box" << endl;
+				cout << "press 6 to generate all-time club members report" << endl;
+				cout << "press 7 to check which employee is excellent" << endl;
+				cout << "press 8 to generate salary report of all employees" << endl;
+				cout << "press 0 to back" << endl;
+				cin >> Report_Chocie;
+				Report_Option = convertStringToNum(Report_Chocie);
+				switch (Report_Option)
+				{
+					case 1:
+					{
+						system("cls");
+						dailySalesReport(worker->id);
+						break;
+					}
+					case 2:
+					{
+						system("cls");
+						dailyClubMebmer(worker->id);
+						break;
+					}
+					case 3:
+					{
+						system("cls");
+						dailyGeneralSalesReport();
+						break;
+					}
+					case 4:
+					{
+						system("cls");
+						dailyReturnedProductReport();
+						break;
+					}
+					case 5:
+					{
+						system("cls");
+						UpdateDate();
+						string today = currDate;
+						Z_Report_Close_Cashbox(today);
+						break;
+					}
+					case 6:
+					{
+						system("cls");
+						allTimeClubMemeberReport();
+						break;
+					}
+					case 7:
+					{
+						system("cls");
+						ExcellentWorkersReport();
+						break;
+					}
+					case 8:
+					{
+						system("cls");
+						salaryReport();
+						break;
+					}
+					case 0:
+					{
+						system("cls");
+						Report_Flag = false;
+						break;
+					}
+					default:
+						system("cls");
+						cout << "Option invalid try again" << endl;
+						break;
+					}
+
+			} while (Report_Flag);
 			break;
 		}
 		case 0:
@@ -588,6 +678,10 @@ void store_manager(Worker* worker)
 			flag = true;
 			break;
 		}
+		default:
+			system("cls");
+			cout << "Option invalid try again" << endl;
+			break;
 		}
 	} while (!flag);
 }

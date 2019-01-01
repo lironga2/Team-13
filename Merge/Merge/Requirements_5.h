@@ -48,6 +48,10 @@ double convertStringToNum(string temp)
 {
 	int multy = 1;
 	double num_to_return = 0;
+	if(!checkIfNum(temp))
+	{ 
+		return -999;
+	}
 	if (checkIfNum(temp))
 	{
 		for (int i = temp.length()-1; i >= 0; i--)

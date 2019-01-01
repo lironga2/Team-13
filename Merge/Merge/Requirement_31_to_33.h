@@ -92,6 +92,7 @@ void Print_Supplier_Product()
 
 void Create_New_Order()
 {
+	system("cls");
 	Install_Supplier_Product();
 	string Option_Validation;
 	int Option;
@@ -134,6 +135,12 @@ void Create_New_Order()
 				Print_Order();
 				break;
 			}
+			case 0:
+			{
+				system("cls");
+				Flag = false;
+				break;
+			}
 			default:
 			{
 				cout << "Invalid option" << endl;
@@ -146,7 +153,6 @@ void Create_New_Order()
 
 void Add_Product_To_Order()
 {
-	//Install_Supplier_Product();
 	string Cct;
 	char Option;
 	bool Flag = false;
@@ -167,11 +173,13 @@ void Add_Product_To_Order()
 		}
 		if (Flag)
 		{
+			system("cls");
 			cout << "Product successfully added" << endl;
 		}
 		else
 		{
-			cout << "Product cct Invalid " << endl;
+			system("cls");
+			cout << "Product cct:"<< Cct <<" Invalid " << endl;
 			cout << "if you want try again press Y|y else press any key to continue" << endl;
 			cin >> Option;
 			if (Option != 'Y' && Option != 'y')
@@ -191,6 +199,8 @@ void Remove_Product_From_Order()
 	bool Amount_Flag = true;
 	while (Try_Againe)
 	{
+		system("cls");
+		Print_Order();
 		cout << "Enter product to: ";
 		cin >> Cct;
 		for (int i = 0; i < Supplier_Product_Amount; i++)
@@ -212,15 +222,18 @@ void Remove_Product_From_Order()
 		}
 		if (Flag)
 		{
+			system("cls");
 			cout << "Product successfully removed" << endl;
 		}
-		else if (Amount_Flag)
-		{
-			cout << "Product amount alredy 0 cant remove" << endl;
-		}
+		//else if (!Amount_Flag)
+		//{
+		//	system("cls");
+		//	cout << "Product amount alredy 0 cant remove" << endl;
+		//}
 		else
 		{
-			cout << "Product cct Invalid " << endl;
+			system("cls");
+			cout << "Product cct:" << Cct << " Invalid " << endl;
 			cout << "if you want try again press Y|y else press any key to continue" << endl;
 			cin >> Option;
 			if (Option != 'Y' && Option != 'y')
@@ -234,15 +247,13 @@ void Remove_Product_From_Order()
 void Print_Order()
 {
 	bool Flag = true;
-	cout << "Supplier product table:" << endl;
-	cout << "product cct\t" << "  " << "product name\tproduct price\t product amount" << endl;
 	for (int i = 0; i < Supplier_Product_Amount; i++)
 	{
 		if (Supplier[i].Product->amount > 0)
 		{
 			if (Flag)
 			{
-				cout << "Supplier product table:" << endl;
+				system("cls");
 				cout << "product cct\t" << "  " << "product name\tproduct price" << endl;
 				Flag = false;
 			}

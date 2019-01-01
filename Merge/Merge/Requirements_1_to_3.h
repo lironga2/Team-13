@@ -58,17 +58,27 @@ void Manager_Or_Shift_Manager_Options(Bill* bill);
 
 void newBill(Bill** bill) {
 	bool friend_club = false;
-	char user_freind_club_choice;
+	string user_freind_club_choice;
+	int Freind_Club_Choice;
 	*bill = new Bill;
 	if (!bill) {
 		cout << "Bad allocate." << endl;
 		exit(1);
 	}
 	invoice_number++;
-	cout << "Is the client a club member? \n 1) Yes 2) No" << endl;
-	cin >> user_freind_club_choice;
+	do
+	{
+		
+		cout << "Is the client a club member? \n 1) Yes 2) No" << endl;
+		cin >> user_freind_club_choice;
+		Freind_Club_Choice = convertStringToNum(user_freind_club_choice);
+		if (Freind_Club_Choice != 1 && Freind_Club_Choice != 2)
+		{
+			cout << "Option invalid try again" << endl;
+		}
+	} while (Freind_Club_Choice != 1 && Freind_Club_Choice != 2);
 	do {
-		if (user_freind_club_choice == '1')
+		if (Freind_Club_Choice == 1)
 			if (findFriendClub()) {
 				friend_club = true;
 				if_club_member = friend_club;
@@ -78,7 +88,7 @@ void newBill(Bill** bill) {
 				cout << "friend member dose not found. do you want try again?\n 1) Yes 2) No" << endl;
 				cin >> user_freind_club_choice;
 			}
-	} while (user_freind_club_choice == '1' && friend_club == false);
+	} while (Freind_Club_Choice == 1 && friend_club == false);
 }
 
 void newProduct(Product** product) {
@@ -731,21 +741,24 @@ bool findFriendClub(string test)
 void Manager_Or_Shift_Manager_Options(Bill* bill)
 {
 	bool flag = true;
-	char user_choise;
+	string user_choise;
 	do
 	{
 		cout << "1) Give the client a discount" << endl;
 		cout << "0) Back" << endl;
 		cin >> user_choise;
-		switch (user_choise)
+		int Option;
+		Option = convertStringToNum(user_choise);
+		switch (Option)
 		{
-		case '1':
+		case 1:
 			giveCleintDiscount(&bill);
 			break;
-		case '0':
+		case 0:
 			flag = false;
 			break;
 		default:
+			cout << "option invalid try again" << endl;
 			break;
 		}
 	} while (flag);

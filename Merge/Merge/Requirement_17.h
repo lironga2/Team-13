@@ -1,7 +1,7 @@
 #pragma once
 #include<iostream>
 #include"Requirements_1_to_3.h"
-//#include"Requirement_26.h"
+#include"Requirements_5.h"
 
 using namespace std;
 
@@ -9,6 +9,7 @@ void giveCleintDiscount(Bill** bill);
 
 void giveCleintDiscount(Bill** bill)
 {
+	string The_Discount;
 	double Discount;
 	double Deal_Price = 1;
 	bool flag = false;
@@ -19,7 +20,8 @@ void giveCleintDiscount(Bill** bill)
 			cout << "Discount isn't valid" << endl;
 		}
 		cout << "Enter discount between 1% -> 25%: ";
-		cin >> Discount;
+		cin >> The_Discount;
+		Discount = convertStringToNum(The_Discount);
 		if (!(Discount >= 1 && Discount <= 25))
 		{
 			flag = true;
