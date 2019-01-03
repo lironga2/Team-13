@@ -344,7 +344,7 @@ void returnProduct() //return product by reduce the amount of money from cashier
 	{
 		cout << "enter cct of product that you want to return" << endl;
 		cin >> product_cct;
-		deleteProductFromStock(product_cct);
+		backProductToStock(product_cct);
 		cout << "product has returned" << endl;
 		ifstream Input;
 		ofstream return_product;

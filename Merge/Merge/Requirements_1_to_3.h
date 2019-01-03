@@ -51,7 +51,7 @@ void deleteExistProduct(Bill ** bill);
 void makePayment(Bill *bill);
 bool findFriendClub(string test="1234");
 int ConvertToNum(string Number);
-void deleteProductFromStock(string product_cct);
+void backProductToStock(string product_cct);
 void Manager_Or_Shift_Manager_Options(Bill* bill);
 
 
@@ -195,7 +195,7 @@ void creatBill(string id, int level)
 			{
 				for (int i = 0; i < bill->num_of_product; i++)
 				{
-					deleteProductFromStock(bill->product[i]->cct);
+					backProductToStock(bill->product[i]->cct);
 				}
 			}
 			break;
@@ -378,7 +378,7 @@ void updateBill(Bill*** bill, string product_cct) { //get the price from stock f
 	}
 
 }
-void deleteProductFromStock(string product_cct) //bring the product back to stock if deleted from bill
+void backProductToStock(string product_cct) //bring the product back to stock if deleted from bill
 {
 	ifstream Input;
 	string Copy_String;
@@ -473,7 +473,7 @@ void deleteExistProduct(Bill ** bill) //delete product from bill
 				}
 				Assist[j] = new Product;
 				Assist[j++] = (*bill)->product[i];
-				deleteProductFromStock(product_cct);
+				backProductToStock(product_cct);
 			}
 			delete((*bill)->product);
 			(*bill)->product = Assist;
@@ -486,13 +486,13 @@ void deleteExistProduct(Bill ** bill) //delete product from bill
 			(*(bill))->num_of_product = 0;
 			delete((*bill)->product);
 			(*bill)->product = nullptr;
-			deleteProductFromStock(product_cct);
+			backProductToStock(product_cct);
 			cout << "product has deleted" << endl;
 		}
 	}
 }
 
-void makePayment(Bill * bill)
+void makePayment(Bill * bill) //finish bill and get pay
 {
 	system("cls");
 	if (bill->num_of_product == 0)
@@ -677,7 +677,7 @@ void makePayment(Bill * bill)
 	}
 }
 
-bool findFriendClub(string test) 
+bool findFriendClub(string test) //check if client club member
 {
 	string phone_number;
 	bool phone_flag = true;
@@ -717,7 +717,7 @@ bool findFriendClub(string test)
 	return false;
 }
 
-void Manager_Or_Shift_Manager_Options(Bill* bill)
+void Manager_Or_Shift_Manager_Options(Bill* bill) //if general worker connected and want to use other level options
 {
 	bool flag = true;
 	string user_choise;
