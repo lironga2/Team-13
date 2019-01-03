@@ -153,7 +153,7 @@ string Add_Product_To_Stock(string test_cct="NO",int test_amount=0)
 }
 
 
-string Convert_To_String(int Amount)
+string Convert_To_String(int Amount) //convert int to string and paste # to end of string
 {
 	char* String_Amount;
 	int i = 1;
@@ -177,7 +177,7 @@ string Convert_To_String(int Amount)
 	string Str = String_Amount;
 	return Str;
 }
-bool isProductCctExist(string cct)
+bool isProductCctExist(string cct) //check if cct exist in stock without checking if enough amount of products
 {
 	ifstream Input;
 	string transfer;
@@ -196,7 +196,7 @@ bool isProductCctExist(string cct)
 	return false;
 
 }
-void changeProductPrice()
+void changeProductPrice() //change the product price to whatever the procurement_manager wants
 {
 	system("cls");
 	string product_cct;

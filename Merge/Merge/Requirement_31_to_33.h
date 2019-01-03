@@ -34,7 +34,7 @@ static Order* Supplier;
 static int Supplier_Product_Amount = 0;
 static bool Install_Supplier_Product_Flag = true;
 
-void Install_Supplier_Product()
+void Install_Supplier_Product() //add new product to supplier Order struct
 {
 	if (Install_Supplier_Product_Flag)
 	{
@@ -79,7 +79,7 @@ void Install_Supplier_Product()
 
 }
 
-void Print_Supplier_Product()
+void Print_Supplier_Product() //print all product from the supplier txt
 {
 	cout << "Supplier product table:" << endl;
 	cout << "product cct\t" << "  " << "product name\tproduct price/t" << endl;
@@ -90,7 +90,7 @@ void Print_Supplier_Product()
 	}
 }
 
-void Create_New_Order()
+void Create_New_Order() //new order menu, add remove complete and print the order.
 {
 	system("cls");
 	Install_Supplier_Product();
@@ -151,7 +151,7 @@ void Create_New_Order()
 
 }
 
-void Add_Product_To_Order()
+void Add_Product_To_Order() // add new product to current order
 {
 	string Cct;
 	char Option;
@@ -190,7 +190,7 @@ void Add_Product_To_Order()
 	}
 }
 
-void Remove_Product_From_Order()
+void Remove_Product_From_Order() // remove product from current order
 {
 	string Cct;
 	char Option;
@@ -225,11 +225,6 @@ void Remove_Product_From_Order()
 			system("cls");
 			cout << "Product successfully removed" << endl;
 		}
-		//else if (!Amount_Flag)
-		//{
-		//	system("cls");
-		//	cout << "Product amount alredy 0 cant remove" << endl;
-		//}
 		else
 		{
 			system("cls");
@@ -244,7 +239,7 @@ void Remove_Product_From_Order()
 	}
 }
 
-void Print_Order()
+void Print_Order() //print the whole order with the sum price of all products.
 {
 	bool Flag = true;
 	for (int i = 0; i < Supplier_Product_Amount; i++)
@@ -272,7 +267,7 @@ void Print_Order()
 	}
 }
 
-void Complete_Order()
+void Complete_Order() //complete order by store the products in stock and update the expences (write in stock and financial balance txt)
 {
 	ifstream Input;
 	ofstream Output;
@@ -294,7 +289,6 @@ void Complete_Order()
 			{
 				Output << Transfer << ' ';
 				Input >> CashBox;
-				//CashBox -= Supplier->Sum;
 				Output << CashBox << endl;
 				continue;
 			}

@@ -2,7 +2,6 @@
 #include <iostream>
 #include<string>
 #include<fstream>
-//#include"Requirements_1_to_3.h"
 
 using namespace std;
 
@@ -11,7 +10,7 @@ static bool Curr_Sale = true;
 void Create_Update_Sale();
 void Remove_Sale(bool* IfSale);
 
-void Update_Sale_Flag(bool* IfSale)
+void Update_Sale_Flag(bool* IfSale)  // change the flag of store sale, if true sale on.
 {
 	ifstream Input;
 	ofstream Output;
@@ -34,7 +33,7 @@ void Update_Sale_Flag(bool* IfSale)
 	Input.close();
 }
 
-void Update_Sale(double* Sale_Percent,double* sale)
+void Update_Sale(double* Sale_Percent,double* sale) //updaate the current sale in store and store it in txt of financial balance
 {
 	if (Curr_Sale)
 	{
@@ -57,7 +56,7 @@ void Update_Sale(double* Sale_Percent,double* sale)
 	}
 }
 
-void Sale_Management(bool* IfSale, double* Sale_Percent,double* sale)
+void Sale_Management(bool* IfSale, double* Sale_Percent,double* sale) //sale menu
 {
 	char Option;
 	do {
@@ -96,7 +95,7 @@ void Sale_Management(bool* IfSale, double* Sale_Percent,double* sale)
 	}
 }
 
-void Create_Update_Sale()
+void Create_Update_Sale() // create new sell of store and output it to financial balance txt with the % and the word YES
 {
 	ifstream Input;
 	ofstream Output;
@@ -205,7 +204,7 @@ void Create_Update_Sale()
 	cout << "Sale of: " << The_Sale << "% successfully updated" << endl;
 } 
 
-void Remove_Sale(bool* IfSale)
+void Remove_Sale(bool* IfSale) //remove the sell by change the financial balance.txt - change yes to no and change the sell % to 0.
 {
 	ifstream Input;
 	ofstream Output;
