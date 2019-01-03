@@ -7,7 +7,7 @@ using namespace std;
 
 void giveCleintDiscount(Bill** bill);
 
-void giveCleintDiscount(Bill** bill)
+void giveCleintDiscount(Bill** bill) //give discount of total transaction from 1 to 25%
 {
 	string The_Discount;
 	double Discount;

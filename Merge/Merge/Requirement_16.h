@@ -1,7 +1,7 @@
 #pragma once
 #include<iostream>
 
-void editTxtGiftCard(int giftcard_amount, string giftcard_number)
+void editTxtGiftCard(int giftcard_amount, string giftcard_number) //update giftcard amount after use the whole amount or part of it
 {
 	ifstream Input;
 	string Copy_String;
@@ -59,7 +59,7 @@ void editTxtGiftCard(int giftcard_amount, string giftcard_number)
 	}
 }
 
-int checkIfGiftCardExist(string test="NO")
+int checkIfGiftCardExist(string test="NO") //check if giftcard exist by number
 {
 	fstream file_giftcard;
 	string number_giftcard_to_cmp;

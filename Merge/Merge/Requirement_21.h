@@ -20,7 +20,7 @@ bool checkIfValidId(string id)
 	return(id.length() == 9 && checkIfNum(id));
 }
 
-bool checkIfWorkerFound(string id_to_compare)
+bool checkIfWorkerFound(string id_to_compare) //check if worker exist in employee.txt
 {
 	ifstream Input;
 	string transfer;
@@ -39,7 +39,7 @@ bool checkIfWorkerFound(string id_to_compare)
 	return false;
 }
 
-string changeEmployeeSalary(string test_id = "NO", string test_amount = "NO")
+string changeEmployeeSalary(string test_id = "NO", string test_amount = "NO") //this func add amount of money to exist salary of employee
 {
 	Employee* worker = new Employee;
 	string file_user;
@@ -187,7 +187,7 @@ string changeEmployeeSalary(string test_id = "NO", string test_amount = "NO")
 
 }
 
-double returnChangeSalary(int level, int  level_to_change) {
+double returnChangeSalary(int level, int  level_to_change) { //change salary if level changed
 	double ChangeSalary = 0;
 	if ((level == 1 && level_to_change == 2) || (level == 2 && level_to_change == 1)) {
 		if (level == 1 && level_to_change == 2) {
@@ -232,7 +232,7 @@ double returnChangeSalary(int level, int  level_to_change) {
 	return ChangeSalary;
 }
 
-string changeAccess(string test_id = "NO", char test_level = '6')
+string changeAccess(string test_id = "NO", char test_level = '6') //promote or Downgrade employee and change his salary.
 {
 	Employee* worker = new Employee;
 	string file_user;
@@ -367,7 +367,7 @@ string changeAccess(string test_id = "NO", char test_level = '6')
 	return "Access successfully update";
 }
 
-void addNewEmployee() 
+void addNewEmployee() //add new employee to system with his full detail , level , user and password and update it in the relevant txt
 {
 	Employee* worker = new Employee;
 	ifstream Input;
@@ -409,7 +409,7 @@ void addNewEmployee()
 	Output << worker->username << ' ' << password << endl;
 	Output.close();
 }
-void deleteExistEmployee() 
+void deleteExistEmployee() //delete employee if he exist 
 {
 	system("cls");
 	Employee* worker = new Employee;
@@ -473,7 +473,7 @@ void deleteExistEmployee()
 	deleteFromeUserAndPass(user_to_remove);
 
 }
-void deleteFromeUserAndPass(string user_to_remove)
+void deleteFromeUserAndPass(string user_to_remove) //after delete from employee.txt delete from txt of user and pass
 {
 	ifstream Input;
 	ofstream Output;
@@ -512,7 +512,7 @@ void deleteFromeUserAndPass(string user_to_remove)
 	Input.close();
 	Output.close();
 }
-void ExcellentWorkersReport()
+void ExcellentWorkersReport() //generate report (only 1 excellent worker at the same time) of excellent employee
 {
 	system("cls");
 	Employee* worker = new Employee;
@@ -545,7 +545,7 @@ void ExcellentWorkersReport()
 		Input.close();
 	}
 }
-string locateEmployee(string test_id="NO")
+string locateEmployee(string test_id="NO") //check if employee exist
 {
 	system("cls");
 	ifstream Input;
@@ -608,7 +608,7 @@ string locateEmployee(string test_id="NO")
 	}
 }
 
-string returnRole(int num)
+string returnRole(int num) //return role of employee 
 {
 	string role;
 	switch (num)
@@ -640,7 +640,7 @@ string returnRole(int num)
 	}
 	return role;
 }
-void allTimeClubMemeberReport()
+void allTimeClubMemeberReport() //generate club member report of all time
 {
 	system("cls");
 	ifstream Input;
@@ -672,7 +672,7 @@ void allTimeClubMemeberReport()
 		cout << endl;
 	}
 }
-void salaryReport() 
+void salaryReport() //print the total amount of salary that the store pays
 {
 	system("cls");
 	cout << "Salary report of store: " << endl;

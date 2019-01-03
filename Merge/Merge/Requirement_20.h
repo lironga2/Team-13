@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void Z_Report_Close_Cashbox(string todaydate)
+void Z_Report_Close_Cashbox(string todaydate) //print the whole transaction of the day,reduct the money from cashier and move it to total balance
 {
 
 	double Bill_Amount;
@@ -35,25 +35,12 @@ while (!Transaction.eof())
 		{
 			cout << "Transction number: " << The_Number << ") " << ':' << endl;
 			The_Number++;
-			//Transaction >> Transfer;
-			//bool Flag1 = false;
 			do 
 			{
-				//if (Flag1)
-				//{
 					Transaction >> Transfer;
-				//}
-				//Flag1 = true;
-				//if (!Transaction.eof())
-				//{
-					//if (Transfer[0] == '#')
-					//{
-					//	break;
-					//}
 					Transaction >> date_to_compare;
 					Transaction >> Check;
 					cout << Transfer << ' ' << date_to_compare << ' ' << Check << endl;
-				//}
 			} while (!Transaction.eof() && date_to_compare.compare("bill:") !=0);
 		}
 	}

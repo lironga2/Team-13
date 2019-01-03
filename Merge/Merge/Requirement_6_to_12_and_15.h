@@ -5,7 +5,7 @@
 #include<stdlib.h>
 using namespace std;
 
-int productInStock(string test ="NO")
+int productInStock(string test ="NO")  //this function get input of cct from user, open stock file and check if its in stock
 {
 	string cct;
 	ifstream Input;
@@ -46,7 +46,7 @@ int productInStock(string test ="NO")
 	}
 	else 
 		cct = test;
-	if (validCct(cct))
+	if (validCct(cct)) //before open the file check if cct valid
 	{
 		ifstream Input;
 		Input.open("Stock.txt");
@@ -106,7 +106,7 @@ int productInStock(string test ="NO")
 	return 1;
 }
 
-string productPrice(string test_cct="NO") 
+string productPrice(string test_cct="NO")  //get input of cct from user and return his price
 {
 	string cct;
 	fstream Stock;
@@ -183,7 +183,7 @@ string productPrice(string test_cct="NO")
 	}
 }
 
-string locateTransaction()
+string locateTransaction() //print transaction by input his number
 {
 	int Endl = 0; // counter to endl every 3 lines
 	string number_transaction;
@@ -230,7 +230,7 @@ string locateTransaction()
 		}
 }
 
-void dailySalesReport(string worker_id) 
+void dailySalesReport(string worker_id) //return the sales of the connected user from today date
 {
 	string date_to_compare;
 	fstream file_transaction;
@@ -301,7 +301,7 @@ void dailySalesReport(string worker_id)
 	}
 }
 
-void dailyClubMebmer(string worker_id)
+void dailyClubMebmer(string worker_id) ////return the club members that add from the connected user of today
 {
 	string date_to_compare;
 	fstream file_ClubMembers;
@@ -331,7 +331,7 @@ void dailyClubMebmer(string worker_id)
 	}
 	cout << "Number of daily club members added: " << count_num_members << endl;
 }
-void returnProduct() 
+void returnProduct() //return product by reduce the amount of money from cashier , remove product from transaction and adding it back to stock 
 {
 	UpdateDate();
 	string product_cct;
@@ -393,7 +393,7 @@ void returnProduct()
 			}
 			else 
 			{
-				while (!(Transfer.compare("Total") == 0) && (!Input.eof()))
+				while (!(Transfer.compare("Total") == 0) && (!Input.eof())) // output to file untill end of transaction
 				{
 					Output << Transfer << ' ';
 					Input >> Transfer;
@@ -415,7 +415,7 @@ void returnProduct()
 			Input.close();
 			Output.close();
 			return_product.close();
-			Input.open("Temp.txt");
+			Input.open("Temp.txt"); //output from temp to transaction to update the txt
 			Output.open("Transaction.txt");
 			while (!Input.eof())
 			{
@@ -434,7 +434,7 @@ void returnProduct()
 
 }
 
-void saleNewGiftCard()
+void saleNewGiftCard() //sales new giftcard and add it to giftcard txt with his amount and date of sell
 {
 	UpdateDate();
 	string val;
@@ -475,7 +475,7 @@ void saleNewGiftCard()
 	cout << "gift card sold succeeded , your amount in giftcard is: " << giftcard_value <<"\nyour giftcard number is: " << giftcard_number <<  endl;
 }
 
-void dailyGeneralSalesReport() {
+void dailyGeneralSalesReport() { //total sales of all employees by today date with sum of all sells
 	string date_to_compare;
 	string id;
 	fstream file_transaction;
@@ -544,7 +544,7 @@ void dailyGeneralSalesReport() {
 		cout << "Total profit of all workers for today is: " << sum_sales << endl;
 	}
 }
-void dailyReturnedProductReport()
+void dailyReturnedProductReport() //generate report of daily return product
 {
 	UpdateDate();
 	ifstream file_returned_product;
