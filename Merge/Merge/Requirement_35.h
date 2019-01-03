@@ -3,13 +3,12 @@
 #include"Requirement_38.h"
 #include"Requirement_39.h"
 
-string Remove_Product_From_Stock(string test_cct ="NO")
+string Remove_Product_From_Stock(string test_cct ="NO") //initialize the amount of choosen product to 0
 {
 	if (test_cct.compare("NO") == 0)
 	{
-		Stock_Report();
+		Stock_Report(); //print the current stock
 	}
-	//Stock_Shortage();
 	ifstream Input;
 	ofstream Output;
 	string Cct_To_remove;
@@ -43,7 +42,8 @@ string Remove_Product_From_Stock(string test_cct ="NO")
 					{
 						cout << "Product has been removed from the stock" << endl;
 					}
-					Output << Product.cct << ' ' << Product.name << ' ' << Product.price << ' ' << "0#" << endl;
+					Output << Product.cct << ' ' << Product.name << ' ' << Product.price << ' ' << "0#" << endl; 
+					// push 0# to product that removed from stock
 					continue;
 				}
 				Output << Product.cct << ' ' << Product.name << ' ' << Product.price << ' ' << Amount << endl;

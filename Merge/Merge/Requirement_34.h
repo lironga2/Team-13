@@ -234,7 +234,7 @@ void changeProductPrice() //change the product price to whatever the procurement
 		Input >> transfer;
 		while (!Input.eof())
 		{
-			if (product_cct.compare(transfer) == 0)
+			if (product_cct.compare(transfer) == 0) //search for the cct that need to be changed
 			{
 				Output << transfer<< ' ';
 				Input >> transfer;

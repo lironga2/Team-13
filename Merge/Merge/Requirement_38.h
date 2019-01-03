@@ -2,7 +2,7 @@
 #include<string>
 #include<fstream>
 #include"Requirements_1_to_3.h"
-void Stock_Shortage()
+void Stock_Shortage() //generate stock shortage report 
 {
 	ifstream Input;
 	string Product_Name;
@@ -19,7 +19,7 @@ void Stock_Shortage()
 			Input >> The_Amount;
 			Input >> The_Amount;
 			Amount = ConvertToNum(The_Amount);
-			if (Amount == 0) {
+			if (Amount == 0) { //print deatails of all products with 0 amount
 				if (flag) {
 					cout << "Shortage table:" << endl;
 					cout << "product cct\t" << "  " << "product name" << endl;

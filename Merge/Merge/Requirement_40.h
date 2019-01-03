@@ -3,7 +3,7 @@
 #include<string>
 #include"Requirements_1_to_3.h"
 
-void Orders_Report()
+void Orders_Report() //generate orders report of all time with the date that the order's done
 {
 	ifstream Input;
 	string Transfer1;

@@ -7,12 +7,12 @@
 #include<stdlib.h>
 using namespace std;
 
-static int invoice_number = 0;
+static int invoice_number = 0;  //static var change to the last transaction every new sell
 static double sale = 1; // global sale
 static double Sale_Percent = 0;
-static bool ifSale = false;
-static bool if_club_member;
-static bool extra_discount;
+static bool ifSale = false; //var of store sale that manager can change
+static bool if_club_member; //var to add 5% discount if client club member
+static bool extra_discount; //var of discount that level 2 or 3 can give
 
 typedef struct Product {
 	string name;
@@ -20,7 +20,7 @@ typedef struct Product {
 	double price = 0;
 };
 
-typedef struct Bill {
+typedef struct Bill { //dynamic struct of bill
 	long double sum = 0;
 	int num_of_product = 0;
 	bool club_member = false;
@@ -56,7 +56,7 @@ void Manager_Or_Shift_Manager_Options(Bill* bill);
 
 
 
-void newBill(Bill** bill) {
+void newBill(Bill** bill) { //create new bill
 	bool friend_club = false;
 	string user_freind_club_choice;
 	int Freind_Club_Choice;
@@ -91,7 +91,7 @@ void newBill(Bill** bill) {
 	} while (Freind_Club_Choice == 1 && friend_club == false);
 }
 
-void newProduct(Product** product) {
+void newProduct(Product** product) { //allocate new product 
 	*product = new Product;
 	if (!product) {
 		cout << "Bad allocate." << endl;
@@ -140,7 +140,6 @@ void creatBill(string id, int level)
 	char user_choise;
 	bill->id = id;
 	bill->level = level;
-	// לא לשכוח לבדוק תקינות קלט ולהוסיף הודעת שגיאה במקרה והקלט לא תקין
 	do {
 		if (bill->num_of_product)
 		{
@@ -160,7 +159,7 @@ void creatBill(string id, int level)
 		cout << "1) Add a new product:" << endl;
 		cout << "2) Delete an existing product:" << endl;
 		cout << "3) Making a payment:" << endl;
-		cout << "4) Shift manager / Manager options:" << endl;
+		cout << "4) Shift manager / Manager options:" << endl; //will work only with general pass for this options
 		cout << "5) Back:" << endl;
 		cin >> user_choise;
 		switch (user_choise)
@@ -171,8 +170,8 @@ void creatBill(string id, int level)
 		case '2':
 			deleteExistProduct(&bill);
 			break;
-		case '3': // לשחרר מערך מוצרים של החשבון הנוכחי תרשום שנדע מה
-			makePayment(bill);
+		case '3': 
+			makePayment(bill); //finish bill and get payment
 			flag = false;
 			break;
 		case '4':
@@ -190,8 +189,7 @@ void creatBill(string id, int level)
 				}
 			}
 			break;
-		case '5': // לא לשכוח שחרור הקצאה לחשבון החדש וגם לעשות -- למספר חשבון הגלובאלי
-				  // לשנות דגל לשלילי ולמחוק כל מה שקיים בקובץ החשבון הנוכחי
+		case '5': 
 			flag = false;
 			if (bill->num_of_product)
 			{
@@ -208,7 +206,7 @@ void creatBill(string id, int level)
 	} while (flag);
 }
 
-void addProductToBill(Bill** bill)
+void addProductToBill(Bill** bill) //add the product that allocate to the current bill
 {
 	int toSend;
 	string product_cct;
@@ -228,7 +226,6 @@ void addProductToBill(Bill** bill)
 	Input.open("Stock.txt");
 	Product Temp_product;
 	int Product_Amount;
-	//load details of employee that connect to the system
 	if (Input.is_open())
 	{
 		while (!(Input.eof()))
@@ -243,7 +240,7 @@ void addProductToBill(Bill** bill)
 					Input >> Temp_product.price;
 					Input >> Copy_String;
 					Product_Amount = ConvertToNum(Copy_String);
-					if (Product_Amount > 0)
+					if (Product_Amount > 0) //wont add product from stock if amount 0
 					{
 						Product_Amount -= 1;
 						toSend = 1;
@@ -309,7 +306,7 @@ bool validCct(string product_cct) {
 	return false;
 }
 
-int ConvertToNum(string Number)
+int ConvertToNum(string Number) //convert number of transaction to int (number of transaction in format Number#)
 {
 	int Result = 0;
 	int Index = 0;
@@ -322,9 +319,7 @@ int ConvertToNum(string Number)
 	return Result;
 }
 
-void updateBill(Bill*** bill, string product_cct) {
-	// משיכת מחיר מהקובץ של המוצר של מספר המקט שהוזן למשתנה price
-
+void updateBill(Bill*** bill, string product_cct) { //get the price from stock file to calculate the total price
 	ifstream Stock;
 	Stock.open("Stock.txt");
 	string name;
@@ -337,9 +332,7 @@ void updateBill(Bill*** bill, string product_cct) {
 		{
 			Stock >> name;
 			Stock >> price;
-			//if (extra_discount)
-			//	price = price*0.9;
-			if (if_club_member)
+			if (if_club_member) //give 5% discount if club member
 			{
 				price = price*0.95;
 				if (ifSale)
@@ -354,25 +347,12 @@ void updateBill(Bill*** bill, string product_cct) {
 			Stock.close();
 			break;
 		}
-		/*
-		if (ifSale)
-		{
-		bill->sum = 0;
-		for (int i = 0; i < bill->num_of_product; i++)
-		{
-		bill->product[i]->price *= sale;
-		bill->sum += bill->product[i]->price;
-		}
-
-		}
-		*/
 	}
-	// משיכת הנתונים מהקובץ
 	(*(*bill))->sum += price;
-	int old_size = (*(*bill))->num_of_product;
+	int old_size = (*(*bill))->num_of_product; //allocate more memory to bill after adding product
 	(*(*bill))->num_of_product++;
 	int temp = (*(*bill))->num_of_product;
-	if ((*(*bill))->num_of_product == 1)
+	if ((*(*bill))->num_of_product == 1)  
 	{
 		(*(*bill))->product = new Product*;
 		(*(*bill))->product[0] = new Product;
@@ -382,7 +362,7 @@ void updateBill(Bill*** bill, string product_cct) {
 	}
 	else
 	{
-		Product** Assist = new Product *[temp];
+		Product** Assist = new Product *[temp]; //copy old struct with the added product to new struct
 		for (int i = 0; i < old_size; i++)
 		{
 			Assist[i] = new Product;
@@ -398,7 +378,7 @@ void updateBill(Bill*** bill, string product_cct) {
 	}
 
 }
-void deleteProductFromStock(string product_cct)
+void deleteProductFromStock(string product_cct) //bring the product back to stock if deleted from bill
 {
 	ifstream Input;
 	string Copy_String;
@@ -421,7 +401,7 @@ void deleteProductFromStock(string product_cct)
 					Input >> Temp_product.price;
 					Input >> Copy_String;
 					Product_Amount = ConvertToNum(Copy_String);
-					Product_Amount += 1;
+					Product_Amount += 1; //add amount of product back
 				}
 				else
 				{
@@ -455,7 +435,7 @@ void deleteProductFromStock(string product_cct)
 		Output.close();
 	}
 }
-void deleteExistProduct(Bill ** bill)
+void deleteExistProduct(Bill ** bill) //delete product from bill
 {
 	int index_to_delete = -1;
 	bool flag = false;
@@ -518,7 +498,6 @@ void makePayment(Bill * bill)
 	if (bill->num_of_product == 0)
 	{
 		cout << "There is no products in the bill" << endl;
-		//exit(1); need back to bill menu.
 	}
 	else
 	{

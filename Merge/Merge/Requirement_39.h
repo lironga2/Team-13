@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void Stock_Report()
+void Stock_Report() //generate stock report
 {
 	ifstream Input;
 	string Product_Name;

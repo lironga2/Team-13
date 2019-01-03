@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void General_Sells_Report()
+void General_Sells_Report() //generate the whole transaction that been done in store.
 {
 	ifstream Input;
 	string Temp1;
@@ -21,12 +21,11 @@ void General_Sells_Report()
 		{
 			Input >> Temp2;
 			Input >> Temp3;
-			if (Temp1[0] == '#')
+			if (Temp1[0] == '#') 
 			{
 				cout << "Number of Transaction\t" << "Date \t\tWOrker id" << endl;
 				cout << Temp1 << "\t\t\t" << Temp2 << '\t' << Temp3 << endl << endl;
 				cout << "product cct\t" << "  " << "product name\tproduct amount" << endl;
-				//cout << "----------------------------------------------" << endl;
 				continue;
 			}
 			if (Temp1.compare("Total") == 0)
