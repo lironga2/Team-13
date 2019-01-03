@@ -389,7 +389,7 @@ void returnProduct() //return product by reduce the amount of money from cashier
 				Input >> Transfer;
 				Output << Transfer << ' ';
 				Input >> TotalPrice;
-				Output << TotalPrice - price << endl;
+				Output << TotalPrice - price << endl; //remove the price of returned product from total price of transaction
 			}
 			else 
 			{

@@ -9,7 +9,7 @@ using namespace std;
 void removeBonus();
 void workerBonus();
 
-void removeBonus()
+void removeBonus() //remove bonus from employee if there is excellent worker
 {
 	string username;
 	string id;
@@ -87,7 +87,7 @@ void removeBonus()
 	}
 }
 
-void workerBonus()
+void workerBonus() //add bonus 1000nis to worker 
 {
 	string id_to_compare;
 	string transfer;
@@ -143,7 +143,7 @@ void workerBonus()
 			{
 				cout << "Id invalid" << endl;
 			}
-			cout << "Enter worker ID number:" << endl;
+			cout << "Enter worker ID number:" << endl; //check validate of id and if id exist in employee txt
 			cin >> id_to_compare;
 			if (id_to_compare.length() != 9)
 			{
@@ -167,10 +167,10 @@ void workerBonus()
 			Input >> phone_number;
 			Input >> salary;
 			Input >> is_excellent;
-			if (id.compare(id_to_compare) == 0)
+			if (id.compare(id_to_compare) == 0) //aditional 1000 nis if found the worker
 			{
 				salary += 1000;
-				is_excellent = "Yes";
+				is_excellent = "Yes"; 
 			}
 			Output << username << ' ';
 			Output << id << ' ';

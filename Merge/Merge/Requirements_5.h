@@ -19,7 +19,7 @@ typedef struct
 	int month;
 	int year;
 }Date;
-void UpdateDate()
+void UpdateDate() //update for today date
 {
 	if (currDate_Flag)
 	{
@@ -32,7 +32,7 @@ void UpdateDate()
 
 
 
-bool checkIfNum(string temp) {
+bool checkIfNum(string temp) { //func that check if all chars in string are nums
 	for (int i = 0; i < temp.length(); i++) {
 		if (temp[i] > '9' || temp[i] < '0')
 			return false;
@@ -40,11 +40,11 @@ bool checkIfNum(string temp) {
 	return true;
 }
 
-bool checkIfNum(char temp) {
+bool checkIfNum(char temp) { //func that check if char is num
 	return temp >= '0' && temp <= '9';
 }
 
-double convertStringToNum(string temp)
+double convertStringToNum(string temp) //convert regular string to num
 {
 	int multy = 1;
 	double num_to_return = 0;
@@ -63,7 +63,7 @@ double convertStringToNum(string temp)
 	return num_to_return;
 }
 
-void Add_Club_Member(string worker_id)
+void Add_Club_Member(string worker_id) //add new club member to clubmembers.txt with the id of worker and the date
 {
 	UpdateDate();
 	string first_name;
@@ -92,10 +92,8 @@ void Add_Club_Member(string worker_id)
 			flag = true;
 	} while (!flag);
 	cout << "Enter customer first name" << endl;
-	//cin.ignore();
 	std::getline(std::cin, first_name);
 	cout << "Enter customer last name" << endl;
-	//cin.ignore();
 	std::getline(std::cin, last_name);
 	cout << "Enter customer bDay : day.month.year" << endl;
 	cin >> bDay.day >> ch >> bDay.month >> ch >> bDay.year;
@@ -116,8 +114,7 @@ void Add_Club_Member(string worker_id)
 			flag = false;
 		}
 	} while (phone_number.length() != 10);
-	//cin.ignore();
-	clubMembers.open("ClubMember.txt", std::fstream::app);
+	clubMembers.open("ClubMember.txt", std::fstream::app); //write to end of file
 	clubMembers << id << ' ' << first_name << ' ' << last_name << ' ' << bDay.day << '.' << bDay.month << '.' << bDay.year << ' ' << city << ' ' << phone_number << ' ' << currDate << ' ' << worker_id << endl;
 	clubMembers.close();
 }

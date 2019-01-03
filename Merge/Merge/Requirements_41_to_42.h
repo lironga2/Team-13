@@ -43,7 +43,7 @@ void procurement_manager(Worker * worker);
 
 
 
-string Login(string test_user_name,string test_password)
+string Login(string test_user_name,string test_password) //login to system
 {
 	bool flag = false;
 	char exit;
