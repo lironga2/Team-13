@@ -5,8 +5,10 @@ void editTxtGiftCard(int giftcard_amount, string giftcard_number) //update giftc
 {
 	ifstream Input;
 	string Copy_String;
+
 	ofstream Output;
 	string temp_giftcard_number;
+	string giftcard_price;
 	string date;
 	int amount;
 
@@ -22,6 +24,7 @@ void editTxtGiftCard(int giftcard_amount, string giftcard_number) //update giftc
 				if (giftcard_number.compare(Copy_String) == 0)
 				{
 					temp_giftcard_number = Copy_String;
+					Input >> giftcard_price;
 					Input >> amount;
 					Input >> date;
 					
@@ -33,11 +36,13 @@ void editTxtGiftCard(int giftcard_amount, string giftcard_number) //update giftc
 					Input >> Copy_String;
 					Output << Copy_String << ' ';
 					Input >> Copy_String;
+					Output << Copy_String << ' ';
+					Input >> Copy_String;
 					Output << Copy_String << endl;
 				}
 			}
 		}
-		Output << temp_giftcard_number << ' ' << giftcard_amount << ' '<< date << endl;
+		Output << temp_giftcard_number << ' ' << giftcard_amount << ' '<< giftcard_price << ' '<< date << endl;
 		Input.close();
 		Output.close();
 		Output.open("GiftCard.txt");
@@ -47,6 +52,8 @@ void editTxtGiftCard(int giftcard_amount, string giftcard_number) //update giftc
 			Input >> Copy_String;
 			if (!Input.eof())
 			{
+				Output << Copy_String << ' ';
+				Input >> Copy_String;
 				Output << Copy_String << ' ';
 				Input >> Copy_String;
 				Output << Copy_String << ' ';
@@ -63,6 +70,7 @@ int checkIfGiftCardExist(string test="NO") //check if giftcard exist by number
 {
 	fstream file_giftcard;
 	string number_giftcard_to_cmp;
+	string giftcard_price;
 	string number_giftcard;
 	string date;
 	int gift_use = 0;
@@ -98,6 +106,7 @@ int checkIfGiftCardExist(string test="NO") //check if giftcard exist by number
 					return Result;
 				}
 				file_giftcard >> giftcard_amount;
+				file_giftcard >> giftcard_price;
 				file_giftcard >> date;
 				if (giftcard_amount < 1)
 				{

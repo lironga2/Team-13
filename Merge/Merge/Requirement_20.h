@@ -13,6 +13,7 @@ void Z_Report_Close_Cashbox(string todaydate) //print the whole transaction of t
 	double Today_Money = 0;
 	double CashBox = 0;
 	string Transfer;
+	double Gift_Card_Price;
 	string Check;
 	string date_to_compare;
 	double Amount;
@@ -54,13 +55,14 @@ while (!Transaction.eof())
 	if (!Transaction.eof())
 	{
 		Transaction >> Amount;
+		Transaction >> Gift_Card_Price;
 		Transaction >> date_to_compare;
 		if (date_to_compare.compare(todaydate) == 0)
 		{
 			cout << "GiftCard Transction number: " << The_Number << ") " << ':' << endl;
 			The_Number++;
-			cout << "Payment: " << Amount << endl;
-			Today_Money += Amount;
+			cout << "Payment: " << Gift_Card_Price << endl;
+			Today_Money += Gift_Card_Price;
 		}
 	}
 }
@@ -206,5 +208,9 @@ while (!Input.eof())
 	}
 	Input.close();
 	Output.close();
+	getchar();
+	cout << "Press any key to continue" << endl;
+	getchar();
+	system("cls");
 
 }

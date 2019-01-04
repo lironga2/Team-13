@@ -117,5 +117,7 @@ void Add_Club_Member(string worker_id) //add new club member to clubmembers.txt 
 	clubMembers.open("ClubMember.txt", std::fstream::app); //write to end of file
 	clubMembers << id << ' ' << first_name << ' ' << last_name << ' ' << bDay.day << '.' << bDay.month << '.' << bDay.year << ' ' << city << ' ' << phone_number << ' ' << currDate << ' ' << worker_id << endl;
 	clubMembers.close();
+	system("cls");
+	cout << "Club member added" << endl;
 }
 

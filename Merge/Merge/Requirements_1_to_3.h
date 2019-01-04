@@ -155,7 +155,6 @@ void creatBill(string id, int level)
 			cout << "There is no products in the bill" << endl;
 		}
 
-
 		cout << "1) Add a new product:" << endl;
 		cout << "2) Delete an existing product:" << endl;
 		cout << "3) Making a payment:" << endl;
@@ -208,12 +207,14 @@ void creatBill(string id, int level)
 
 void addProductToBill(Bill** bill) //add the product that allocate to the current bill
 {
+	system("cls");
 	int toSend;
 	string product_cct;
 	do {
 		cout << "Please Enter Product cct:" << endl; //cct -> makat.
 		cin >> product_cct;
 		if (!validCct(product_cct)) {
+			system("cls");
 			cout << "Invalid cct.Try again." << endl;
 		}
 	} while (!validCct(product_cct));
@@ -247,6 +248,7 @@ void addProductToBill(Bill** bill) //add the product that allocate to the curren
 					}
 					else
 					{
+						system("cls");
 						cout << "product's amount too low, try to add a different product" << endl;
 						toSend = 0;
 					}
@@ -284,6 +286,7 @@ void addProductToBill(Bill** bill) //add the product that allocate to the curren
 	Input.close();
 	Output.close();
 	if (toSend) {
+		system("cls");
 		cout << "Product successfully added" << endl;
 		updateBill(&bill, product_cct);
 	}
@@ -458,6 +461,7 @@ void deleteExistProduct(Bill ** bill) //delete product from bill
 		}
 		if (index_to_delete == -1)
 		{
+			system("cls");
 			cout << "The product does not exist in the cart" << endl;
 		}
 		else if ((*(bill))->num_of_product > 1)
@@ -479,6 +483,7 @@ void deleteExistProduct(Bill ** bill) //delete product from bill
 			(*bill)->product = Assist;
 			(*(bill))->num_of_product--;
 			Assist = nullptr;
+			system("cls");
 			cout << "product has deleted" << endl;
 		}
 		else
@@ -497,6 +502,7 @@ void makePayment(Bill * bill) //finish bill and get pay
 	system("cls");
 	if (bill->num_of_product == 0)
 	{
+		system("cls");
 		cout << "There is no products in the bill" << endl;
 	}
 	else
@@ -513,20 +519,20 @@ void makePayment(Bill * bill) //finish bill and get pay
 		bool validFlag = true;
 		fstream transaction;
 		char ch;
-		int cash_from_giftcard = 0;
-		string manager_password;
-		cout << "is the client have valid giftcard? 1) Yes 2) No" << endl;
-		cin >> user_giftcard_choice;
-		if ((user_giftcard_choice == '1'))
-		{
-			cout << "please enter Manager password " << endl;
-			cin >> manager_password;
-			if ((manager_password.compare("1234") == 0))
-			{
-				if (user_giftcard_choice == '1')
-					cash_from_giftcard = checkIfGiftCardExist();
-			}
-		}
+		//int cash_from_giftcard = 0;
+		//string manager_password;
+		//cout << "is the client have valid giftcard? 1) Yes 2) No" << endl;
+		//cin >> user_giftcard_choice;
+		//if ((user_giftcard_choice == '1'))
+		//{
+		//	cout << "please enter Manager password " << endl;
+		//	cin >> manager_password;
+		//	if ((manager_password.compare("1234") == 0))
+		//	{
+		//		if (user_giftcard_choice == '1')
+		//			cash_from_giftcard = checkIfGiftCardExist();
+		//	}
+		//}
 
 		if (if_club_member)
 		{
@@ -537,13 +543,13 @@ void makePayment(Bill * bill) //finish bill and get pay
 			cout << bill->product[i]->name << " - " << bill->product[i]->price << endl;
 		}
 
-		if (cash_from_giftcard)
-		{
-			bill->sum -= cash_from_giftcard;
-			cout << "after the use of the giftcard amount, your final bill is:" << bill->sum << endl;
-		}
-		else
-			cout << "Amount to pay: " << bill->sum << endl;
+		//if (cash_from_giftcard)
+		//{
+		//	bill->sum -= cash_from_giftcard;
+		//	cout << "after the use of the giftcard amount, your final bill is:" << bill->sum << endl;
+		//}
+		/*else*/
+		cout << "Amount to pay: " << bill->sum << endl;
 		do
 		{
 			cout << "How do you want to pay?: " << bill->sum << endl;
@@ -621,8 +627,10 @@ void makePayment(Bill * bill) //finish bill and get pay
 				{
 					if (!validFlag)
 					{
+						system("cls");
 						cout << "CVV invalid " << endl;
 					}
+					system("cls");
 					cout << "Enter CVV: " << endl;
 					cin >> CVV;
 					if (CVV.length() != 3)
@@ -651,6 +659,7 @@ void makePayment(Bill * bill) //finish bill and get pay
 				else
 				{
 					bill->sum -= cash;
+					system("cls");
 					cout << "remind bill to pay is: " << bill->sum << endl;
 				}
 				break;
@@ -670,6 +679,7 @@ void makePayment(Bill * bill) //finish bill and get pay
 		transaction.close();
 		cout << "transaction number: " << bill->current_account_number << " payed thank you" << endl;
 		getchar();
+		cout << "Press any key to continue" << endl;
 		getchar();
 		system("cls");
 		if_club_member = false;
@@ -687,6 +697,7 @@ bool findFriendClub(string test) //check if client club member
 		{
 			if (!phone_flag)
 			{
+				system("cls");
 				cout << "phone number invalid" << endl;
 			}
 			cout << "Enter customer's phone number: " << endl;
@@ -724,6 +735,7 @@ void Manager_Or_Shift_Manager_Options(Bill* bill) //if general worker connected 
 	do
 	{
 		cout << "1) Give the client a discount" << endl;
+		cout << "2) Use giftcard " << endl;
 		cout << "0) Back" << endl;
 		cin >> user_choise;
 		int Option;
@@ -733,6 +745,17 @@ void Manager_Or_Shift_Manager_Options(Bill* bill) //if general worker connected 
 		case 1:
 			giveCleintDiscount(&bill);
 			break;
+		case 2:
+		{
+			int cash_from_giftcard = 0;
+			cash_from_giftcard = checkIfGiftCardExist();
+			if (cash_from_giftcard)
+			{
+				bill->sum -= cash_from_giftcard;
+				cout << "after the use of the giftcard amount, your final bill is:" << bill->sum << endl;
+			}
+			break;
+		}
 		case 0:
 			flag = false;
 			break;

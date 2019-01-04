@@ -338,6 +338,7 @@ void returnProduct() //return product by reduce the amount of money from cashier
 	string Transaction_Number = locateTransaction();
 	if (Transaction_Number.compare("number_transaction didnt found!") == 0)
 	{
+		system("cls");
 		cout << "number_transaction didnt found!" << endl;
 	}
 	else
@@ -345,6 +346,7 @@ void returnProduct() //return product by reduce the amount of money from cashier
 		cout << "enter cct of product that you want to return" << endl;
 		cin >> product_cct;
 		backProductToStock(product_cct);
+		system("cls");
 		cout << "product has returned" << endl;
 		ifstream Input;
 		ofstream return_product;
@@ -438,6 +440,8 @@ void saleNewGiftCard() //sales new giftcard and add it to giftcard txt with his 
 {
 	UpdateDate();
 	string val;
+	int giftcard_price;
+
 	int giftcard_number=0;
 	int giftcard_value = 0;
 	char ch;
@@ -451,6 +455,7 @@ void saleNewGiftCard() //sales new giftcard and add it to giftcard txt with his 
 			cout << "The Value of giftcard invlaid try again" << endl;
 		}
 	} while (giftcard_value < 0);
+	giftcard_price = giftcard_value;
 	fstream file_giftcard;
 	file_giftcard.open("GiftCard.txt");
 	if (file_giftcard.is_open())
@@ -469,7 +474,7 @@ void saleNewGiftCard() //sales new giftcard and add it to giftcard txt with his 
 	file_giftcard.open("GiftCard.txt", std::fstream::app);
 	if (file_giftcard.is_open())
 	{
-		file_giftcard << '#' << giftcard_number << ' ' << giftcard_value << ' ' << currDate << endl;
+		file_giftcard << '#' << giftcard_number << ' ' << giftcard_value << ' ' << giftcard_price << ' ' << currDate << endl;
 	}
 	file_giftcard.close();
 	cout << "gift card sold succeeded , your amount in giftcard is: " << giftcard_value <<"\nyour giftcard number is: " << giftcard_number <<  endl;
@@ -542,6 +547,10 @@ void dailyGeneralSalesReport() { //total sales of all employees by today date wi
 		}
 		file_transaction.close();
 		cout << "Total profit of all workers for today is: " << sum_sales << endl;
+		getchar();
+		cout << "Press any key to continue" << endl;
+		getchar();
+		system("cls");
 	}
 }
 void dailyReturnedProductReport() //generate report of daily return product
@@ -573,4 +582,8 @@ void dailyReturnedProductReport() //generate report of daily return product
 		file_returned_product >> to_compare;
 	}
 	file_returned_product.close();
+	getchar();
+	cout << "Press any key to continue" << endl;
+	getchar();
+	system("cls");
 }

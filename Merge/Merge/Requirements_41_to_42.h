@@ -54,6 +54,7 @@ string Login(string test_user_name,string test_password) //login to system
 	{
 		do
 		{
+			system("cls");
 			cout << "Please enter your username" << endl;
 			cin >> user_name;
 			cout << "Please enter your password" << endl;
@@ -192,7 +193,7 @@ void general_worker(Worker* worker)
 		cout << "press 5 to locate transaction" << endl;
 		cout << "press 6 to create your daily sells report" << endl;
 		cout << "press 7 to create your daily club members report" << endl;
-		cout << "press 0 to back" << endl;
+		cout << "press 0 to logout" << endl;
 		cin >> Option;
 		opt = convertStringToNum(Option);
 		switch (opt)
@@ -275,7 +276,7 @@ void shift_manager(Worker* worker)
 		cout << "press 12 to create general daily sells report" << endl;
 		cout << "press 13 to create daily return product report" << endl;
 		cout << "press 14 to create z report and close the cash box" << endl;
-		cout << "press 0 to back" << endl;
+		cout << "press 0 to logout" << endl;
 		cin >> Option;
 		opt = convertStringToNum(Option);
 		switch (opt)
@@ -399,7 +400,7 @@ void procurement_manager(Worker * worker)
 		cout << "press 6 to generate missing product in stock report" << endl;
 		cout << "press 7 to generate product in stock report" << endl;
 		cout << "press 8 to generate orders report" << endl;
-		cout << "press 0 to back" << endl;
+		cout << "press 0 to logout" << endl;
 		cin >> Option;
 		opt = convertStringToNum(Option);
 		switch (opt)
@@ -491,7 +492,7 @@ void store_manager(Worker* worker)
 		cout << "press 14 to sale management" << endl;
 		cout << "press 15 to locate employee" << endl;
 		cout << "press 16 to generate reports menu" << endl;
-		cout << "press 0 to back" << endl;
+		cout << "press 0 to logout" << endl;
 		cin >> Option;
 		opt = convertStringToNum(Option);
 		switch (opt)

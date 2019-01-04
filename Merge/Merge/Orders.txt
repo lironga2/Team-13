@@ -4,3 +4,16 @@ Total Order Amount: 6000
 #2 27.12.2018
 112 TouchPad 350 1
 Total Order Amount: 350
+#3 4.1.2019
+101 MacBook 6000 2
+102 DellPc 2250 1
+103 OpticMouse 60 1
+104 IpadPro 2000 1
+105 IphoneXs 3000 1
+106 AirPods 350 1
+108 MagicKeyboard2 350 1
+109 MagicMouse2 300 1
+110 ApplePencil 250 1
+111 MacBookAir 4000 1
+112 TouchPad 350 1
+Total payment: 24910
