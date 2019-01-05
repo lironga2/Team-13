@@ -270,9 +270,14 @@ string changeAccess(string test_id = "NO", char test_level = '6') //promote or D
 			{
 				cout << "Id invalid" << endl;
 			}
-			cout << "Enter employee id to change access: ";
+			cout << "Enter employee id to change access (-1 to back): ";
 			cin >> id_access_to_change;
-
+			if (id_access_to_change.compare("-1") == 0)
+			{
+				system("cls");
+				cout << "You choose to go back" << endl;
+				return "You choose to go back\n";
+			}
 			if (!checkIfValidId(id_access_to_change) || !checkIfWorkerFound(id_access_to_change))
 			{
 				flag = false;
@@ -411,7 +416,7 @@ void addNewEmployee() //add new employee to system with his full detail , level 
 }
 void deleteExistEmployee() //delete employee if he exist 
 {
-	system("cls");
+	
 	Employee* worker = new Employee;
 	string file_user;
 	string file_user2;
@@ -420,58 +425,84 @@ void deleteExistEmployee() //delete employee if he exist
 	ifstream Input;
 	ofstream Output;
 	string id;
-	do {
-		cout << "Enter id of employee that you want to remove" << endl;
-		cin >> id;
-		if (!checkIfWorkerFound(id))
-			cout << "Worker not found, please try again" << endl;
-	}while (!checkIfWorkerFound(id));
-	
-	cout << "User and his details has been deleted from the system" << endl;
-	Output.open("Temp.txt");
+	string transfer;
+	cout << "Workers list:" << endl;
 	Input.open("Employee.txt");
-
+	bool input_flag = true;
 	while (!Input.eof())
 	{
-		Input >> worker->username;
-		Input >> worker->id;
-		Input >> worker->first_name;
-		Input >> worker->last_name;
-		Input >> worker->level;
-		Input >> worker->phone_number;
-		Input >> worker->salary;
-		Input >> worker->is_excellent;
-		if (id.compare(worker->id) == 0)
+		if (input_flag)
 		{
-			user_to_remove = worker->username;
+			Input >> transfer;
 		}
-		else
+		cout << transfer << ' ';
+		if (transfer.compare("No") == 0 || transfer.compare("Yes") == 0)
 		{
-			Output << worker->username << ' ' << worker->id << ' ' << worker->first_name << ' ' << worker->last_name << ' ' <<
-			worker->level << ' ' << worker->phone_number << ' ' << worker->salary << ' ' << worker->is_excellent << endl;
+			cout << endl;
 		}
+		Input >> transfer;
+		input_flag = false;
 	}
 	Input.close();
-	Output.close();
-	Input.open("Temp.txt");
-	Output.open("Employee.txt");
-	Input >> file_user;
-	while (!Input.eof())
-	{
-		if ((file_user.compare("Yes") == 0) || (file_user.compare("No") == 0))
+	do {
+		cout << "Enter id of employee that you want to remove (-1 to back): " << endl;
+		cin >> id;
+		if (id.compare("-1") == 0)
 		{
-			Output << file_user << endl;
+			system("cls");
+			cout << "You choose to go back" << endl;
 		}
-		else
+			if (!checkIfWorkerFound(id))
+				cout << "Worker not found, please try again" << endl;
+		}while (!checkIfWorkerFound(id)&& id.compare("-1") != 0);
+		if (id.compare("-1") != 0)
 		{
-			Output << file_user << ' ';
-		}
-		Input >> file_user;
-	}
-	Input.close();
-	Output.close();
-	deleteFromeUserAndPass(user_to_remove);
+			system("cls");
+			cout << "User and his details has been deleted from the system" << endl;
+			Output.open("Temp.txt");
+			Input.open("Employee.txt");
 
+			while (!Input.eof())
+			{
+				Input >> worker->username;
+				Input >> worker->id;
+				Input >> worker->first_name;
+				Input >> worker->last_name;
+				Input >> worker->level;
+				Input >> worker->phone_number;
+				Input >> worker->salary;
+				Input >> worker->is_excellent;
+				if (id.compare(worker->id) == 0)
+				{
+					user_to_remove = worker->username;
+				}
+				else
+				{
+					Output << worker->username << ' ' << worker->id << ' ' << worker->first_name << ' ' << worker->last_name << ' ' <<
+						worker->level << ' ' << worker->phone_number << ' ' << worker->salary << ' ' << worker->is_excellent << endl;
+				}
+			}
+			Input.close();
+			Output.close();
+			Input.open("Temp.txt");
+			Output.open("Employee.txt");
+			Input >> file_user;
+			while (!Input.eof())
+			{
+				if ((file_user.compare("Yes") == 0) || (file_user.compare("No") == 0))
+				{
+					Output << file_user << endl;
+				}
+				else
+				{
+					Output << file_user << ' ';
+				}
+				Input >> file_user;
+			}
+			Input.close();
+			Output.close();
+			deleteFromeUserAndPass(user_to_remove);
+		}
 }
 void deleteFromeUserAndPass(string user_to_remove) //after delete from employee.txt delete from txt of user and pass
 {
@@ -488,6 +519,7 @@ void deleteFromeUserAndPass(string user_to_remove) //after delete from employee.
 		{
 			Input >> file_data;
 			Input >> file_data;
+			continue;
 		}
 		else
 		{
@@ -645,32 +677,39 @@ void allTimeClubMemeberReport() //generate club member report of all time
 	system("cls");
 	ifstream Input;
 	string file_data;
+	string Member_id;
+	string Member_First_Name;
+	string Member_Last_Name;
+	string Member_Bday;
+	string Member_add;
+	string Member_phone;
+	string Member_Additon_Date;
+	string Worker_add_id;
+
 
 	Input.open("ClubMember.txt");
 	if (Input)
 	{
 		cout << "Club members of our store:" << endl;
-		Input >> file_data;
+		cout << "Member id:\tMember first name:\tMember last name:" << endl;
 		while (!Input.eof())
 		{
-			for (int i = 0; i < 8; i++)
-			{
+			Input >> Member_id;
 				if (!Input.eof())
 				{
-					cout << file_data << ' ';
-					Input >> file_data;
-					if (checkIfWorkerFound(file_data))
-					{
-						cout << file_data << endl;
-						Input >> file_data;
-					}
+					Input >> Member_First_Name;
+					Input >> Member_Last_Name;
+					Input >> Member_Bday;
+					Input >> Member_add;
+					Input >> Member_phone;
+					Input >> Member_Additon_Date;
+					Input >> Worker_add_id;
+					cout << Member_id << "\t" << Member_First_Name << "\t\t\t" << Member_Last_Name << endl;
 				}
-			}
-			
 		}
-		Input.close();
-		cout << endl;
+			
 	}
+		Input.close();
 }
 void salaryReport() //print the total amount of salary that the store pays
 {

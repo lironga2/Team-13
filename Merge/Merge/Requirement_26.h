@@ -2,6 +2,7 @@
 #include <iostream>
 #include<string>
 #include<fstream>
+#include"Requirements_5.h"
 
 using namespace std;
 
@@ -58,20 +59,22 @@ void Update_Sale(double* Sale_Percent,double* sale) //updaate the current sale i
 
 void Sale_Management(bool* IfSale, double* Sale_Percent,double* sale) //sale menu
 {
-	char Option;
+	string Option;
+	int Opt;
 	do {
 		cout << "1) to Create Sale or update sale percent" << endl;
 		cout << "2) to remove current sale" << endl;
 		cout << "0) to get back" << endl;
 		cin >> Option;
-		if (Option != '0' && Option != '1' && Option != '2')
+		Opt = convertStringToNum(Option);
+		if (Opt != 0 && Opt != 1 && Opt != 2)
 		{
 			cout << " Invalid Option" << endl;
 		}
-	} while (Option != '0' && Option != '1' && Option != '2');
-	switch (Option)
+	} while (Opt != 0 && Opt != 1 && Opt != 2);
+	switch (Opt)
 	{
-		case '1':
+		case 1:
 		{
 			Update_Sale_Flag(IfSale);
 			if (*IfSale)
@@ -86,7 +89,7 @@ void Sale_Management(bool* IfSale, double* Sale_Percent,double* sale) //sale men
 			Create_Update_Sale();
 			break;
 		}
-		case'2':
+		case 2:
 		{
 			Remove_Sale(IfSale);
 		}
@@ -100,7 +103,8 @@ void Create_Update_Sale() // create new sell of store and output it to financial
 	ifstream Input;
 	ofstream Output;
 	string Transfer;
-	int The_Sale;
+	string The_Sale;
+	int Sale;
 	bool flag = false;
 	do
 	{
@@ -110,7 +114,8 @@ void Create_Update_Sale() // create new sell of store and output it to financial
 		}
 		cout << "Enter discount between 1% -> 50%: ";
 		cin >> The_Sale;
-		if (!(The_Sale >= 1 && The_Sale <= 50))
+		Sale = convertStringToNum(The_Sale);
+		if (!(Sale >= 1 && Sale <= 50))
 		{
 			flag = true;
 		}

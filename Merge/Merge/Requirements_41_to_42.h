@@ -592,7 +592,7 @@ void store_manager(Worker* worker)
 			string Report_Chocie;
 			int Report_Option;
 			bool Report_Flag = true;
-
+			system("cls");
 			do
 			{
 				cout << "welcome to generate reports menu" << endl;

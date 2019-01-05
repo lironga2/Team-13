@@ -103,6 +103,7 @@ void Create_New_Order() //new order menu, add remove complete and print the orde
 		cout << "Press 2) to remove product from order" << endl;
 		cout << "Press 3) to complete the order" << endl;
 		cout << "Press 4) to print the order" << endl;
+		cout << "press 0 to back" << endl;
 		cin >> Option_Validation;
 		Option = convertStringToNum(Option_Validation);
 
@@ -249,11 +250,11 @@ void Print_Order() //print the whole order with the sum price of all products.
 			if (Flag)
 			{
 				system("cls");
-				cout << "product cct\t" << "  " << "product name\tproduct price" << endl;
+				cout << "product cct\t" << "  " << "product name\tproduct price\tproduct amount" << endl;
 				Flag = false;
 			}
-			cout << Supplier[i].Product->cct << "\t\t  " << Supplier[i].Product->name << "\t" << Supplier[i].Product->price <<"\t"<< Supplier[i].Product->amount << endl;
-			cout << "----------------------------------------------" << endl;
+			cout << Supplier[i].Product->cct << "\t\t  " << Supplier[i].Product->name << "\t" << Supplier[i].Product->price <<"\t\t"<< Supplier[i].Product->amount << endl;
+			cout << "-------------------------------------------------------------------------------" << endl;
 		}
 	}
 	if (Flag)
@@ -263,7 +264,7 @@ void Print_Order() //print the whole order with the sum price of all products.
 	else
 	{
 		cout << "Total order price: " << Supplier->Sum << endl;
-		cout << "----------------------------------------------" << endl;
+		cout << "-------------------------------------------------------------------------------" << endl;
 	}
 }
 
@@ -386,6 +387,7 @@ void Complete_Order() //complete order by store the products in stock and update
 			Temp_Product.amount = ConvertToNum(Temp);
 			for (int i = 0; i < Supplier_Product_Amount; i++)
 			{
+				Flag = true;
 				if (Temp_Product.cct.compare(Supplier[i].Product->cct) == 0 && Supplier[i].Product->amount > 0)
 				{
 					Output << Temp_Product.cct << ' ';

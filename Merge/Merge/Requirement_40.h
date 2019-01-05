@@ -33,9 +33,13 @@ void Orders_Report() //generate orders report of all time with the date that the
 					Input >> Transfer1;
 					Input >> Transfer2;
 					Input >> Transfer3;
+					if (Transfer1.compare("Total") == 0)
+					{
+						break;
+					}
 					Input >> Transfer4;
 				}
-				cout << Transfer1 << ' ' << Transfer2 << ' ' << Transfer3 << ' ' << Transfer4 << endl;
+				cout << Transfer1 << ' ' << Transfer2 << ' ' << Transfer3 << ' ' << endl;
 				cout << "----------------------------------------------" << endl;
 				
 			}

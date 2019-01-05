@@ -1,6 +1,11 @@
-Store revenue:
-in box: 121000
-Store expenses:
-Total money: 24910
-Store sale:
-No 0 
+103 OpticMouse 120 1#
+112 TouchPad 200 2#
+106 AirPods 700 1#
+108 MagicKeyboard2 700 1#
+109 MagicMouse2 600 1#
+110 ApplePencil 500 1#
+111 MacBookAir 8000 1#
+102 DellPc 4500 1#
+101 MacBook 12000 0#
+104 IpadPro 4000 1#
+105 IphoneXs 6000 0#
