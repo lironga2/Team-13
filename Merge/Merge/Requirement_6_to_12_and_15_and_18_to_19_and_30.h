@@ -222,10 +222,13 @@ string locateTransaction() //print transaction by input his number
 	}
 		if (transaction_exist)
 		{
+			//return the transction number to work with return product
+			file_transaction.close();
 			return number_transaction;
 		}
 		else
 		{
+			file_transaction.close();
 			return "number_transaction didnt found!";
 		}
 }

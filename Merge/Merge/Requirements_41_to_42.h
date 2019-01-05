@@ -145,8 +145,10 @@ string load_details(string user_name,string test)
 	{
 		cout << worker->first_name << ' ' << worker->last_name << endl;
 		menu(worker);
+		//for test
 		return "0";
 	}
+	//for test
 	return worker->first_name;
 }
 //first menu of worker, checks which level the employee have and choose the right menu
@@ -181,6 +183,7 @@ void general_worker(Worker* worker)
 {
 	string Option;
 	int opt;
+	//for logout.
 	bool flag = false;
 
 	do

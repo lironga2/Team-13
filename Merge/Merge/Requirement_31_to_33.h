@@ -160,7 +160,7 @@ void Add_Product_To_Order() // add new product to current order
 	bool Try_Againe = true;
 	while (Try_Againe)
 	{
-		cout << "Enter product to: ";
+		cout << "Enter product cct to add: ";
 		cin >> Cct;
 		for (int i = 0; i < Supplier_Product_Amount; i++)
 		{
@@ -197,44 +197,56 @@ void Remove_Product_From_Order() // remove product from current order
 	char Option;
 	bool Flag = false;
 	bool Try_Againe = true;
+	bool Not_Emepty_Flag = false;
 	bool Amount_Flag = true;
-	while (Try_Againe)
+	for (int i = 0; i < Supplier_Product_Amount; i++)
 	{
-		system("cls");
-		Print_Order();
-		cout << "Enter product to: ";
-		cin >> Cct;
-		for (int i = 0; i < Supplier_Product_Amount; i++)
+		if (Supplier[i].Product->amount > 0)
 		{
-			if (Supplier[i].Product->cct.compare(Cct) == 0)
+			Not_Emepty_Flag = true;
+		}
+	}
+
+	if (Not_Emepty_Flag)
+	{
+		while (Try_Againe)
+		{
+			system("cls");
+			Print_Order();
+			cout << "Enter product cct to remove: ";
+			cin >> Cct;
+			for (int i = 0; i < Supplier_Product_Amount; i++)
 			{
-				if (Supplier[i].Product->amount > 0)
+				if (Supplier[i].Product->cct.compare(Cct) == 0)
 				{
-					Supplier[i].Product->amount--;
-					Supplier->Sum -= Supplier[i].Product->price;
-					Flag = true;
-					Try_Againe = false;
-				}
-				else
-				{
-					Amount_Flag = false;
+					if (Supplier[i].Product->amount > 0)
+					{
+						Supplier[i].Product->amount--;
+						Supplier->Sum -= Supplier[i].Product->price;
+						Flag = true;
+						Try_Againe = false;
+					}
+					else
+					{
+						Amount_Flag = false;
+					}
 				}
 			}
-		}
-		if (Flag)
-		{
-			system("cls");
-			cout << "Product successfully removed" << endl;
-		}
-		else
-		{
-			system("cls");
-			cout << "Product cct:" << Cct << " Invalid " << endl;
-			cout << "if you want try again press Y|y else press any key to continue" << endl;
-			cin >> Option;
-			if (Option != 'Y' && Option != 'y')
+			if (Flag)
 			{
-				Try_Againe = false;
+				system("cls");
+				cout << "Product successfully removed" << endl;
+			}
+			else
+			{
+				system("cls");
+				cout << "Product cct:" << Cct << " Invalid " << endl;
+				cout << "if you want try again press Y|y else press any key to continue" << endl;
+				cin >> Option;
+				if (Option != 'Y' && Option != 'y')
+				{
+					Try_Againe = false;
+				}
 			}
 		}
 	}
@@ -398,6 +410,7 @@ void Complete_Order() //complete order by store the products in stock and update
 					Output << Temp << endl;
 					arr[i] =-1;
 					Flag = false;
+					break;
 				}
 			}
 			if (Flag)

@@ -40,6 +40,7 @@ string Remove_Product_From_Stock(string test_cct ="NO") //initialize the amount 
 				{
 					if (test_cct.compare("NO") == 0)
 					{
+						system("cls");
 						cout << "Product has been removed from the stock" << endl;
 					}
 					Output << Product.cct << ' ' << Product.name << ' ' << Product.price << ' ' << "0#" << endl; 

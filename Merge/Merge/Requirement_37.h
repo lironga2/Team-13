@@ -23,9 +23,9 @@ void General_Sells_Report() //generate the whole transaction that been done in s
 			Input >> Temp3;
 			if (Temp1[0] == '#') 
 			{
-				cout << "Number of Transaction\t" << "Date \t\tWOrker id" << endl;
+				cout << "Number of Transaction\t" << "Date \t\tWorker id" << endl;
 				cout << Temp1 << "\t\t\t" << Temp2 << '\t' << Temp3 << endl << endl;
-				cout << "product cct\t" << "  " << "product name\tproduct amount" << endl;
+				cout << "product cct\t" << "  " << "product name"<< endl;
 				continue;
 			}
 			if (Temp1.compare("Total") == 0)

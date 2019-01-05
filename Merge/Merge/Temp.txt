@@ -1,5 +1,11 @@
-liron 147852369  liron gabai 4 0545987980 10000 No
-vladis 317273969 vladis markin 2 0526256397 6000 No
-shir 123456789 shir eliyahu 3 0541478523 8000 No
-gilad 987654321 gilad cohen 4 0541234567 10000 No
-test 123456788 test testing 2 0000000000 8000 Yes
+103 OpticMouse 120 1#
+112 TouchPad 200 2#
+106 AirPods 700 1#
+108 MagicKeyboard2 700 1#
+109 MagicMouse2 600 1#
+110 ApplePencil 500 1#
+111 MacBookAir 8000 1#
+102 DellPc 4500 1#
+104 IpadPro 4000 1#
+105 IphoneXs 6000 0#
+101 MacBook 12000 2#
