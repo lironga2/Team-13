@@ -2,7 +2,7 @@
 #include<iostream>
 #include<string>
 #include<fstream>
-#include "Requirement_6_to_12_and_15.h"
+#include "Requirement_6_to_12_and_15_and_18_to_19_and_30.h"
 
 using namespace std;
 

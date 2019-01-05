@@ -151,13 +151,13 @@
     <ClInclude Include="Requirement_20.h" />
     <ClInclude Include="Requirement_17.h" />
     <ClInclude Include="Requirement_16.h" />
-    <ClInclude Include="Requirement_21.h" />
-    <ClInclude Include="Requirement_34.h" />
+    <ClInclude Include="Requirement_21_to_25_and_27_to_29.h" />
+    <ClInclude Include="Requirement_34_and_36.h" />
     <ClInclude Include="Requirement_26.h" />
     <ClInclude Include="Requirement_39.h" />
     <ClInclude Include="Requirement_40.h" />
-    <ClInclude Include="Requirement_6_to_12_and_15.h" />
-    <ClInclude Include="Requirements_1_to_3.h" />
+    <ClInclude Include="Requirement_6_to_12_and_15_and_18_to_19_and_30.h" />
+    <ClInclude Include="Requirements_1_to_4.h" />
     <ClInclude Include="Requirements_41_to_42.h" />
     <ClInclude Include="Requirements_5.h" />
     <ClInclude Include="Requirment_13_14.h" />

@@ -3,7 +3,7 @@
 #include<fstream>
 #include<string>
 #include"Requirements_5.h"
-#include"Requirement_34.h"
+#include"Requirement_34_and_36.h"
 //#include"Requirement_32.h"
 
 using namespace std;

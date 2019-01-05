@@ -1,8 +1,7 @@
 #pragma once
 #include"minunit.h"
-#include"Requirement_21.h"
+#include"Requirement_21_to_25_and_27_to_29.h"
 #include"Requirements_5.h"
-#include"Requirement_21.h"
 #include<time.h>
 #include <stdlib.h>
 int tests_run = 0;

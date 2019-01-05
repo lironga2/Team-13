@@ -2,13 +2,13 @@
 #include<iostream>
 #include<fstream>
 #include<string>
-#include"Requirements_1_to_3.h"
+#include"Requirements_1_to_4.h"
 #include"Requirements_5.h"
-#include"Requirement_6_to_12_and_15.h"
+#include"Requirement_6_to_12_and_15_and_18_to_19_and_30.h"
 #include"Requirment_13_14.h"
-#include"Requirement_21.h"
+#include"Requirement_21_to_25_and_27_to_29.h"
 #include"Requirement_20.h"
-#include"Requirement_34.h"
+#include"Requirement_34_and_36.h"
 #include"Requirement_39.h"
 #include"Requirement_38.h"
 #include"Requirement_37.h"
@@ -54,7 +54,7 @@ string Login(string test_user_name,string test_password) //login to system
 	{
 		do
 		{
-			system("cls");
+			//system("cls");
 			cout << "Please enter your username" << endl;
 			cin >> user_name;
 			cout << "Please enter your password" << endl;
@@ -242,6 +242,7 @@ void general_worker(Worker* worker)
 			}
 			case 0:
 			{
+				system("cls");
 				Login();
 				flag = true;
 				break;
@@ -343,7 +344,6 @@ void shift_manager(Worker* worker)
 			}
 			case 11:
 			{
-				//fix make payment.
 				system("cls");
 				saleNewGiftCard();
 				break;
@@ -370,6 +370,7 @@ void shift_manager(Worker* worker)
 			}
 			case 0:
 			{
+				system("cls");
 				Login();
 				flag = true;
 				break;
@@ -455,6 +456,7 @@ void procurement_manager(Worker * worker)
 		}
 		case 0:
 		{
+			system("cls");
 			Login();
 			flag = true;
 			break;
@@ -676,6 +678,7 @@ void store_manager(Worker* worker)
 		}
 		case 0:
 		{
+			system("cls");
 			Login();
 			flag = true;
 			break;
