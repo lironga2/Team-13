@@ -345,39 +345,59 @@ void returnProduct() //return product by reduce the amount of money from cashier
 	{
 		cout << "enter cct of product that you want to return" << endl;
 		cin >> product_cct;
-		backProductToStock(product_cct);
-		system("cls");
-		cout << "product has returned" << endl;
-		ifstream Input;
-		ofstream return_product;
-		ofstream Output;
-		string Transfer;
-		bool Done_Flag = true;
-		bool Flag = true;
-		Input.open("Transaction.txt");
-		return_product.open("ReturnProduct.txt" , std::fstream::app);
-		Output.open("Temp.txt");
-		int Endl = 0;
-		double price;
-		double TotalPrice = 0;
-		while (!Input.eof())
+		if (validCct(product_cct))
 		{
-			Input >> Transfer;
-			if (Transfer.compare(Transaction_Number) == 0)
+			backProductToStock(product_cct);
+			system("cls");
+			cout << "product has returned" << endl;
+			ifstream Input;
+			ofstream return_product;
+			ofstream Output;
+			string Transfer;
+			bool Done_Flag = true;
+			bool Flag = true;
+			Input.open("Transaction.txt");
+			return_product.open("ReturnProduct.txt", std::fstream::app);
+			Output.open("Temp.txt");
+			int Endl = 0;
+			double price;
+			double TotalPrice = 0;
+			while (!Input.eof())
 			{
-				while (!Transfer.compare("Total") == 0 && (!Input.eof()))
+				Input >> Transfer;
+				if (Transfer.compare(Transaction_Number) == 0)
 				{
-					if (Transfer.compare(product_cct) == 0 && (Flag))
+					while (!Transfer.compare("Total") == 0 && (!Input.eof()))
 					{
-						return_product << currDate << ' ' << Transfer << ' ';
-						Input >> Transfer;
-						return_product << Transfer << ' ';
-						Input >> price;
-						return_product << price << endl;
-						Input >> Transfer;
-						Flag = false;
+						if (Transfer.compare(product_cct) == 0 && (Flag))
+						{
+							return_product << currDate << ' ' << Transfer << ' ';
+							Input >> Transfer;
+							return_product << Transfer << ' ';
+							Input >> price;
+							return_product << price << endl;
+							Input >> Transfer;
+							Flag = false;
+						}
+						else
+						{
+							Output << Transfer << ' ';
+							Input >> Transfer;
+							Output << Transfer << ' ';
+							Input >> Transfer;
+							Output << Transfer << endl;
+							Input >> Transfer;
+						}
 					}
-					else 
+					Output << Transfer << ' ';
+					Input >> Transfer;
+					Output << Transfer << ' ';
+					Input >> TotalPrice;
+					Output << TotalPrice - price << endl; //remove the price of returned product from total price of transaction
+				}
+				else
+				{
+					while (!(Transfer.compare("Total") == 0) && (!Input.eof())) // output to file untill end of transaction
 					{
 						Output << Transfer << ' ';
 						Input >> Transfer;
@@ -386,34 +406,16 @@ void returnProduct() //return product by reduce the amount of money from cashier
 						Output << Transfer << endl;
 						Input >> Transfer;
 					}
-				}
-				Output << Transfer << ' ';
-				Input >> Transfer;
-				Output << Transfer << ' ';
-				Input >> TotalPrice;
-				Output << TotalPrice - price << endl; //remove the price of returned product from total price of transaction
-			}
-			else 
-			{
-				while (!(Transfer.compare("Total") == 0) && (!Input.eof())) // output to file untill end of transaction
-				{
-					Output << Transfer << ' ';
-					Input >> Transfer;
-					Output << Transfer << ' ';
-					Input >> Transfer;
-					Output << Transfer << endl;
-					Input >> Transfer;
-				}
-				if (!Input.eof())
-				{
-					Output << Transfer << ' ';
-					Input >> Transfer;
-					Output << Transfer << ' ';
-					Input >> Transfer;
-					Output << Transfer << endl;
+					if (!Input.eof())
+					{
+						Output << Transfer << ' ';
+						Input >> Transfer;
+						Output << Transfer << ' ';
+						Input >> Transfer;
+						Output << Transfer << endl;
+					}
 				}
 			}
-		}
 			Input.close();
 			Output.close();
 			return_product.close();
@@ -430,8 +432,10 @@ void returnProduct() //return product by reduce the amount of money from cashier
 						Output << endl;
 				}
 			}
-		Input.close();
-		Output.close();
+			Input.close();
+			Output.close();
+		}
+		cout << "Cct invalid" << endl;
 	}
 
 }

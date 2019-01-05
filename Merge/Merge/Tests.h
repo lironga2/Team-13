@@ -9,7 +9,7 @@ int tests_run = 0;
 
 static char * test_if_worker_found()
 {
-	mu_assert("Error in check if worker found, should be true", checkIfWorkerFound("202020202") == true);
+	mu_assert("Error in check if worker found, should be true", checkIfWorkerFound("147852369") == true);
 	return 0;
 }
 static char * test_return_role()
@@ -46,12 +46,12 @@ static char * test_find_friend_club()
 }
 static char * test_login()
 {
-	mu_assert("Error in login to store system,should be: your log to system", Login("l", "1") == "your log to system");
+	mu_assert("Error in login to store system,should be: your log to system", Login("liron", "1") == "your log to system");
 	return 0;
 }
 static char * test_product_In_Stock()
 {
-	mu_assert("Error test product in store,should be: 1", productInStock("101") == 1);
+	mu_assert("Error test product in store,should be: 1", productInStock("111") == 1);
 	return 0;
 }
 static char * test_check_If_Gift_Card_Exist()
@@ -71,12 +71,12 @@ static char * test_check_If_All_String_Num()
 }
 static char * test_if_Load_Details()
 {
-	mu_assert("Error in check if load details, should be gilad", load_details("giladco", "YES") == "gilad");
+	mu_assert("Error in check if load details, should be gilad", load_details("gilad", "YES") == "gilad");
 	return 0;
 }
 static char * test_is_valid()
 {
-	mu_assert("Error in check if is valid, should be true", isValid("lironga2", "123456") == true);
+	mu_assert("Error in check if is valid, should be true", isValid("liron", "1") == true);
 	return 0;
 }
 static char * change_employee_salary()
@@ -102,7 +102,7 @@ static char * test_change_access()
 }
 static char * test_locate_employee()
 {
-	mu_assert("Error in locate employee, should be 0541478521", locateEmployee("147852369") == "0541478521");
+	mu_assert("Error in locate employee, should be 0541478521", locateEmployee("317273969") == "0526256397");
 	return 0;
 }
 static char * test_product_price()
