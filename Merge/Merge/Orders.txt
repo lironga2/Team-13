@@ -14,3 +14,15 @@ Total payment: 24910
 #2 4.1.2019
 112 TouchPad 350 1
 Total payment: 350
+#3 17.1.2019
+101 MacBook 6000 4
+102 DellPc 2250 2
+103 OpticMouse 60 1
+104 IpadPro 2000 3
+105 IphoneXs 3000 3
+106 AirPods 350 2
+108 MagicKeyboard2 350 5
+110 ApplePencil 250 2
+111 MacBookAir 4000 7
+112 TouchPad 350 5
+Total payment: 76260

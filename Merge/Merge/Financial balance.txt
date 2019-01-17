@@ -1,6 +1,6 @@
 Store revenue:
 in box: 121000
 Store expenses:
-Total money: 25260
+Total money: 101520
 Store sale:
 No 0 
